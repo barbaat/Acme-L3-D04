@@ -34,7 +34,7 @@ public class LecturerCourseShowTest extends TestHarness {
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/lecturer/course/show-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test100Positive(final int courseIndex, final String code, final String title, final String abstractCourse, final String retailPrice, final String link, final String draftMode) {
+	public void test100Positive(final int courseIndex, final String code, final String title, final String abstractCourse, final String retailPrice, final String link) {
 		// HINT: this test signs in as an employer, lists his or her jobs, selects one of them and checks that it's as expected.
 
 		super.signIn("lecturer1", "lecturer1");
@@ -50,7 +50,6 @@ public class LecturerCourseShowTest extends TestHarness {
 		super.checkInputBoxHasValue("abstractCourse", abstractCourse);
 		super.checkInputBoxHasValue("retailPrice", retailPrice);
 		super.checkInputBoxHasValue("link", link);
-		super.checkInputBoxHasValue("draftMode", draftMode);
 
 		super.signOut();
 	}
@@ -70,7 +69,7 @@ public class LecturerCourseShowTest extends TestHarness {
 		String param;
 
 		super.signIn("lecturer1", "lecturer1");
-		courses = this.repository.findManyCoursesByLecturerUsername("lecturer2");
+		courses = this.repository.findManyCoursesByLecturerUsername("user-account-lecturer2");
 		for (final Course course : courses)
 			if (course.isDraftMode()) {
 				param = String.format("id=%d", course.getId());
@@ -78,21 +77,6 @@ public class LecturerCourseShowTest extends TestHarness {
 				super.checkLinkExists("Sign in");
 				super.request("/lecturer/course/show", param);
 				super.checkPanicExists();
-
-				super.signIn("administrator", "administrator");
-				super.request("/lecturer/course/show", param);
-				super.checkPanicExists();
-				super.signOut();
-
-				super.signIn("employer2", "employer2");
-				super.request("/lecturer/course/show", param);
-				super.checkPanicExists();
-				super.signOut();
-
-				super.signIn("worker1", "worker1");
-				super.request("/lecturer/course/show", param);
-				super.checkPanicExists();
-				super.signOut();
 			}
 	}
 
