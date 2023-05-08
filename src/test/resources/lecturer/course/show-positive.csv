@@ -1,0 +1,8 @@
+courseIndex,code,title,abstractCourse,retailPrice,link,draftMode
+2,ABC123,Introduction to Python,This course will teach you how to program in Python.,EUR 68.00,https://www.us.es/abc123,false
+1,A123,Introduction to Java,This course will teach you how to program in Java.,EUR 40.00,https://www.us.es/abc123,true
+3,AB123,Introduction to Rust,This course will teach you how to program in Rust.,EUR 20.00,https://www.us.es/abc123,true
+1,ABC000,Introduction to Haskell,This course will teach you how to program in Haskell.,EUR 80.00,https://www.us.es/abc123,true
+0,ABC124,Introduction to C++,This course will teach you how to program in C++.,EUR 60.00,https://www.us.es/abc123,true
+2,ABC146,Introduction to Javascript,This course will teach you how to program in Javascript.,EUR 50.00,https://www.us.es/abc123,true
+0,ABC168,Introduction to HTML,This course will teach you how to program in HTML.,EUR 100.00,https://www.us.es/abc123,false
