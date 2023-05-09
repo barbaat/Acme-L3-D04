@@ -1,5 +1,5 @@
 
-package acme.features.student.activities;
+package acme.features.student.activity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +13,8 @@ import acme.framework.services.AbstractService;
 import acme.roles.Student;
 
 @Service
-public class StudentActivityShowService extends AbstractService<Student, Activity> {
-	//Internal state ---------------------------------------------------------
+public class StudentActivityDeleteService extends AbstractService<Student, Activity> {
+	// Internal state ---------------------------------------------------------
 
 	@Autowired
 	protected StudentActivityRepository repository;
@@ -43,20 +43,37 @@ public class StudentActivityShowService extends AbstractService<Student, Activit
 		activity = this.repository.findActivityById(id);
 		principal = super.getRequest().getPrincipal();
 		student = this.repository.findStudentByPrincipalId(principal.getActiveRoleId());
-		status = student != null && activity.getEnrolment().getStudent().equals(student);
+		status = student != null && activity.getEnrolment().getStudent().equals(student) && !activity.getEnrolment().isDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		Activity object;
 		int id;
+		Activity object;
 
 		id = super.getRequest().getData("id", int.class);
 		object = this.repository.findActivityById(id);
 
 		super.getBuffer().setData(object);
+	}
+
+	@Override
+	public void bind(final Activity object) {
+		assert object != null;
+	}
+
+	@Override
+	public void validate(final Activity object) {
+		assert object != null;
+	}
+
+	@Override
+	public void perform(final Activity object) {
+		assert object != null;
+
+		this.repository.delete(object);
 	}
 
 	@Override

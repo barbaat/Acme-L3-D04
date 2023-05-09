@@ -1,5 +1,5 @@
 
-package acme.features.student.enrolments;
+package acme.features.student.enrolment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

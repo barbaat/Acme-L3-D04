@@ -1,5 +1,5 @@
 
-package acme.features.student.enrolments;
+package acme.features.student.enrolment;
 
 import javax.annotation.PostConstruct;
 

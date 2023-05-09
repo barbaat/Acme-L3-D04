@@ -1,17 +1,21 @@
 
-package acme.features.student.enrolments;
+package acme.features.student.enrolment;
+
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.courses.Course;
 import acme.entities.enrolments.Enrolment;
 import acme.framework.components.accounts.Principal;
+import acme.framework.components.jsp.SelectChoices;
 import acme.framework.components.models.Tuple;
 import acme.framework.services.AbstractService;
 import acme.roles.Student;
 
 @Service
-public class StudentEnrolmentShowWorkbookService extends AbstractService<Student, Enrolment> {
+public class StudentEnrolmentShowService extends AbstractService<Student, Enrolment> {
 	//Internal state ---------------------------------------------------------
 
 	@Autowired
@@ -24,7 +28,7 @@ public class StudentEnrolmentShowWorkbookService extends AbstractService<Student
 	public void check() {
 		boolean status;
 
-		status = super.getRequest().hasData("enrolmentId", int.class);
+		status = super.getRequest().hasData("id", int.class);
 
 		super.getResponse().setChecked(status);
 	}
@@ -32,13 +36,13 @@ public class StudentEnrolmentShowWorkbookService extends AbstractService<Student
 	@Override
 	public void authorise() {
 		boolean status;
-		int enrolmentId;
+		int id;
 		Enrolment enrolment;
-		Principal principal;
+		final Principal principal;
 		Student student;
 
-		enrolmentId = super.getRequest().getData("enrolmentId", int.class);
-		enrolment = this.repository.findEnrolmentById(enrolmentId);
+		id = super.getRequest().getData("id", int.class);
+		enrolment = this.repository.findEnrolmentById(id);
 		principal = super.getRequest().getPrincipal();
 		student = this.repository.findStudentById(principal.getActiveRoleId());
 		status = student != null && enrolment.getStudent().equals(student);
@@ -51,7 +55,7 @@ public class StudentEnrolmentShowWorkbookService extends AbstractService<Student
 		Enrolment object;
 		int id;
 
-		id = super.getRequest().getData("enrolmentId", int.class);
+		id = super.getRequest().getData("id", int.class);
 		object = this.repository.findEnrolmentById(id);
 
 		super.getBuffer().setData(object);
@@ -61,19 +65,22 @@ public class StudentEnrolmentShowWorkbookService extends AbstractService<Student
 	public void unbind(final Enrolment object) {
 		assert object != null;
 		Double workTime;
-		Integer numActivities;
+		Collection<Course> courses;
+		SelectChoices choices;
+
+		Tuple tuple;
+		courses = this.repository.findAllPublishedCourses();
+		choices = SelectChoices.from(courses, "title", object.getCourse());
 
 		workTime = this.repository.findWorktimeByEnrolmentId(object.getId());
 		workTime = workTime != null ? workTime : 0.0;
-		numActivities = this.repository.findNumberActivitiesByEnrolmentId(object.getId());
 
-		Tuple tuple;
-
-		tuple = super.unbind(object, "code", "motivation", "goals", "draftMode");
-		tuple.put("readonly", true);
+		tuple = super.unbind(object, "code", "motivation", "goals", "draftMode", "cardLowerNibble", "cardHolder");
+		tuple.put("readonly", !object.isDraftMode());
 		tuple.put("workTime", workTime);
-		tuple.put("numActivities", numActivities);
 		tuple.put("courseTitle", object.getCourse().getTitle());
+		tuple.put("course", choices.getSelected().getKey());
+		tuple.put("courses", choices);
 
 		super.getResponse().setData(tuple);
 	}

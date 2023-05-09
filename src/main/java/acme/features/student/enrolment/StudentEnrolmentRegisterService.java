@@ -1,5 +1,5 @@
 
-package acme.features.student.enrolments;
+package acme.features.student.enrolment;
 
 import java.util.Collection;
 
@@ -15,7 +15,7 @@ import acme.framework.services.AbstractService;
 import acme.roles.Student;
 
 @Service
-public class StudentEnrolmentUpdateService extends AbstractService<Student, Enrolment> {
+public class StudentEnrolmentRegisterService extends AbstractService<Student, Enrolment> {
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
@@ -26,37 +26,26 @@ public class StudentEnrolmentUpdateService extends AbstractService<Student, Enro
 
 	@Override
 	public void check() {
-		boolean status;
-
-		status = super.getRequest().hasData("id", int.class);
-
-		super.getResponse().setChecked(status);
+		super.getResponse().setChecked(true);
 	}
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int id;
-		Enrolment enrolment;
-		final Principal principal;
-		Student student;
-
-		id = super.getRequest().getData("id", int.class);
-		enrolment = this.repository.findEnrolmentById(id);
-		principal = super.getRequest().getPrincipal();
-		student = this.repository.findStudentById(principal.getActiveRoleId());
-		status = student != null && enrolment.getStudent().equals(student) && enrolment.isDraftMode();
-
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
 	public void load() {
-		int id;
 		Enrolment object;
+		Principal principal;
 
-		id = super.getRequest().getData("id", int.class);
-		object = this.repository.findEnrolmentById(id);
+		object = new Enrolment();
+
+		principal = super.getRequest().getPrincipal();
+		final int principalId = principal.getActiveRoleId();
+
+		object.setStudent(this.repository.findStudentById(principalId));
+		object.setDraftMode(true);
 
 		super.getBuffer().setData(object);
 	}
@@ -80,8 +69,8 @@ public class StudentEnrolmentUpdateService extends AbstractService<Student, Enro
 	public void validate(final Enrolment object) {
 		assert object != null;
 		final Enrolment enrolmentWithSameCode = this.repository.findEnrolmentByCode(object.getCode());
-		super.state(enrolmentWithSameCode == null || enrolmentWithSameCode.getId() == object.getId(), "code", "student.enrolment.form.error.duplicated-code");
-		super.state(object.isDraftMode(), "draftMode", "student.enrolment.form.error.finalised");
+
+		super.state(enrolmentWithSameCode == null, "code", "student.enrolment.form.error.duplicated-code");
 	}
 
 	@Override
@@ -94,21 +83,16 @@ public class StudentEnrolmentUpdateService extends AbstractService<Student, Enro
 	@Override
 	public void unbind(final Enrolment object) {
 		assert object != null;
-		Double workTime;
 		Collection<Course> courses;
 		SelectChoices choices;
 
 		Tuple tuple;
 		courses = this.repository.findAllPublishedCourses();
-		choices = SelectChoices.from(courses, "title", object.getCourse());
+		choices = SelectChoices.from(courses, "code", object.getCourse());
 
-		workTime = this.repository.findWorktimeByEnrolmentId(object.getId());
-		workTime = workTime != null ? workTime : 0.0;
-
-		tuple = super.unbind(object, "code", "motivation", "goals", "draftMode", "cardLowerNibble", "cardHolder");
+		tuple = super.unbind(object, "code", "motivation", "goals", "draftMode");
 		tuple.put("readonly", !object.isDraftMode());
-		tuple.put("workTime", workTime);
-		tuple.put("courseTitle", object.getCourse().getTitle());
+		tuple.put("workTime", 0.0);
 		tuple.put("course", choices.getSelected().getKey());
 		tuple.put("courses", choices);
 

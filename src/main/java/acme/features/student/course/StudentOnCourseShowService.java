@@ -1,19 +1,19 @@
 
-package acme.features.student.lectures;
+package acme.features.student.course;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.entities.lectures.Lecture;
+import acme.entities.courses.Course;
 import acme.framework.components.models.Tuple;
 import acme.framework.services.AbstractService;
 import acme.roles.Student;
 
 @Service
-public class StudentLectureShowService extends AbstractService<Student, Lecture> {
+public class StudentOnCourseShowService extends AbstractService<Student, Course> {
 
 	@Autowired
-	protected StudentLectureRepository repository;
+	protected StudentOnCourseRepository repository;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -35,24 +35,27 @@ public class StudentLectureShowService extends AbstractService<Student, Lecture>
 
 	@Override
 	public void load() {
-		Lecture object;
+		Course object;
 		int id;
 
 		id = super.getRequest().getData("id", int.class);
-		object = this.repository.findLectureById(id);
+		object = this.repository.findCourseById(id);
 
 		super.getBuffer().setData(object);
 	}
 
 	@Override
-	public void unbind(final Lecture object) {
+	public void unbind(final Course object) {
 		assert object != null;
 
 		Tuple tuple;
 
-		tuple = super.unbind(object, "title", "abstractLecture", "estimatedLearningTimeInHours", "body", "draftMode", "lectureType", "link");
+		tuple = super.unbind(object, "code", "title", "abstractCourse", "draftMode", "retailPrice", "link");
+
 		final String lecturer = object.getLecturer().getUserAccount().getUsername();
 		tuple.put("lecturer", lecturer);
+		final Integer id = super.getRequest().getData("id", int.class);
+		super.getResponse().setGlobal("id", id);
 		super.getResponse().setData(tuple);
 	}
 }

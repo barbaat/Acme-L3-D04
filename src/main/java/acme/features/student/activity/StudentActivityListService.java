@@ -1,5 +1,5 @@
 
-package acme.features.student.activities;
+package acme.features.student.activity;
 
 import java.util.Collection;
 
