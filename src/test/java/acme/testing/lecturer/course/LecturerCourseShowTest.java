@@ -56,15 +56,12 @@ public class LecturerCourseShowTest extends TestHarness {
 
 	@Test
 	public void test200Negative() {
-		// HINT: there's no negative test case for this listing, since it doesn't
-		// HINT+ involve filling in any forms.
+		// No puede tener
 	}
 
 	@Test
 	public void test300Hacking() {
-		// HINT: this test tries to show a duty of a job that is in draft mode or
-		// HINT+ not available, but wasn't published by the principal;
-
+		// Un profesor solo puede ver sus cursos
 		Collection<Course> courses;
 		String param;
 
