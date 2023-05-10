@@ -14,8 +14,6 @@
 			<acme:input-url code="any.peep.form.label.link" path="link" readonly="true"/>			
 		</jstl:when>
 		<jstl:when test="${_command == 'create' }">
-
-		 	<acme:input-moment code="any.peep.form.label.moment" path="moment"/>
 			<acme:input-textbox code="any.peep.form.label.title" path="title"/>	
 			<acme:input-textbox code="any.peep.form.label.nick" path="nick"/>
 			<acme:input-textbox code="any.peep.form.label.message" path="message"/>

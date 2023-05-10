@@ -5,8 +5,8 @@
 
 <acme:list>
 	<acme:list-column code="any.peep.list.label.moment" path="moment" width="20%"/>	
-	<acme:list-column code="any.peep.list.label.nick" path="nick" width="20%"/>
 	<acme:list-column code="any.peep.list.label.title" path="title" width="20%"/>
+	<acme:list-column code="any.peep.list.label.nick" path="nick" width="20%"/>
 	<acme:list-column code="any.peep.list.label.message" path="message" width="50%"/>	
 </acme:list>
 
