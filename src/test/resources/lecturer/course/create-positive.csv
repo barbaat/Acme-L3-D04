@@ -1,0 +1,5 @@
+courseIndex,code,title,retailPrice,abstractCourse,link,draftMode
+0,AAA123,AAAAA,EUR 100.00,AAAAA,,false
+1,AAA124,BBBBB,EUR 60.00,BBBBB,https://www.us.es/abc123,false
+2,AAA125,CCCCC,EUR 80.00,CCCCC,,false
+3,AAA126,DDDDD,EUR 120.00,DDDDD,https://www.us.es/abc123,false

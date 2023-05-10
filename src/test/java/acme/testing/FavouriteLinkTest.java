@@ -19,8 +19,8 @@ public class FavouriteLinkTest extends TestHarness {
 	@Test
 	public void test100Positive() {
 		super.requestHome();
-		super.clickOnMenu("Anonymous", "Favourite link");
-		super.checkCurrentUrl("http://www.example.com");
+		super.clickOnMenu("Anonymous", "77932863P: Barba Trejo, Francisco Javier");
+		super.checkCurrentUrl("https://shop.realbetisbalompie.es");
 	}
 
 }
