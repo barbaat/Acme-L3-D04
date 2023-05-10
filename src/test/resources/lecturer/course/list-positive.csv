@@ -1,5 +1,5 @@
 courseIndex,code,title,retailPrice
-2,ABC123,Introduction to Python,EUR 68.00
-0,A123,Introduction to Java,EUR 40.00
-1,AB123,Introduction to Rust,EUR 20.00
+1,ABC123,Introduction to Python,EUR 68.00
+2,ABC128,Introduction to Java,EUR 40.00
+0,AB123,Introduction to Rust,EUR 20.00
 3,ABC168,Introduction to HTML,EUR 100.00

@@ -24,10 +24,6 @@ public class LecturerCourseCreateTest extends TestHarness {
 
 		super.signIn("lecturer1", "lecturer1");
 
-		//		super.clickOnMenu("Lecturer", "List of courses");
-		//		super.checkListingExists();
-		//
-		//		super.clickOnButton("Create course");
 		super.clickOnMenu("Lecturer", "Create course");
 		super.fillInputBoxIn("code", code);
 		super.fillInputBoxIn("title", title);
@@ -40,8 +36,7 @@ public class LecturerCourseCreateTest extends TestHarness {
 
 		super.checkListingExists();
 		super.sortListing(0, "asc");
-		super.checkColumnHasValue(courseIndex, 0, title);
-		super.checkColumnHasValue(courseIndex, 1, abstractCourse);
+		super.checkColumnHasValue(courseIndex, 0, code);
 
 		super.clickOnListingRecord(courseIndex);
 		super.checkInputBoxHasValue("code", code);
@@ -56,13 +51,9 @@ public class LecturerCourseCreateTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/lecturer/course/create-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test200Negative(final int courseIndex, final String code, final String title, final String retailPrice, final String abstractCourse, final String link) {
-		// HINT: this test attempts to create courses using wrong data.
 
 		super.signIn("lecturer1", "lecturer1");
-		//		super.clickOnMenu("Lecturer", "List of courses");
-		//		super.checkListingExists();
-		//
-		//		super.clickOnButton("Create course");
+
 		super.clickOnMenu("Lecturer", "Create course");
 		super.fillInputBoxIn("code", code);
 		super.fillInputBoxIn("title", title);
@@ -77,8 +68,6 @@ public class LecturerCourseCreateTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
-		// HINT: this final test tries to create final a duty for final a job as final a principal without 
-		//HINT: the "Employer" role.
 
 		super.checkLinkExists("Sign in");
 		super.request("/lecturer/course/create");
