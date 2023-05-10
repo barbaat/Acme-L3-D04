@@ -1,14 +1,3 @@
-/*
- * EmployerApplicationShowTest.java
- *
- * Copyright (C) 2012-2023 Rafael Corchuelo.
- *
- * In keeping with the traditional purpose of furthering education and research, it is
- * the policy of the copyright owner to permit non-commercial use and redistribution of
- * this software. It has been tested carefully, but it is not guaranteed for any particular
- * purposes. The copyright owner does not offer any warranties or representations, nor do
- * they accept any liabilities with respect to them.
- */
 
 package acme.testing.lecturer.course;
 
@@ -35,7 +24,6 @@ public class LecturerCourseShowTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/lecturer/course/show-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int courseIndex, final String code, final String title, final String abstractCourse, final String retailPrice, final String link) {
-		// HINT: this test signs in as an employer, lists his or her jobs, selects one of them and checks that it's as expected.
 
 		super.signIn("lecturer1", "lecturer1");
 
