@@ -1,0 +1,5 @@
+key,key:auditor,key:course,code,conclusion,strongPoints,weakPoints,draftMode
+audit1,auditor1,course1,D0000,Muy práctico,Matemáticas y lógica, Idiomas, true
+audit2,auditor2,course2,A1001,Dificil,Mucho nivel de matemáticas,Muchos suspensos, true
+audit3,auditor1,course2,A1234,Práctico,Matemáticas y lógica, Idiomas, false
+audit4,auditor2,course1,B2000,Muy dificil,Mucho nivel de matemáticas,Muchos suspensos, true
