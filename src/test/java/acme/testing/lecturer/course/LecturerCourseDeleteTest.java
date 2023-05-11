@@ -53,8 +53,8 @@ public class LecturerCourseDeleteTest extends TestHarness {
 	}
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/lecturer/lecture/delete-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test200Negative(final int courseIndex, final String code, final String title, final String retailPrice, final String abstractCourse, final String link) {
+	@CsvFileSource(resources = "/lecturer/course/delete-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
+	public void test200Negative(final int courseIndex, final String code, final String title, final String abstractCourse, final String retailPrice, final String link) {
 		super.signIn("lecturer1", "lecturer1");
 
 		super.clickOnMenu("Lecturer", "List of courses");

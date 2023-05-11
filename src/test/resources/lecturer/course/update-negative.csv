@@ -1,2 +1,2 @@
-courseIndex,code,title,retailPrice,abstractCourse,link,draftMode
-2,ABC128,Introduction to Java,40.00,Actualizado,https://www.us.es/abc123,true
+courseIndex,code,title,abstractCourse,retailPrice,link,draftMode
+0,AB123,Introduction to Rust,This course will teach you how to program in Rust.,20.00,https://www.us.es/abc123,true
