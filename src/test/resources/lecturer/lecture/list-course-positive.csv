@@ -1,0 +1,3 @@
+courseIndex,lectureIndex,code,title,abstractLecture,estimatedLearningTimeInHours
+1,0,ABC123,Lecture 1,Introduction to Programming,90.00
+1,1,ABC123,Lecture 2,Introduction to Math,60.00

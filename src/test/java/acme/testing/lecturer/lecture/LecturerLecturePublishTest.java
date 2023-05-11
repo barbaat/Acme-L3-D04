@@ -53,9 +53,6 @@ public class LecturerLecturePublishTest extends TestHarness {
 		super.checkColumnHasValue(lectureIndex, 0, title);
 		super.clickOnListingRecord(lectureIndex);
 		super.checkFormExists();
-		// Al estar ya publicado, el botón desaparece, ¿cómo puedo hacer para que pruebe a publicarlo?
-		//		super.clickOnSubmit("Publish a lecture");
-		//		super.checkAlertExists(false);
 		super.checkNotButtonExists("Publish a lecture");
 
 		super.signOut();
@@ -103,8 +100,6 @@ public class LecturerLecturePublishTest extends TestHarness {
 
 	@Test
 	public void test302Hacking() {
-		// HINT: this test tries to publish a lecture that wasn't registered by the principal,
-		// HINT+ be it published or unpublished.
 
 		Collection<Lecture> lectures;
 		String params;
