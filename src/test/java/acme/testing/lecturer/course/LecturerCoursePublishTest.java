@@ -146,7 +146,12 @@ public class LecturerCoursePublishTest extends TestHarness {
 
 		super.checkFormExists();
 		super.checkNotButtonExists("Delete a lecture"); //Por lo que está publicada la lección
-		super.clickOnSubmit("Publish a lecture");
+
+		final Course curso = this.repository.findCourseByCode(code);
+		final String params = String.format("id=%d", curso.getId());
+		super.request("/lecturer/course/show", params);
+		super.checkFormExists();
+		super.clickOnSubmit("Publish a course");
 		super.checkErrorsExist();
 
 		super.signOut();
