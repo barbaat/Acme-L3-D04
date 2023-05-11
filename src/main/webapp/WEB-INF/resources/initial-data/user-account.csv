@@ -13,3 +13,5 @@ user-account-auditor1,true,"UserIdentity{name: 'Auditor1', surname: 'Acme4', ema
 user-account-auditor2,true,"UserIdentity{name: 'Auditor2', surname: 'Acme4', email: 'auditor2@acme.com'}",auditor2,auditor2
 user-account-company1,true,"UserIdentity{name: 'Company1', surname: 'Acme3', email: 'company1@acme.com'}",company1,company1
 user-account-company2,true,"UserIdentity{name: 'Company2', surname: 'Acme4', email: 'company2@acme.com'}",company2,company2
+user-account-employer1,true,"UserIdentity{name: 'Employer1', surname: 'Acme3', email: 'employer1@acme.com'}",employer1,employer1
+user-account-employer2,true,"UserIdentity{name: 'Employer2', surname: 'Acme4', email: 'employer2@acme.com'}",employer2,employer2

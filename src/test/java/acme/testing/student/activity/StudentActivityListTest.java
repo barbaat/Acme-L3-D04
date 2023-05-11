@@ -60,12 +60,37 @@ public class StudentActivityListTest extends TestHarness {
 
 		enrolments = this.repository.findManyEnrolmentsByStudentUsername("student1");
 		for (final Enrolment enrolment : enrolments)
-			if (enrolment.isDraftMode()) {
+			if (!enrolment.isDraftMode()) {
 				param = String.format("id=%d", enrolment.getId());
 
 				super.checkLinkExists("Sign in");
 				super.request("/student/enrolment/list", param);
 				super.checkPanicExists();
+
+				super.signIn("administrator", "administrator");
+				super.request("/student/enrolment/list");
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("auditor1", "auditor1");
+				super.request("/student/enrolment/list");
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("lecturer1", "lecturer1");
+				super.request("/student/enrolment/list");
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("company1", "company1");
+				super.request("/student/enrolment/list");
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("assistant1", "assistant1");
+				super.request("/student/enrolment/list");
+				super.checkPanicExists();
+				super.signOut();
 			}
 	}
 }

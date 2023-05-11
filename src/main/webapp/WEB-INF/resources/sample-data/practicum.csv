@@ -1,5 +1,9 @@
 key,key:company,key:course,code,title,abstract$,goals,draftMode,estimatedTotalTime
 practicum-01,company1,course1,LOL123,Práctica de iniciación,Esto es un resumen,Ganar todo,false,123.8
-practicum-02,company2,course2,LOL456,Práctica intermedia,Esto es un resumen,Ganar todo,false,123.8
+practicum-02,company2,course7,LOL456,Práctica intermedia,Esto es un resumen,Ganar todo,false,123.8
 practicum-03,company1,course1,CDC123,Práctica de expertos,Esto es un resumen,Ganar todo,true,123.8
-practicum-04,company2,course2,CDC456,Práctica profesional,Esto es un resumen,Ganar todo,true,123.8
+practicum-04,company2,course7,CDC456,Práctica profesional,Esto es un resumen,Ganar todo,true,123.8
+practicum-05,company1,course1,KIS123,Práctica de iniciación,Esto es un resumen,Ganar todo,false,123.8
+practicum-06,company2,course7,KIS456,Práctica intermedia,Esto es un resumen,Ganar todo,false,123.8
+practicum-07,company1,course1,KJ405,Práctica de expertos,Esto es un resumen,Ganar todo,true,123.8
+practicum-08,company2,course7,AB067,Práctica profesional,Esto es un resumen,Ganar todo,true,123.8

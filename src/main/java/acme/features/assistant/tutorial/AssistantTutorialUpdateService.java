@@ -1,5 +1,5 @@
 
-package acme.features.company.practicum;
+package acme.features.assistant.tutorial;
 
 import java.util.Collection;
 
@@ -7,22 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.courses.Course;
-import acme.entities.practicums.Practicum;
-import acme.framework.components.accounts.Principal;
+import acme.entities.tutorials.Tutorial;
 import acme.framework.components.jsp.SelectChoices;
 import acme.framework.components.models.Tuple;
 import acme.framework.services.AbstractService;
-import acme.roles.Company;
+import acme.roles.Assistant;
 
 @Service
-public class CompanyPracticumPublishService extends AbstractService<Company, Practicum> {
+public class AssistantTutorialUpdateService extends AbstractService<Assistant, Tutorial> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected CompanyPracticumRepository practicumRepository;
+	protected AssistantTutorialRepository repository;
 
-	// AbstractService interface ----------------------------------------------
+	// AbstractService<Assistant, Tutorial> ----------------------------------------------
 
 
 	@Override
@@ -37,72 +36,72 @@ public class CompanyPracticumPublishService extends AbstractService<Company, Pra
 	@Override
 	public void authorise() {
 		boolean status;
-		Practicum object;
-		Principal principal;
-		int practicumId;
+		int id;
+		Tutorial tutorial;
+		Assistant assistant;
 
-		practicumId = super.getRequest().getData("id", int.class);
-		object = this.practicumRepository.findPracticumById(practicumId);
-		principal = super.getRequest().getPrincipal();
-
-		status = object.getCompany().getId() == principal.getActiveRoleId();
+		id = super.getRequest().getData("id", int.class);
+		tutorial = this.repository.findTutorialById(id);
+		assistant = tutorial == null ? null : tutorial.getAssistant();
+		status = super.getRequest().getPrincipal().hasRole(assistant) || tutorial != null && !tutorial.isDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		Practicum object;
+		Tutorial object;
 		int id;
 
 		id = super.getRequest().getData("id", int.class);
-		object = this.practicumRepository.findPracticumById(id);
+		object = this.repository.findTutorialById(id);
 
 		super.getBuffer().setData(object);
+
 	}
 
 	@Override
-	public void bind(final Practicum object) {
+	public void bind(final Tutorial object) {
 		assert object != null;
 
 		int courseId;
 		Course course;
 
 		courseId = super.getRequest().getData("course", int.class);
-		course = this.practicumRepository.findCourseById(courseId);
+		course = this.repository.findCourseById(courseId);
 
-		super.bind(object, "code", "title", "abstract$", "goals");
+		super.bind(object, "code", "title", "abstractTutorial", "goals", "estimatedTotalTime");
 		object.setCourse(course);
 	}
 
 	@Override
-	public void validate(final Practicum object) {
+	public void validate(final Tutorial object) {
 		assert object != null;
 	}
 
 	@Override
-	public void perform(final Practicum object) {
+	public void perform(final Tutorial object) {
 		assert object != null;
 
-		object.setDraftMode(false);
-		this.practicumRepository.save(object);
+		this.repository.save(object);
 	}
 
 	@Override
-	public void unbind(final Practicum object) {
+	public void unbind(final Tutorial object) {
 		assert object != null;
 
 		Collection<Course> courses;
 		SelectChoices choices;
 		Tuple tuple;
 
-		courses = this.practicumRepository.findPublishedCourses();
+		courses = this.repository.findAllCourses();
 		choices = SelectChoices.from(courses, "code", object.getCourse());
 
-		tuple = super.unbind(object, "code", "title", "abstract$", "goals");
+		tuple = super.unbind(object, "code", "title", "abstractTutorial", "goals", "estimatedTotalTime", "draftMode");
 		tuple.put("course", choices.getSelected().getKey());
 		tuple.put("courses", choices);
 
 		super.getResponse().setData(tuple);
 	}
+
 }
