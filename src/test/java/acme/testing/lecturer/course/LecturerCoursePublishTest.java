@@ -82,7 +82,7 @@ public class LecturerCoursePublishTest extends TestHarness {
 		final String params = String.format("id=%d", curso.getId());
 		super.request("/lecturer/course/show", params);
 		super.checkFormExists();
-		super.clickOnSubmit("Publish a lecture");
+		super.clickOnSubmit("Publish a course");
 		super.checkErrorsExist();
 
 		super.signOut();
@@ -116,7 +116,7 @@ public class LecturerCoursePublishTest extends TestHarness {
 		final String params = String.format("id=%d", curso.getId());
 		super.request("/lecturer/course/show", params);
 		super.checkFormExists();
-		super.clickOnSubmit("Publish a lecture");
+		super.clickOnSubmit("Publish a course");
 		super.checkErrorsExist();
 
 		super.signOut();
