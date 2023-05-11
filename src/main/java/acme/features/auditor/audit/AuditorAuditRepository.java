@@ -31,6 +31,9 @@ public interface AuditorAuditRepository extends AbstractRepository {
 	@Query("select a from Auditor a where a.id = :id")
 	Auditor findAuditorById(int id);
 
+	@Query("select a from Auditor a where a.userAccount.username = :username")
+	Auditor findAuditorByUsername(String username);
+
 	@Query("select c from Course c where c.id = :id")
 	Course findCourseById(int id);
 

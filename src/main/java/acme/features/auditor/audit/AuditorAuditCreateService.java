@@ -70,7 +70,7 @@ public class AuditorAuditCreateService extends AbstractService<Auditor, Audit> {
 		Tuple tuple;
 		Collection<Course> courses;
 		SelectChoices choices;
-		courses = this.repo.findCourses();
+		courses = this.repo.findPublishedCourses();
 		choices = SelectChoices.from(courses, "code", object.getCourse());
 		tuple = super.unbind(object, "code", "conclusion", "strongPoints", "weakPoints", "draftMode");
 		tuple.put("courses", choices);

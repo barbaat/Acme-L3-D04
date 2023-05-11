@@ -73,7 +73,6 @@ master.menu.student.course.list = Lista de cursos publicados
 master.menu.auditor = Auditor
 master.menu.auditor.audit.create = Crear auditoría
 master.menu.auditor.audit.list = Lista de auditorías
-master.menu.auditor.auditor-dashboard.show = Panel de auditor
 
 # master.menu.company ###################################################
 
