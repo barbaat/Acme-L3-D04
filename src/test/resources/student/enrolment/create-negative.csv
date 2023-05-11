@@ -1,7 +1,8 @@
 enrolmentIndex,code,course,motivation,goals
 0,AAAA,Introduction to HTML,Codigo fuera de patron,"this, is, a list, of, goals"
-1,ABM1236,Introduction to Python,codigo repetido,"thisss, isss, a lissst, of, goalsss"
-2,ABM1333,Introduction to HTML,goals vacio,
-3,ABM1933,Introduction to HTML,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,"motivation, demasiado, larga"
-4,ABM1993,Introduction to HTML,,"motivation, esta, vacio"
-5,ABM1222,Introduction to Python,goals muy largo,"muy, largo,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa "
+1,,Introduction to Python,select vacio,"thisss, isss, a lissst, of, goalsss"
+2,ABM1236,Introduction to Python,codigo repetido,"thisss, isss, a lissst, of, goalsss"
+3,ABM1333,Introduction to HTML,goals vacio,
+4,ABM1933,Introduction to HTML,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,"motivation, demasiado, larga"
+5,ABM1993,Introduction to HTML,,"motivation, esta, vacio"
+6,ABM1222,Introduction to Python,goals muy largo,"muy, largo,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa "
