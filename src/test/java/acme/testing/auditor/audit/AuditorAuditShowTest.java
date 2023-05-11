@@ -58,9 +58,7 @@ public class AuditorAuditShowTest extends TestHarness {
 		String param;
 
 		super.signIn("auditor1", "auditor1");
-		final int auditorId = this.repository.findAuditorByUsername("user-account-auditor2").getId();
-
-		audits = this.repository.findAuditsByAuditorId(auditorId);
+		audits = this.repository.findAuditsByAuditorUsername("user-account-auditor2");
 		for (final Audit audit : audits)
 			if (audit.isDraftMode()) {
 				param = String.format("id=%d", audit.getId());
