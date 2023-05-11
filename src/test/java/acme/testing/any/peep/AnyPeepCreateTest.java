@@ -14,8 +14,6 @@ public class AnyPeepCreateTest extends TestHarness {
 	public void test100Positive(final int recordIndex, final String moment, final String title, final String nick, final String message, final String email, final String link) {
 		// HINT: this test lists peeps, creates a new one, and check that it's been created properly.
 
-		// Primero probamos con anonymous
-
 		super.checkLinkExists("Sign in");
 
 		super.clickOnMenu("Any", "Create peep");
@@ -44,6 +42,13 @@ public class AnyPeepCreateTest extends TestHarness {
 		super.checkInputBoxHasValue("message", message);
 		super.checkInputBoxHasValue("email", email);
 		super.checkInputBoxHasValue("link", link);
+
+	}
+
+	@ParameterizedTest
+	@CsvFileSource(resources = "/any/peep/create-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
+	public void test101Positive(final int recordIndex, final String moment, final String title, final String nick, final String message, final String email, final String link) {
+		// HINT: this test creates a new peep by clicking on Create peep menu option, and check that it's been created properly.
 
 		// Comprobando con Create peep
 
@@ -76,7 +81,12 @@ public class AnyPeepCreateTest extends TestHarness {
 		super.checkInputBoxHasValue("email", email);
 		super.checkInputBoxHasValue("link", link);
 
-		// Comprobamos logueandonos
+	}
+
+	@ParameterizedTest
+	@CsvFileSource(resources = "/any/peep/create-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
+	public void test102Positive(final int recordIndex, final String moment, final String title, final String nick, final String message, final String email, final String link) {
+		// HINT: this test creates a new peep, previosly login into the system, and check that it's been created properly.
 
 		super.signIn("assistant1", "assistant1");
 		super.request("/any/peep/create");
@@ -112,7 +122,7 @@ public class AnyPeepCreateTest extends TestHarness {
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/any/peep/create-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test200Negative(final int recordIndex, final String moment, final String nick, final String title, final String message, final String email, final String link) {
+	public void test200Negative(final int recordIndex, final String title, final String nick, final String message, final String email, final String link) {
 		// HINT: this test attempts to create peeps with incorrect data.
 
 		super.checkLinkExists("Sign in");
@@ -129,8 +139,6 @@ public class AnyPeepCreateTest extends TestHarness {
 		super.clickOnSubmit("Publish");
 
 		super.checkErrorsExist();
-
-		super.signOut();
 
 		// Comprobamos con los otros roles
 

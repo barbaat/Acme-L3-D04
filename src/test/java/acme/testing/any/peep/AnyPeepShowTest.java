@@ -40,12 +40,10 @@ public class AnyPeepShowTest extends TestHarness {
 		super.checkInputBoxHasValue("email", email);
 		super.checkInputBoxHasValue("link", link);
 
-		super.signOut();
-
 		// Comprobamos que logueandonos en la aplicacion tambien nos lo muestra
 
 		super.signIn("assistant1", "assistant1");
-		super.request("/any/peep/show");
+		super.request("/any/peep/list");
 		super.sortListing(0, "asc");
 		super.clickOnListingRecord(recordIndex);
 		super.checkFormExists();
@@ -60,7 +58,7 @@ public class AnyPeepShowTest extends TestHarness {
 		super.signOut();
 
 		super.signIn("administrator", "administrator");
-		super.request("/any/peep/show");
+		super.request("/any/peep/list");
 		super.sortListing(0, "asc");
 		super.clickOnListingRecord(recordIndex);
 		super.checkFormExists();
@@ -75,7 +73,7 @@ public class AnyPeepShowTest extends TestHarness {
 		super.signOut();
 
 		super.signIn("student1", "student1");
-		super.request("/any/peep/show");
+		super.request("/any/peep/list");
 		super.sortListing(0, "asc");
 		super.clickOnListingRecord(recordIndex);
 		super.checkFormExists();
@@ -90,7 +88,7 @@ public class AnyPeepShowTest extends TestHarness {
 		super.signOut();
 
 		super.signIn("lecturer1", "lecturer1");
-		super.request("/any/peep/show");
+		super.request("/any/peep/list");
 		super.sortListing(0, "asc");
 		super.clickOnListingRecord(recordIndex);
 		super.checkFormExists();
@@ -105,7 +103,7 @@ public class AnyPeepShowTest extends TestHarness {
 		super.signOut();
 
 		super.signIn("auditor1", "auditor1");
-		super.request("/any/peep/show");
+		super.request("/any/peep/list");
 		super.sortListing(0, "asc");
 		super.clickOnListingRecord(recordIndex);
 		super.checkFormExists();
@@ -120,7 +118,7 @@ public class AnyPeepShowTest extends TestHarness {
 		super.signOut();
 
 		super.signIn("company1", "company1");
-		super.request("/any/peep/show");
+		super.request("/any/peep/list");
 		super.sortListing(0, "asc");
 		super.clickOnListingRecord(recordIndex);
 		super.checkFormExists();
