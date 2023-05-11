@@ -1,5 +1,9 @@
 key,title,abstract$,startPeriod,finishPeriod,optionalLink,draftMode,exceptional,key:practicum
-practicumSession-01,Primera sesión práctica,Esto es un resumen,"2022/11/01 18:00","2022/11/09 18:00",https://ev.us.es/webapps/login/,true,false,practicum-01
-practicumSession-02,Segunda sesión práctica,Esto es un resumen,"2022/10/11 08:30","2022/10/20 08:30",https://ev.us.es/webapps/login/,true,false,practicum-02
+practicumSession-01,Primera sesión práctica,Esto es un resumen,"2022/11/01 18:00","2022/11/09 18:00",https://ev.us.es/webapps/login/,false,true,practicum-01
+practicumSession-02,Segunda sesión práctica,Esto es un resumen,"2022/10/11 08:30","2022/10/20 08:30",https://ev.us.es/webapps/login/,false,true,practicum-02
 practicumSession-03,Tercera sesión práctica,Esto es un resumen,"2022/03/01 11:00","2022/03/09 11:00",null,true,false,practicum-03
 practicumSession-04,Cuarta sesión práctica,Esto es un resumen,"2022/01/01 12:00","2022/01/09 12:00",null,false,false,practicum-04
+practicumSession-05,Quinta sesión práctica,Esto es un resumen,"2022/10/01 15:25","2022/10/09 15:25",https://ev.us.es/webapps/login/,false,false,practicum-07
+practicumSession-06,Sexta sesión práctica,Esto es un resumen,"2022/08/01 19:00","2022/08/09 19:00",https://ev.us.es/webapps/login/,false,false,practicum-08
+practicumSession-07,Séptima sesión práctica,Esto es un resumen,"2022/07/01 22:00","2022/07/09 22:00",null,false,true,practicum-05
+practicumSession-08,Octava sesión práctica,Esto es un resumen,"2022/06/01 09:00","2022/06/09 09:00",null,false,true,practicum-06
