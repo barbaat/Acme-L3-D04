@@ -28,10 +28,10 @@ public class SystemConfigurationService {
 	public String translateDate(final Date date, final String lang) {
 		String res = "";
 		if (lang.equals("es")) {
-			final SimpleDateFormat spanishFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+			final SimpleDateFormat spanishFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			res = spanishFormat.format(date);
 		} else if (lang.equals("en")) {
-			final SimpleDateFormat englishFormat = new SimpleDateFormat("yyyy/dd/MM hh:mm");
+			final SimpleDateFormat englishFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 			res = englishFormat.format(date);
 		}
 		return res;

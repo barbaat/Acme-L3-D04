@@ -20,7 +20,8 @@ public class AuditorAuditingRecordCreateTest extends TestHarness {
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/auditingRecord/create-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test100Positive(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String startTime, final String finishTime, final String mark, final String moreInfo) {
+	public void test100Positive(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String startTime, final String finishTime, final String mark, final String moreInfo,
+		final String confirmation) {
 		super.signIn("auditor1", "auditor1");
 
 		super.clickOnMenu("Auditor", "List of audits");
@@ -40,6 +41,7 @@ public class AuditorAuditingRecordCreateTest extends TestHarness {
 		super.fillInputBoxIn("finishTime", finishTime);
 		super.fillInputBoxIn("mark", mark);
 		super.fillInputBoxIn("moreInfo", moreInfo);
+		super.fillInputBoxIn("confirmation", confirmation);
 
 		super.clickOnSubmit("Create correction record");
 
