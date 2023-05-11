@@ -96,7 +96,7 @@ public class CompanyPracticumPublishService extends AbstractService<Company, Pra
 		SelectChoices choices;
 		Tuple tuple;
 
-		courses = this.practicumRepository.findAllCourses();
+		courses = this.practicumRepository.findPublishedCourses();
 		choices = SelectChoices.from(courses, "code", object.getCourse());
 
 		tuple = super.unbind(object, "code", "title", "abstract$", "goals");
