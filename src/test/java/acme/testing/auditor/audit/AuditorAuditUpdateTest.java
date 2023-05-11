@@ -1,10 +1,14 @@
 
 package acme.testing.auditor.audit;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acme.entities.audits.Audit;
 import acme.testing.TestHarness;
 
 public class AuditorAuditUpdateTest extends TestHarness {
@@ -76,25 +80,29 @@ public class AuditorAuditUpdateTest extends TestHarness {
 		super.signOut();
 	}
 
-	//	@Test
-	//	public void test300Hacking() {
-	//
-	//		Collection<Course> cursos;
-	//		String param;
-	//
-	//		cursos = this.repository.findManyCoursesByLecturerUsername("user-account-auditor1");
-	//		for (final Course curso : cursos) {
-	//			param = String.format("id=%d", curso.getId());
-	//
-	//			super.checkLinkExists("Sign in");
-	//			super.request("/auditor/course/update", param);
-	//			super.checkPanicExists();
-	//
-	//			super.signIn("administrator", "administrator");
-	//			super.request("/auditor/course/update", param);
-	//			super.checkPanicExists();
-	//			super.signOut();
-	//
-	//		}
-	//	}
+	@Test
+	public void test300Hacking() {
+
+		String param;
+
+		final Collection<Audit> audits = this.repository.findAuditsByAuditorUsername("user-account-auditor1");
+		for (final Audit audit : audits) {
+			param = String.format("id=%d", audit.getId());
+
+			super.checkLinkExists("Sign in");
+			super.request("/auditor/audit/update", param);
+			super.checkPanicExists();
+
+			super.signIn("administrator", "administrator");
+			super.request("/auditor/audit/update", param);
+			super.checkPanicExists();
+			super.signOut();
+
+			super.signIn("student1", "student1");
+			super.request("/auditor/audit/update", param);
+			super.checkPanicExists();
+			super.signOut();
+
+		}
+	}
 }
