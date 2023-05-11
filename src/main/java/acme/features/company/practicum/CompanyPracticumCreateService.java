@@ -25,9 +25,6 @@ public class CompanyPracticumCreateService extends AbstractService<Company, Prac
 	@Autowired
 	protected CompanyPracticumRepository practicumRepository;
 
-	//	@Autowired
-	//	protected AuxiliarService				auxiliarService;
-
 	// AbstractService interface ----------------------------------------------
 
 
@@ -87,7 +84,7 @@ public class CompanyPracticumCreateService extends AbstractService<Company, Prac
 				totalHours += duration.toHours();
 			}
 			final boolean comprobar = totalHours < estimatedTotalTime * 0.9 || totalHours > estimatedTotalTime * 1.1;
-			super.state(comprobar, "estimatedTotalTime", "company.practicum.form.error.estimated-total-time");
+			super.state(!comprobar, "estimatedTotalTime", "company.practicum.form.error.estimated-total-time");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("code"))
@@ -110,7 +107,7 @@ public class CompanyPracticumCreateService extends AbstractService<Company, Prac
 		SelectChoices choices;
 		Tuple tuple;
 
-		courses = this.practicumRepository.findAllCourses();
+		courses = this.practicumRepository.findPublishedCourses();
 		choices = SelectChoices.from(courses, "code", object.getCourse());
 
 		tuple = super.unbind(object, "code", "title", "abstract$", "goals", "estimatedTotalTime");

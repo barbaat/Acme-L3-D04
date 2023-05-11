@@ -1,16 +1,20 @@
 
 package acme.features.company.practicum;
 
+import java.time.Duration;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.courses.Course;
 import acme.entities.practicums.Practicum;
+import acme.entities.sessions.PracticumSession;
 import acme.framework.components.accounts.Principal;
 import acme.framework.components.jsp.SelectChoices;
 import acme.framework.components.models.Tuple;
+import acme.framework.helpers.MomentHelper;
 import acme.framework.services.AbstractService;
 import acme.roles.Company;
 
@@ -21,9 +25,6 @@ public class CompanyPracticumUpdateService extends AbstractService<Company, Prac
 
 	@Autowired
 	protected CompanyPracticumRepository practicumRepository;
-
-	//	@Autowired
-	//	protected AuxiliarService				auxiliarService;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -82,17 +83,27 @@ public class CompanyPracticumUpdateService extends AbstractService<Company, Prac
 	public void validate(final Practicum object) {
 		assert object != null;
 
-		//		if (!super.getBuffer().getErrors().hasErrors("code"))
-		//			super.state(this.repository.findPracticumByCode(object.getCode()) == null || this.repository.findPracticumByCode(object.getCode()).equals(object), "code", "company.practicum.form.error.code");
-		//
-		//		if (!super.getBuffer().getErrors().hasErrors("title"))
-		//			super.state(this.auxiliarService.validateTextImput(object.getTitle()), "title", "company.practicum.form.error.spam");
-		//
-		//		if (!super.getBuffer().getErrors().hasErrors("abstract$"))
-		//			super.state(this.auxiliarService.validateTextImput(object.getAbstract$()), "abstract$", "company.practicum.form.error.spam");
-		//
-		//		if (!super.getBuffer().getErrors().hasErrors("goals"))
-		//			super.state(this.auxiliarService.validateTextImput(object.getGoals()), "goals", "company.practicum.form.error.spam");
+		int practicumId;
+
+		practicumId = super.getRequest().getData("id", int.class);
+		if (!super.getBuffer().getErrors().hasErrors("estimatedTotalTime")) {
+			final Collection<PracticumSession> sessions = this.practicumRepository.findPracticumSessionsByPracticumId(practicumId);
+			final Double estimatedTotalTime = object.getEstimatedTotalTime();
+			double totalHours = 0.0;
+
+			for (final PracticumSession session : sessions) {
+				final Date start = session.getStartPeriod();
+				final Date finish = session.getFinishPeriod();
+				final Duration duration = MomentHelper.computeDuration(start, finish);
+				totalHours += duration.toHours();
+			}
+			final boolean comprobar = totalHours < estimatedTotalTime * 0.9 || totalHours > estimatedTotalTime * 1.1;
+			super.state(!comprobar, "estimatedTotalTime", "company.practicum.form.error.estimated-total-time");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("code"))
+			super.state(this.practicumRepository.findPracticumByCode(object.getCode()) == null || this.practicumRepository.findPracticumByCode(object.getCode()).equals(object), "code", "company.practicum.form.error.existing-code");
+
 	}
 
 	@Override
@@ -110,7 +121,7 @@ public class CompanyPracticumUpdateService extends AbstractService<Company, Prac
 		SelectChoices choices;
 		Tuple tuple;
 
-		courses = this.practicumRepository.findAllCourses();
+		courses = this.practicumRepository.findPublishedCourses();
 		choices = SelectChoices.from(courses, "code", object.getCourse());
 
 		tuple = super.unbind(object, "code", "title", "abstract$", "goals");
