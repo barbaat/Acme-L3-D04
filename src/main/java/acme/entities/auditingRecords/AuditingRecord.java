@@ -43,13 +43,16 @@ public class AuditingRecord extends AbstractEntity {
 	protected String			assessment;
 
 	//the period during which the subject was audited (in the past, at least one hour long)
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	protected Date				startTime;
 
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	protected Date				finishTime;
 
 	//a mark (“A+”, “A”, “B”, “C”, “F”, or “F-“)
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	protected TypeMark			mark;
 
