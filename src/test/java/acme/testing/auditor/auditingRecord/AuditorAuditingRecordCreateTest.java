@@ -145,7 +145,7 @@ public class AuditorAuditingRecordCreateTest extends TestHarness {
 		super.fillInputBoxIn("finishTime", finishTime);
 		super.fillInputBoxIn("mark", mark);
 		super.fillInputBoxIn("moreInfo", moreInfo);
-		super.clickOnButton("Create");
+		super.clickOnSubmit("Create");
 
 		super.checkErrorsExist();
 
