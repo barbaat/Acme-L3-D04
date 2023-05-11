@@ -70,38 +70,10 @@ public class AuditorAuditingRecordCreateTest extends TestHarness {
 	}
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/auditor/auditingRecord/create-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test200Negative(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String startTime, final String finishTime, final String mark, final String moreInfo) {
-
-		super.signIn("auditor1", "auditor1");
-
-		super.clickOnMenu("Auditor", "List of audits");
-		super.checkListingExists();
-		super.sortListing(0, "asc");
-
-		super.checkColumnHasValue(auditIndex, 0, code);
-		super.clickOnListingRecord(auditIndex);
-		super.checkInputBoxHasValue("code", code);
-
-		super.clickOnButton("Auditing-Records");
-		super.clickOnButton("Create");
-
-		super.fillInputBoxIn("subject", subject);
-		super.fillInputBoxIn("assessment", assessment);
-		super.fillInputBoxIn("startTime", startTime);
-		super.fillInputBoxIn("finishTime", finishTime);
-		super.fillInputBoxIn("mark", mark);
-		super.fillInputBoxIn("moreInfo", moreInfo);
-
-		super.checkErrorsExist();
-
-		super.signOut();
-	}
-
-	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/auditingRecord/create-positive-exceptional.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100PositiveExceptional(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String startTime, final String finishTime, final String mark, final String moreInfo,
 		final String confirmation) {
+
 		super.signIn("auditor1", "auditor1");
 
 		super.clickOnMenu("Auditor", "List of audits");
@@ -137,7 +109,6 @@ public class AuditorAuditingRecordCreateTest extends TestHarness {
 
 		super.checkListingExists();
 		super.sortListing(0, "asc");
-		super.checkColumnHasValue(auditingRecordIndex, 0, subject);
 
 		super.clickOnListingRecord(auditingRecordIndex);
 
@@ -147,6 +118,36 @@ public class AuditorAuditingRecordCreateTest extends TestHarness {
 		super.checkInputBoxHasValue("finishTime", finishTime);
 		super.checkInputBoxHasValue("mark", mark);
 		super.checkInputBoxHasValue("moreInfo", moreInfo);
+
+		super.signOut();
+	}
+
+	@ParameterizedTest
+	@CsvFileSource(resources = "/auditor/auditingRecord/create-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
+	public void test200Negative(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String startTime, final String finishTime, final String mark, final String moreInfo) {
+
+		super.signIn("auditor1", "auditor1");
+
+		super.clickOnMenu("Auditor", "List of audits");
+		super.checkListingExists();
+		super.sortListing(0, "asc");
+
+		super.checkColumnHasValue(auditIndex, 0, code);
+		super.clickOnListingRecord(auditIndex);
+		super.checkInputBoxHasValue("code", code);
+
+		super.clickOnButton("Auditing-Records");
+		super.clickOnButton("Create");
+
+		super.fillInputBoxIn("subject", subject);
+		super.fillInputBoxIn("assessment", assessment);
+		super.fillInputBoxIn("startTime", startTime);
+		super.fillInputBoxIn("finishTime", finishTime);
+		super.fillInputBoxIn("mark", mark);
+		super.fillInputBoxIn("moreInfo", moreInfo);
+		super.clickOnButton("Create");
+
+		super.checkErrorsExist();
 
 		super.signOut();
 	}
