@@ -3,6 +3,7 @@ package acme.testing.lecturer.lectureCourse;
 
 import java.util.Collection;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -160,89 +161,91 @@ public class LecturerLectureCourseDeleteTest extends TestHarness {
 		super.signOut();
 	}
 
-	//	@Test
-	//	public void test300Hacking() {
-	//
-	//		// No pueda añadir una lecture a un curso alguien que no tenga el rol de lecturer
-	//
-	//		Collection<Lecture> lectures;
-	//		String param;
-	//		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer1");
-	//		for (final Lecture lecture : lectures) {
-	//			param = String.format("lectureId=%d", lecture.getId());
-	//			super.checkLinkExists("Sign in");
-	//			super.request("/lecturer/lecture-course/create" + param);
-	//			super.checkPanicExists();
-	//
-	//			super.signIn("administrator", "administrator");
-	//			super.request("/lecturer/lecture-course/create" + param);
-	//			super.checkPanicExists();
-	//			super.signOut();
-	//		}
-	//	}
-	//
-	//	@Test
-	//	public void test301Hacking() {
-	//
-	//		/*
-	//		 * // final Collection<Course> cursos;
-	//		 * //
-	//		 * // cursos = this.repository.findManyCoursesByLecturerUsername("user-account-lecturer1");
-	//		 * // for (final Course curso : cursos) {
-	//		 * // lectures = this.repository.findManyLecturesByCourseId(curso.getId());
-	//		 * // for (final Lecture lecture : lectures) {
-	//		 * // param = String.format("lectureId=%d", lecture.getId());
-	//		 * // super.checkLinkExists("Sign in");
-	//		 * // super.request("/lecturer/lecture-course/create" + param);
-	//		 * // super.checkPanicExists();
-	//		 * //
-	//		 * // super.signIn("administrator", "administrator");
-	//		 * // super.request("/lecturer/lecture-course/create" + param);
-	//		 * // super.checkPanicExists();
-	//		 * // super.signOut();
-	//		 * // }
-	//		 * // }
-	//		 */
-	//
-	//		// No pueda añadir una lecture a un curso en el que ya está dentro 
-	//
-	//		//		Collection<Lecture> lectures;
-	//		//		final Collection<Course> cursos;
-	//		//		String param;
-	//		//
-	//		//		lectures = this.repository.findManyLecturesByLecturerUsername("user-account-lecturer1");
-	//		//		cursos = this.repository.findManyCoursesByLecturerUsername("user-account-lecturer1");
-	//		//
-	//		//		for (final Lecture leccion : lectures)
-	//		//			if (leccion.isDraftMode()) {
-	//		//				param = String.format("id=%d", leccion.getId());
-	//		//				super.checkLinkExists("Sign in");
-	//		//				super.request("/lecturer/lecture-course/create?lectureId=83");
-	//		//				super.checkPanicExists();
-	//		//
-	//		//				super.signIn("administrator", "administrator");
-	//		//				super.request("/lecturer/lecture/create");
-	//		//				super.checkPanicExists();
-	//		//				super.signOut();
-	//		//
-	//		//			}
-	//	}
-	//
-	//	@Test
-	//	public void test302Hacking() {
-	//
-	//		// No pueda añadir una lecture a un curso alguien que tenga el rol de Lecturer que creó la lecture
-	//
-	//		Collection<Lecture> lectures;
-	//		String param;
-	//		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer1");
-	//
-	//		super.signIn("lecturer2", "lecturer2");
-	//
-	//		for (final Lecture lecture : lectures) {
-	//			param = String.format("lectureId=%d", lecture.getId());
-	//			super.request("/lecturer/lecture-course/create" + param);
-	//			super.checkPanicExists();
-	//		}
-	//	}
+	@Test
+	public void test300Hacking() {
+
+		// No pueda añadir una lecture a un curso alguien que no tenga el rol de lecturer
+
+		Collection<Lecture> lectures;
+		String param;
+		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer2");
+		for (final Lecture lecture : lectures) {
+
+			param = String.format("lectureId=%d", lecture.getId());
+
+			super.checkLinkExists("Sign in");
+			super.request("/lecturer/lecture-course/create" + param);
+			super.checkPanicExists();
+
+			super.signIn("administrator", "administrator");
+			super.request("/lecturer/lecture-course/create" + param);
+			super.checkPanicExists();
+			super.signOut();
+		}
+	}
+
+	@Test
+	public void test301Hacking() {
+
+		/*
+		 * // final Collection<Course> cursos;
+		 * //
+		 * // cursos = this.repository.findManyCoursesByLecturerUsername("user-account-lecturer1");
+		 * // for (final Course curso : cursos) {
+		 * // lectures = this.repository.findManyLecturesByCourseId(curso.getId());
+		 * // for (final Lecture lecture : lectures) {
+		 * // param = String.format("lectureId=%d", lecture.getId());
+		 * // super.checkLinkExists("Sign in");
+		 * // super.request("/lecturer/lecture-course/create" + param);
+		 * // super.checkPanicExists();
+		 * //
+		 * // super.signIn("administrator", "administrator");
+		 * // super.request("/lecturer/lecture-course/create" + param);
+		 * // super.checkPanicExists();
+		 * // super.signOut();
+		 * // }
+		 * // }
+		 */
+
+		// No pueda añadir una lecture a un curso en el que ya está dentro 
+
+		//		Collection<Lecture> lectures;
+		//		final Collection<Course> cursos;
+		//		String param;
+		//
+		//		lectures = this.repository.findManyLecturesByLecturerUsername("user-account-lecturer1");
+		//		cursos = this.repository.findManyCoursesByLecturerUsername("user-account-lecturer1");
+		//
+		//		for (final Lecture leccion : lectures)
+		//			if (leccion.isDraftMode()) {
+		//				param = String.format("id=%d", leccion.getId());
+		//				super.checkLinkExists("Sign in");
+		//				super.request("/lecturer/lecture-course/create?lectureId=83");
+		//				super.checkPanicExists();
+		//
+		//				super.signIn("administrator", "administrator");
+		//				super.request("/lecturer/lecture/create");
+		//				super.checkPanicExists();
+		//				super.signOut();
+		//
+		//			}
+	}
+
+	@Test
+	public void test302Hacking() {
+
+		// No pueda añadir una lecture a un curso alguien que tenga el rol de Lecturer que creó la lecture
+
+		Collection<Lecture> lectures;
+		String param;
+
+		super.signIn("lecturer1", "lecturer1");
+		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer2");
+
+		for (final Lecture lecture : lectures) {
+			param = String.format("lectureId=%d", lecture.getId());
+			super.request("/lecturer/lecture-course/create" + param);
+			super.checkPanicExists();
+		}
+	}
 }
