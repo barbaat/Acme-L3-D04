@@ -1,0 +1,19 @@
+auditIndex,code,auditingRecordIndex,auditingRecordId,subject,assessment,startTime,finishTime,mark,moreInfo
+1,D0000,0,Nivel intermedioaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,Examen final, 2022/04/04 11:11, 2022/04/04 12:11,A,http://google.com
+1,D0000,0,Matemáticas,Nivel intermedioaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, 2022/04/04 11:11, 2022/04/04 12:11,A,http://google.com
+1,D0000,0,Matemáticas,Examen final, 2022/04/04 11:11, 2022/04/04 11:11,A,http://google.com
+1,D0000,0,Matemáticas,Examen final, 2022/04/04 11:11, 2022/04/03 12:11,A,http://google.com
+1,D0000,0,Matemáticas,Examen final, 2042/04/04 11:11, 2042/04/04 12:11,A,http://google.com
+1,D0000,0,Matemáticas,Examen final, 2022/04/04 11:11, 2022/04/04 12:11,A,google
+1,D0000,0,,Examen final, 2022/04/04 11:11, 2022/04/04 12:11,A,http://google.com
+1,D0000,0,Matemáticas,, 2022/04/04 11:11, 2022/04/04 12:11,A,http://google.com
+1,D0000,0,Matemáticas,Examen final,, 2022/04/04 12:11,A,http://google.com
+1,D0000,0,Matemáticas,Examen final, 2022/04/04 11:11,,A,http://google.com
+1,D0000,0,Matemáticas,Examen final, 2022/04/04 11:11, 2022/04/04 12:11,---,http://google.com
+0,A1234,0,87,Biología EDITADO,Prácticas,2022/04/05 11:11, 2022/04/05 12:11,A,http://instagram.com
+0,A1234,0,87,Biología,Prácticas EDITADO,2022/04/05 11:11, 2022/04/05 12:11,A,http://instagram.com
+0,A1234,0,87,Biología,Prácticas,2022/04/03 12:11, 2022/04/05 12:11,A,http://instagram.com
+0,A1234,0,87,Biología,Prácticas,2022/04/05 11:11, 2022/04/06 13:11,A,http://instagram.com
+0,A1234,0,87,Biología,Prácticas,2022/04/05 11:11, 2022/04/05 12:11,APLUS,http://instagram.com
+0,A1234,0,87,Biología,Prácticas,2022/04/05 11:11, 2022/04/05 12:11,A,http://instagrameditado.com
+0,A1234,0,87,Biología,Prácticas,2022/04/05 11:11, 2022/04/05 12:11,A,

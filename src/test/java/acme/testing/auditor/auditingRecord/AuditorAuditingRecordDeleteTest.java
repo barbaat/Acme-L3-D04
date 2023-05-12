@@ -88,7 +88,7 @@ public class AuditorAuditingRecordDeleteTest extends TestHarness {
 
 		final String param = String.format("id=%d", auditingRecordId);
 
-		super.checkNotButtonExists("Delete");
+		super.checkNotSubmitExists("Delete");
 
 		super.request("/auditor/auditingRecord/delete", param);
 		super.checkPanicExists();
