@@ -24,8 +24,7 @@ public class AuditorAuditingRecordDeleteTest extends TestHarness {
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/auditingRecord/delete-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test100Positive(final int auditIndex, final String code, final int auditingRecordIndex, final int auditingRecordId, final String subject, final String assessment, final String startTime, final String finishTime, final String mark,
-		final String moreInfo) {
+	public void test100Positive(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String startTime, final String finishTime, final String mark, final String moreInfo) {
 
 		super.signIn("auditor1", "auditor1");
 
@@ -49,6 +48,8 @@ public class AuditorAuditingRecordDeleteTest extends TestHarness {
 		super.checkInputBoxHasValue("mark", mark);
 		super.checkInputBoxHasValue("moreInfo", moreInfo);
 
+		final String auditingRecordIdString = super.getCurrentQuery();
+		final int auditingRecordId = Integer.parseInt(auditingRecordIdString.substring(auditingRecordIdString.indexOf("=") + 1));
 		final String param = String.format("id=%d", auditingRecordId);
 		super.clickOnSubmit("Delete");
 		super.checkNotErrorsExist();
@@ -61,8 +62,7 @@ public class AuditorAuditingRecordDeleteTest extends TestHarness {
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/auditingRecord/delete-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test200Negative(final int auditIndex, final String code, final int auditingRecordIndex, final int auditingRecordId, final String subject, final String assessment, final String startTime, final String finishTime, final String mark,
-		final String moreInfo) {
+	public void test200Negative(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String startTime, final String finishTime, final String mark, final String moreInfo) {
 
 		super.signIn("auditor1", "auditor1");
 
@@ -86,6 +86,8 @@ public class AuditorAuditingRecordDeleteTest extends TestHarness {
 		super.checkInputBoxHasValue("mark", mark);
 		super.checkInputBoxHasValue("moreInfo", moreInfo);
 
+		final String auditingRecordIdString = super.getCurrentQuery();
+		final int auditingRecordId = Integer.parseInt(auditingRecordIdString.substring(auditingRecordIdString.indexOf("=") + 1));
 		final String param = String.format("id=%d", auditingRecordId);
 
 		super.checkNotSubmitExists("Delete");

@@ -78,8 +78,7 @@ public class AuditorAuditingRecordUpdateTest extends TestHarness {
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/auditingRecord/update-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test200Negative(final int auditIndex, final String code, final int auditingRecordIndex, final int auditingRecordId, final String subject, final String assessment, final String startTime, final String finishTime, final String mark,
-		final String moreInfo) {
+	public void test200Negative(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String startTime, final String finishTime, final String mark, final String moreInfo) {
 
 		super.signIn("auditor1", "auditor1");
 
@@ -95,6 +94,7 @@ public class AuditorAuditingRecordUpdateTest extends TestHarness {
 		super.clickOnListingRecord(auditingRecordIndex);
 		super.checkFormExists();
 
+		final String auditingRecordId = super.getCurrentQuery().toString();
 		final String param = String.format("id=%d", auditingRecordId);
 
 		super.checkNotSubmitExists("Update");
