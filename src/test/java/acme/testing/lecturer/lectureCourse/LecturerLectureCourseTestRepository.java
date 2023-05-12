@@ -34,6 +34,9 @@ public interface LecturerLectureCourseTestRepository extends AbstractRepository 
 	@Query("select c from Course c where c.id = :id")
 	Course findOneCourseById(int id);
 
+	@Query("select c from Course c where c.code = :code")
+	Course findOneCourseByCode(String code);
+
 	@Query("select l from Lecture l where l.id = :id")
 	Lecture findOneLectureById(int id);
 
@@ -42,4 +45,5 @@ public interface LecturerLectureCourseTestRepository extends AbstractRepository 
 
 	@Query("select lc from LectureCourse lc where lc.lecture = :lecture and lc.course = :course")
 	LectureCourse findOneLectureCourseByLectureAndCourse(Lecture lecture, Course course);
+
 }
