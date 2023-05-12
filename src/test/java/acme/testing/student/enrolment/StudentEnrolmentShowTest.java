@@ -45,6 +45,28 @@ public class StudentEnrolmentShowTest extends TestHarness {
 		super.signOut();
 	}
 
+	@ParameterizedTest
+	@CsvFileSource(resources = "/student/enrolment/show-noPublished-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
+	public void test100Positive(final int enrolmentIndex, final String code, final String course, final String workTime, final String motivation, final String goals) {
+		// HINT: this test signs in as an employer, lists his or her jobs, selects one of them and checks that it's as expected.
+
+		super.signIn("student1", "student1");
+
+		super.clickOnMenu("Student", "List of enrolments");
+		super.checkListingExists();
+		super.sortListing(0, "asc");
+		super.clickOnListingRecord(enrolmentIndex);
+		super.checkFormExists();
+
+		super.checkInputBoxHasValue("code", code);
+		super.checkInputBoxHasValue("course", course);
+		super.checkInputBoxHasValue("workTime", workTime);
+		super.checkInputBoxHasValue("motivation", motivation);
+		super.checkInputBoxHasValue("goals", goals);
+
+		super.signOut();
+	}
+
 	@Test
 	public void test200Negative() {
 		// HINT: there's no negative test case for this listing, since it doesn't
