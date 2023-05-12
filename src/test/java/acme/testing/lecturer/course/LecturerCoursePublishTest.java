@@ -1,6 +1,9 @@
 
 package acme.testing.lecturer.course;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -156,59 +159,59 @@ public class LecturerCoursePublishTest extends TestHarness {
 
 		super.signOut();
 	}
-}
 
-//	@Test
-//	public void test300Hacking() {
-//		// HINT: this test tries to publish a lecture with a role other than "lecturer".
-//
-//		Collection<Lecture> lectures;
-//		String params;
-//
-//		lectures = this.repository.findManyLecturesByLecturerUsername("user-account-lecturer2");
-//		for (final Lecture leccion : lectures)
-//			if (leccion.isDraftMode()) {
-//				params = String.format("id=%d", leccion.getId());
-//
-//				super.checkLinkExists("Sign in");
-//				super.request("/lecturer/lecture/publish", params);
-//				super.checkPanicExists();
-//
-//				super.signIn("administrator", "administrator");
-//				super.request("/lecturer/lecture/publish", params);
-//				super.checkPanicExists();
-//				super.signOut();
-//			}
-//	}
-//
-//	@Test
-//	public void test301Hacking() {
-//		// HINT: this test tries to publish a published lecture that was registered by the principal.
-//
-//		Collection<Lecture> lectures;
-//		String params;
-//
-//		super.signIn("lecturer1", "lecturer1");
-//		lectures = this.repository.findManyLecturesByLecturerUsername("user-account-lecturer1");
-//		for (final Lecture leccion : lectures)
-//			if (!leccion.isDraftMode()) {
-//				params = String.format("id=%d", leccion.getId());
-//				super.request("/lecturer/lecture/publish", params);
-//			}
-//		super.signOut();
-//	}
-//
-//	@Test
-//	public void test302Hacking() {
-//
-//		Collection<Lecture> lectures;
-//		String params;
-//
-//		super.signIn("lecturer2", "lecturer2");
-//		lectures = this.repository.findManyLecturesByLecturerUsername("user-account-lecturer1");
-//		for (final Lecture lecture : lectures) {
-//			params = String.format("id=%d", lecture.getId());
-//			super.request("/lecturer/lecture/publish", params);
-//		}
-//		super.signOut();
-//	}
+	@Test
+	public void test300Hacking() {
+		// Publicar curso con otro rol que no es Lecturer
+
+		Collection<Course> cursos;
+		String params;
+
+		cursos = this.repository.findManyCoursesByLecturerUsername("user-account-lecturer2");
+		for (final Course curso : cursos)
+			if (curso.isDraftMode()) {
+				params = String.format("id=%d", curso.getId());
+
+				super.checkLinkExists("Sign in");
+				super.request("/lecturer/course/publish", params);
+				super.checkPanicExists();
+
+				super.signIn("administrator", "administrator");
+				super.request("/lecturer/course/publish", params);
+				super.checkPanicExists();
+				super.signOut();
+			}
+	}
+
+	@Test
+	public void test301Hacking() {
+		// Publicar un curso que ya está publicado
+
+		Collection<Course> cursos;
+		String params;
+
+		super.signIn("lecturer1", "lecturer1");
+		cursos = this.repository.findManyCoursesByLecturerUsername("user-account-lecturer1");
+		for (final Course curso : cursos)
+			if (!curso.isDraftMode()) {
+				params = String.format("id=%d", curso.getId());
+				super.request("/lecturer/course/publish", params);
+			}
+		super.signOut();
+	}
+
+	@Test
+	public void test302Hacking() {
+		//Publicar un curso siendo Lecturer pero no el que lo creó
+		Collection<Course> cursos;
+		String params;
+
+		super.signIn("lecturer2", "lecturer2");
+		cursos = this.repository.findManyCoursesByLecturerUsername("user-account-lecturer1");
+		for (final Course curso : cursos) {
+			params = String.format("id=%d", curso.getId());
+			super.request("/lecturer/lecture/publish", params);
+		}
+		super.signOut();
+	}
+}
