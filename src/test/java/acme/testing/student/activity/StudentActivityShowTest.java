@@ -65,7 +65,7 @@ public class StudentActivityShowTest extends TestHarness {
 		for (final Enrolment enrolment : enrolments) {
 			final Collection<Activity> activities = this.repository.findActivitiesByEnrolmentId(enrolment.getId());
 			for (final Activity activity : activities)
-				if (activity.getEnrolment().isDraftMode()) {
+				if (!activity.getEnrolment().isDraftMode()) {
 					param = String.format("id=%d", activity.getEnrolment().getId());
 
 					//Si no estoy autenticado

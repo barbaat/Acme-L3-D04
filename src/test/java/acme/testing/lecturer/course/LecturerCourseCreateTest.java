@@ -44,6 +44,11 @@ public class LecturerCourseCreateTest extends TestHarness {
 		super.checkInputBoxHasValue("abstractCourse", abstractCourse);
 		super.checkInputBoxHasValue("retailPrice", retailPrice);
 		super.checkInputBoxHasValue("link", link);
+		// No se muestra el draftMode porque se da por supuesto al poder editar y eliminar
+
+		super.clickOnButton("Lectures of course");
+		super.checkListingExists();
+		super.checkListingEmpty();
 
 		super.signOut();
 	}
