@@ -70,11 +70,11 @@ public class AuditorAuditListTest extends TestHarness {
 			final String param = String.format("id=%d", audit.getId());
 
 			super.checkLinkExists("Sign in");
-			super.request("/auditor/audit/delete", param);
+			super.request("/auditor/audit/list", param);
 			super.checkPanicExists();
 
 			super.signIn("auditor2", "auditor2");
-			super.request("/auditor/audit/delete", param);
+			super.request("/auditor/audit/list", param);
 			super.checkPanicExists();
 			super.signOut();
 

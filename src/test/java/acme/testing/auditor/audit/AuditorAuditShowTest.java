@@ -24,6 +24,7 @@ public class AuditorAuditShowTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/audit/show-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int auditIndex, final String course, final String code, final String conclusion, final String strongPoints, final String weakPoints, final String mark) {
+		//Compruebo que puedo visualizar un audit correctamente
 
 		super.signIn("auditor1", "auditor1");
 
@@ -51,21 +52,34 @@ public class AuditorAuditShowTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
-		// HINT: this test tries to show a duty of a job that is in draft mode or
-		// HINT+ not available, but wasn't published by the principal;
-
-		Collection<Audit> audits;
-		String param;
+		//Compruebo que solo auditor1 pueda ver sus audits sin publicar
 
 		super.signIn("auditor1", "auditor1");
-		audits = this.repository.findAuditsByAuditorUsername("user-account-auditor2");
+		final Collection<Audit> audits = this.repository.findAuditsByAuditorUsername("auditor1");
 		for (final Audit audit : audits)
 			if (audit.isDraftMode()) {
-				param = String.format("id=%d", audit.getId());
+				final String param = String.format("id=%d", audit.getId());
 
 				super.checkLinkExists("Sign in");
 				super.request("/auditor/audit/show", param);
 				super.checkPanicExists();
+
+				super.signIn("auditor2", "auditor2");
+				super.request("/auditor/audit/show", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.checkLinkExists("Sign in");
+				super.signIn("lecturer1", "lecturer1");
+				super.request("/auditor/audit/show", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.checkLinkExists("Sign in");
+				super.signIn("student1", "student1");
+				super.request("/auditor/audit/show", param);
+				super.checkPanicExists();
+				super.signOut();
 			}
 	}
 
