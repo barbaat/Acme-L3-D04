@@ -93,7 +93,7 @@ public class LecturerLectureUpdateTest extends TestHarness {
 		Collection<Lecture> lectures;
 		String param;
 
-		lectures = this.repository.findManyLecturesByLecturerUsername("user-account-lecturer1");
+		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer1");
 		for (final Lecture leccion : lectures) {
 			param = String.format("id=%d", leccion.getId());
 

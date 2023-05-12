@@ -54,7 +54,7 @@ public class LecturerCourseShowTest extends TestHarness {
 		String param;
 
 		super.signIn("lecturer1", "lecturer1");
-		courses = this.repository.findManyCoursesByLecturerUsername("user-account-lecturer2");
+		courses = this.repository.findManyCoursesByLecturerUsername("lecturer2");
 		for (final Course course : courses)
 			if (course.isDraftMode()) {
 				param = String.format("id=%d", course.getId());

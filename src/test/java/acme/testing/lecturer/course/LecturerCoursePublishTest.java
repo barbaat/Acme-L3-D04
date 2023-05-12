@@ -167,7 +167,7 @@ public class LecturerCoursePublishTest extends TestHarness {
 		Collection<Course> cursos;
 		String params;
 
-		cursos = this.repository.findManyCoursesByLecturerUsername("user-account-lecturer2");
+		cursos = this.repository.findManyCoursesByLecturerUsername("lecturer2");
 		for (final Course curso : cursos)
 			if (curso.isDraftMode()) {
 				params = String.format("id=%d", curso.getId());
@@ -191,7 +191,7 @@ public class LecturerCoursePublishTest extends TestHarness {
 		String params;
 
 		super.signIn("lecturer1", "lecturer1");
-		cursos = this.repository.findManyCoursesByLecturerUsername("user-account-lecturer1");
+		cursos = this.repository.findManyCoursesByLecturerUsername("lecturer1");
 		for (final Course curso : cursos)
 			if (!curso.isDraftMode()) {
 				params = String.format("id=%d", curso.getId());
@@ -207,7 +207,7 @@ public class LecturerCoursePublishTest extends TestHarness {
 		String params;
 
 		super.signIn("lecturer2", "lecturer2");
-		cursos = this.repository.findManyCoursesByLecturerUsername("user-account-lecturer1");
+		cursos = this.repository.findManyCoursesByLecturerUsername("lecturer1");
 		for (final Course curso : cursos) {
 			params = String.format("id=%d", curso.getId());
 			super.request("/lecturer/lecture/publish", params);
