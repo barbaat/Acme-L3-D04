@@ -1,2 +1,2 @@
-recordIndex,reference,contractor,title,deadline,salary,score,moreInfo,description
+lectureIndex,title,abstractLecture,body,estimatedLearningTimeInHours,lectureType,link,draftMode
 2,Lecture 3,Introduction to Programming,Actualizado,-30.00,THEORY,https://www.us.es/abc123,true
