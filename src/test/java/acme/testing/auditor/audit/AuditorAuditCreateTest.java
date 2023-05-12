@@ -21,6 +21,7 @@ public class AuditorAuditCreateTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/audit/create-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int auditIndex, final String course, final String code, final String conclusion, final String strongPoints, final String weakPoints) {
+		//Creo audits correctamente
 
 		super.signIn("auditor1", "auditor1");
 

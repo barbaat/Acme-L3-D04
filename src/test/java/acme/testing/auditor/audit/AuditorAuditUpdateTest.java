@@ -59,6 +59,7 @@ public class AuditorAuditUpdateTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/audit/update-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test200Negative(final int auditIndex, final String course, final String code, final String conclusion, final String strongPoints, final String weakPoints) {
+		//Comprueba que no puedo editar un audit con datos erróneos
 
 		super.signIn("auditor1", "auditor1");
 
@@ -80,12 +81,38 @@ public class AuditorAuditUpdateTest extends TestHarness {
 		super.signOut();
 	}
 
+	@ParameterizedTest
+	@CsvFileSource(resources = "/auditor/audit/update-negative2.csv", encoding = "utf-8", numLinesToSkip = 1)
+	public void test200Negative2(final int auditIndex, final String course, final String code, final String conclusion, final String strongPoints, final String weakPoints) {
+		//Comprueba que no puedo editar un audit publicado
+
+		super.signIn("auditor1", "auditor1");
+
+		super.clickOnMenu("Auditor", "List of audits");
+		super.checkListingExists();
+		super.sortListing(0, "asc");
+
+		super.clickOnListingRecord(auditIndex);
+		super.checkFormExists();
+
+		final String auditIdString = super.getCurrentQuery();
+		final int auditId = Integer.parseInt(auditIdString.substring(auditIdString.indexOf("=") + 1));
+		final String param = String.format("id=%d", auditId);
+
+		super.checkNotButtonExists("Update");
+
+		super.request("/auditor/auditingRecord/update", param);
+		super.checkPanicExists();
+
+		super.signOut();
+	}
+
 	@Test
 	public void test300Hacking() {
 
 		String param;
 
-		final Collection<Audit> audits = this.repository.findAuditsByAuditorUsername("user-account-auditor1");
+		final Collection<Audit> audits = this.repository.findAuditsByAuditorUsername("auditor1");
 		for (final Audit audit : audits) {
 			param = String.format("id=%d", audit.getId());
 
@@ -99,6 +126,11 @@ public class AuditorAuditUpdateTest extends TestHarness {
 			super.signOut();
 
 			super.signIn("student1", "student1");
+			super.request("/auditor/audit/update", param);
+			super.checkPanicExists();
+			super.signOut();
+
+			super.signIn("auditor2", "auditor2");
 			super.request("/auditor/audit/update", param);
 			super.checkPanicExists();
 			super.signOut();

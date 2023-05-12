@@ -73,7 +73,7 @@ public class AuditorAuditDeleteTest extends TestHarness {
 		super.checkInputBoxHasValue("weakPoints", weakPoints);
 		super.checkInputBoxHasValue("mark", mark);
 
-		super.checkNotButtonExists("Delete");
+		super.checkNotSubmitExists("Delete");
 
 		super.signOut();
 	}
@@ -81,18 +81,30 @@ public class AuditorAuditDeleteTest extends TestHarness {
 	@Test
 	public void test300Hacking() {
 
-		Collection<Audit> audits;
-		String param;
-
-		audits = this.repository.findAuditsByAuditorUsername("user-account-auditor1");
+		final Collection<Audit> audits = this.repository.findAuditsByAuditorUsername("auditor1");
 		for (final Audit audit : audits) {
-			param = String.format("id=%d", audit.getId());
+			final String param = String.format("id=%d", audit.getId());
 
 			super.checkLinkExists("Sign in");
 			super.request("/auditor/audit/delete", param);
 			super.checkPanicExists();
 
 			super.signIn("administrator", "administrator");
+			super.request("/auditor/audit/delete", param);
+			super.checkPanicExists();
+			super.signOut();
+
+			super.signIn("auditor2", "auditor2");
+			super.request("/auditor/audit/delete", param);
+			super.checkPanicExists();
+			super.signOut();
+
+			super.signIn("student1", "student1");
+			super.request("/auditor/audit/delete", param);
+			super.checkPanicExists();
+			super.signOut();
+
+			super.signIn("lecturer1", "lecturer1");
 			super.request("/auditor/audit/delete", param);
 			super.checkPanicExists();
 			super.signOut();

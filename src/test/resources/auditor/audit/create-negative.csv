@@ -4,6 +4,10 @@ auditIndex,course,code,conclusion,strongPoints,weakPoints
 0,ABC168,Z3001,Nivel intermedioaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,Muy útil,Necesita una base
 0,ABC168,Z3001,Nivel intermedio,Nivel intermedioaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,Necesita una base
 0,ABC168,Z3001,Nivel intermedio,Muy útil,Nivel intermedioaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+0,ABC168,,Nivel intermedio,Muy útil,Nivel intermedio
+0,ABC168,Z3001,,Muy útil,Nivel intermedio
+0,ABC168,Z3001,Nivel intermedio,,Nivel intermedio
+0,ABC168,Z3001,Nivel intermedio,Muy útil,
 
 
 
