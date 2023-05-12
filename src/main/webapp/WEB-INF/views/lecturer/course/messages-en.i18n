@@ -18,5 +18,5 @@ lecturer.course.form.error.duplicated = Code already exist, change it!
 lecturer.course.form.error.negative-retailPrice = Amount must be positive!
 
 lecturer.course.form.error.nolecture = No lectures!
-lecturer.course.form.error.nohandson = No hand-on lecture!
-lecturer.course.form.error.lecturenp = Some lectures does not published
+lecturer.course.form.error.nohandson = It's a theory course!
+lecturer.course.form.error.lecturenp = Some lectures does not published!
