@@ -39,7 +39,6 @@ public class AuditorAuditingRecordUpdateTest extends TestHarness {
 		super.clickOnButton("Auditing-Records");
 		super.clickOnListingRecord(auditingRecordIndex);
 		super.checkSubmitExists("Update");
-		super.clickOnSubmit("Update");
 
 		super.fillInputBoxIn("subject", subject);
 		super.fillInputBoxIn("assessment", assessment);
@@ -94,10 +93,11 @@ public class AuditorAuditingRecordUpdateTest extends TestHarness {
 		super.clickOnListingRecord(auditingRecordIndex);
 		super.checkFormExists();
 
-		final String auditingRecordId = super.getCurrentQuery().toString();
+		final String auditingRecordIdString = super.getCurrentQuery();
+		final int auditingRecordId = Integer.parseInt(auditingRecordIdString.substring(auditingRecordIdString.indexOf("=") + 1));
 		final String param = String.format("id=%d", auditingRecordId);
 
-		super.checkNotSubmitExists("Update");
+		super.checkNotButtonExists("Update");
 
 		super.request("/auditor/auditingRecord/update", param);
 		super.checkPanicExists();
