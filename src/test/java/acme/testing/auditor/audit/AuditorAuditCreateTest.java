@@ -53,6 +53,7 @@ public class AuditorAuditCreateTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/audit/create-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test200Negative(final int auditIndex, final String course, final String code, final String conclusion, final String strongPoints, final String weakPoints) {
+		//Compruebo que no puedo crear audits con datos erróneos o vacíos
 
 		super.signIn("auditor1", "auditor1");
 
@@ -71,6 +72,7 @@ public class AuditorAuditCreateTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
+		//Compruebo que si no soy auditor no puedo crear audits
 
 		super.checkLinkExists("Sign in");
 		super.request("/auditor/audit/create");
@@ -85,5 +87,16 @@ public class AuditorAuditCreateTest extends TestHarness {
 		super.request("/auditor/audit/create");
 		super.checkPanicExists();
 		super.signOut();
+
+		super.signIn("student1", "student1");
+		super.request("/auditor/audit/create");
+		super.checkPanicExists();
+		super.signOut();
+
+		super.signIn("company1", "company1");
+		super.request("/auditor/audit/create");
+		super.checkPanicExists();
+		super.signOut();
+
 	}
 }
