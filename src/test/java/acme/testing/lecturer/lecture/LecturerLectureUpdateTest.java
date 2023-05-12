@@ -93,7 +93,7 @@ public class LecturerLectureUpdateTest extends TestHarness {
 		Collection<Lecture> lectures;
 		String param;
 
-		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer1");
+		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer2");
 		for (final Lecture leccion : lectures) {
 			param = String.format("id=%d", leccion.getId());
 
@@ -106,7 +106,7 @@ public class LecturerLectureUpdateTest extends TestHarness {
 			super.checkPanicExists();
 			super.signOut();
 
-			super.signIn("lecturer2", "lecturer2");
+			super.signIn("lecturer1", "lecturer1");
 			super.request("/lecturer/lecture/update", param);
 			super.checkPanicExists();
 			super.signOut();

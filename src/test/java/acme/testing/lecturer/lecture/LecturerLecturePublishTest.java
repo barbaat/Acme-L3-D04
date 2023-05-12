@@ -78,6 +78,11 @@ public class LecturerLecturePublishTest extends TestHarness {
 				super.request("/lecturer/lecture/publish", params);
 				super.checkPanicExists();
 				super.signOut();
+
+				super.signIn("lecturer1", "lecturer1");
+				super.request("/lecturer/lecture/publish", params);
+				super.checkPanicExists();
+				super.signOut();
 			}
 	}
 
