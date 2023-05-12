@@ -1,10 +1,15 @@
 
 package acme.testing.auditor.auditingRecord;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acme.entities.auditingRecords.AuditingRecord;
+import acme.entities.audits.Audit;
 import acme.testing.TestHarness;
 
 public class AuditorAuditingRecordDeleteTest extends TestHarness {
@@ -91,29 +96,34 @@ public class AuditorAuditingRecordDeleteTest extends TestHarness {
 		super.signOut();
 	}
 
-	//	@Test
-	//	public void test300Hacking() {
-	//
-	//		Collection<AuditingRecord> auditingRecords;
-	//		String param;
-	//
-	//		auditingRecords = this.repository.findAuditingRecordsByAuditorUsername("auditor1");
-	//		for (final AuditingRecord leccion : auditingRecords) {
-	//			param = String.format("id=%d", leccion.getId());
-	//
-	//			super.checkLinkExists("Sign in");
-	//			super.request("/auditor/auditingRecord/delete", param);
-	//			super.checkPanicExists();
-	//
-	//			super.signIn("administrator", "administrator");
-	//			super.request("/auditor/auditingRecord/delete", param);
-	//			super.checkPanicExists();
-	//			super.signOut();
-	//
-	//			super.signIn("auditor2", "auditor2");
-	//			super.request("/auditor/auditingRecord/delete", param);
-	//			super.checkPanicExists();
-	//			super.signOut();
-	//		}
-	//	}
+	@Test
+	public void test300Hacking() {
+
+		final Collection<Audit> audits = this.repository.findAuditsByAuditorUsername("auditor1");
+		for (final Audit audit : audits) {
+			final Collection<AuditingRecord> auditingRecords = this.repository.findAuditingRecordsByAuditId(audit.getId());
+			for (final AuditingRecord auditingRecord : auditingRecords) {
+				final String param = String.format("id=%d", auditingRecord.getId());
+
+				super.checkLinkExists("Sign in");
+				super.request("/auditor/auditingRecord/delete", param);
+				super.checkPanicExists();
+
+				super.signIn("administrator", "administrator");
+				super.request("/auditor/auditingRecord/delete", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("auditor2", "auditor2");
+				super.request("/auditor/auditingRecord/delete", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("lecturer1", "lecturer1");
+				super.request("/auditor/auditingRecord/delete", param);
+				super.checkPanicExists();
+				super.signOut();
+			}
+		}
+	}
 }
