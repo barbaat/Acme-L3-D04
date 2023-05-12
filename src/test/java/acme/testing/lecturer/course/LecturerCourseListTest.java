@@ -1,14 +1,3 @@
-/*
- * EmployerDutyListTest.java
- *
- * Copyright (C) 2012-2023 Rafael Corchuelo.
- *
- * In keeping with the traditional purpose of furthering education and research, it is
- * the policy of the copyright owner to permit non-commercial use and redistribution of
- * this software. It has been tested carefully, but it is not guaranteed for any particular
- * purposes. The copyright owner does not offer any warranties or representations, nor do
- * they accept any liabilities with respect to them.
- */
 
 package acme.testing.lecturer.course;
 
@@ -40,12 +29,10 @@ public class LecturerCourseListTest extends TestHarness {
 		super.sortListing(0, "asc");
 
 		super.checkColumnHasValue(courseIndex, 0, code);
+		super.checkColumnHasValue(courseIndex, 1, title);
+		super.checkColumnHasValue(courseIndex, 2, retailPrice);
+
 		super.clickOnListingRecord(courseIndex);
-
-		super.checkInputBoxHasValue("code", code);
-		super.checkInputBoxHasValue("title", title);
-		super.checkInputBoxHasValue("retailPrice", retailPrice);
-
 		super.signOut();
 	}
 
@@ -56,7 +43,7 @@ public class LecturerCourseListTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
-		// No puede haber
+		// Preguntar al profesor
 	}
 
 }
