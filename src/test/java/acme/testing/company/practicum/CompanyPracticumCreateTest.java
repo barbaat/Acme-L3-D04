@@ -44,8 +44,8 @@ public class CompanyPracticumCreateTest extends TestHarness {
 		super.checkInputBoxHasValue("code", practicumCode);
 		super.checkInputBoxHasValue("title", title);
 		super.checkInputBoxHasValue("abstract$", abstract$);
+		super.checkInputBoxHasValue("goals", goals);
 		super.checkInputBoxHasValue("estimatedTotalTime", estimatedTotalTime);
-		super.checkInputBoxHasValue("course", course);
 
 		super.signOut();
 	}
