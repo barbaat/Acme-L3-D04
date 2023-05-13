@@ -1,0 +1,4 @@
+auditIndex,code,auditingRecordIndex,subject,assessment,startTime,finishTime,mark,moreInfo
+1,D0000,0,Física y química,Prácticas de laboratorio,2022/04/11 11:11, 2022/04/12 12:11,FMINUS,http://fyq.com
+1,D0000,1,Informática,Prácticas de ordenador,2022/04/05 11:11, 2022/04/05 12:11,B,http://informatica.com
+

@@ -1,0 +1,9 @@
+enrolmentIndex,code,activityIndex,title,abstractt,activityType,link,startPeriod,endPeriod
+0,ABM1236,3,titletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitle,mas de 75 en title,THEORY,http://www.example.com,2023/07/16 16:00,2023/07/16 17:00
+1,ABM1237,2,mas de 100 en abstract,abstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstractabstract,HANDS_ON,http://www.examplee.com,2023/07/19 16:00,2023/07/19 18:00
+2,ABM1538,1,title,select de activitytype sin seleccionar,---,http://www.exampleee.com,2023/07/20 16:00,2023/07/20 17:30
+2,ABM1538,1,,vacio el titulo,THEORY,http://www.exampleee.com,2023/07/20 16:00,2023/07/20 17:30
+2,ABM1538,1,vacio el abstract,,HANDS_ON,http://www.exampleee.com,2023/07/20 16:00,2023/07/20 17:30
+2,ABM1538,1,title,url mal,THEORY,lolala,2023/07/20 16:00,2023/07/20 17:30
+2,ABM1538,1,startperiod vacio,abstract,HANDS_ON,http://www.exampleee.com,,2023/07/20 17:30
+2,ABM1538,1,startperiod vacio,abstract,HANDS_ON,http://www.exampleee.com,2023/07/20 17:30,

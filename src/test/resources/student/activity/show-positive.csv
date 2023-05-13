@@ -1,0 +1,7 @@
+enrolmentIndex,code,activityIndex,title,abstractt,activityType,link,startPeriod,endPeriod
+0,ABM1236,0,a,abstract,THEORY,http://www.example.com,2023/07/16 16:00,2023/07/16 17:00
+0,ABM1236,1,titillllee,abstract,THEORY,http://www.example.com,2023/07/16 16:00,2023/07/16 17:00
+0,ABM1236,2,title,abstract,THEORY,http://www.example.com,2023/04/16 22:00,2023/04/16 23:00
+1,ABM1237,0,title,a,THEORY,http://www.example.com,2023/07/16 16:00,2023/07/16 21:00
+1,ABM1237,1,title,sisisiis,THEORY,http://www.example.com,2023/07/16 16:00,2023/07/16 20:00
+2,ABM1538,0,title,abstract,THEORY,http://www.example.com,2023/07/16 16:00,2023/07/16 22:00

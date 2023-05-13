@@ -1,7 +1,6 @@
-recordIndex,reference,title,deadline
-0,EMP01-JOB01,Title 1,2030/12/11 23:00
-1,EMP01-JOB02,Title 2,2030/12/11 23:00
-2,EMP02-JOB01,Title 6,2030/03/30 11:00
-3,EMP02-JOB02,Title 7,2030/04/30 12:00
-4,EMP02-JOB03,Title 8,2030/05/30 13:00
-5,EMP02-JOB04,Title 9,2030/06/30 13:00
+lectureIndex,title,abstractLecture,estimatedLearningTimeInHours
+0,Lecture 1,Introduction to Programming,90.00
+1,Lecture 2,Introduction to Math,60.00
+2,Lecture 3,Introduction to Programming,30.00
+3,Lecture 7,Introduction to HTML,100.00
+4,Lecture 8,Introduction to CSS,65.00

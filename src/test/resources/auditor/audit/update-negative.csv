@@ -1,0 +1,12 @@
+auditIndex,course,code,conclusion,strongPoints,weakPoints
+1,---,D0000,Muy práctico,Matemáticas y lógica, Idiomas
+1,ABC123,D0,Muy práctico,Matemáticas y lógica, Idiomas
+1,ABC123,D0000,String demasiado largoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo,Matemáticas y lógica, Idiomas
+1,ABC123,D0000,Muy práctico,String demasiado largoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo, Idiomas
+1,ABC123,D0000,Muy práctico,Matemáticas y lógica, String demasiado largoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+1,ABC123,,Muy práctico,Matemáticas y lógica, Idiomas
+1,ABC123,D0000,,Matemáticas y lógica, Idiomas
+1,ABC123,D0000,Muy práctico,, Idiomas
+1,ABC123,D0000,Muy práctico,Matemáticas y lógica,
+
+

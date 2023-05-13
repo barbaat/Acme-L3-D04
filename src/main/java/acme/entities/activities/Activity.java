@@ -47,9 +47,11 @@ public class Activity extends AbstractEntity {
 	@NotNull
 	protected ActivityType		activityType;
 
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	protected Date				startPeriod;
 
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	protected Date				endPeriod;
 

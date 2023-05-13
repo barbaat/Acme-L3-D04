@@ -74,11 +74,12 @@ public class StudentEnrolmentFinaliseService extends AbstractService<Student, En
 		assert object != null;
 		final SimpleDateFormat formatter;
 		final String dateFormat;
-		Integer cvv;
+		//Integer cvv;
+		String cvv;
 		final String expireDateString;
 		Date expireDate = null;
 
-		cvv = super.getRequest().getData("cvv", Integer.class);
+		cvv = super.getRequest().getData("cvv", String.class);
 		expireDateString = super.getRequest().getData("expireDate", String.class);
 		if (super.getRequest().getLocale().getLanguage().equals("es")) {
 			formatter = new SimpleDateFormat("MM/yyyy");
@@ -90,7 +91,8 @@ public class StudentEnrolmentFinaliseService extends AbstractService<Student, En
 
 		super.state(object.getCardLowerNibble() != null && object.getCardLowerNibble().matches("^([0-9]{16})$"), "cardLowerNibble", "student.enrolment.form.error.invalid-card-number");
 		super.state(!"".equals(object.getCardHolder()), "cardHolder", "student.enrolment.form.error.invalid-card-holder");
-		super.state(cvv != null, "cvv", "student.enrolment.form.error.invalid-cvv");
+		//super.state(cvv != null, "cvv", "student.enrolment.form.error.invalid-cvv");
+		super.state(cvv != null && cvv.matches("\\d{3}$"), "cvv", "student.enrolment.form.error.invalid-cvv");
 
 		if (super.getRequest().getLocale().getLanguage().equals("es"))
 			super.state(expireDateString != null && expireDateString.matches("^(0[1-9]|1[0-2])/(20)[2-9][0-9]$"), "expireDate", "student.enrolment.form.error.invalid-expireDate-format");
@@ -107,10 +109,9 @@ public class StudentEnrolmentFinaliseService extends AbstractService<Student, En
 				super.state(!MomentHelper.isAfterOrEqual(MomentHelper.getCurrentMoment(), expireDate), "expireDate", "student.enrolment.form.error.invalid-expireDate-value");
 		}
 
-		if (cvv != null)
-			super.state(String.valueOf(cvv).length() == 3, "cvv", "student.enrolment.form.error.invalid-cvv");
+		//		if (cvv != null)
+		//			super.state(String.valueOf(cvv).length() == 3, "cvv", "student.enrolment.form.error.invalid-cvv");
 
-		super.state(object.isDraftMode(), "draftMode", "student.enrolment.form.error.finalised");
 	}
 
 	@Override
@@ -127,11 +128,11 @@ public class StudentEnrolmentFinaliseService extends AbstractService<Student, En
 	public void unbind(final Enrolment object) {
 		assert object != null;
 		Double workTime;
-		Integer cvv;
+		String cvv;
 		String expireDate;
 
 		expireDate = super.getRequest().hasData("expireDate") ? super.getRequest().getData("expireDate", String.class).trim() : null;
-		cvv = super.getRequest().hasData("cvv") ? super.getRequest().getData("cvv", Integer.class) : null;
+		cvv = super.getRequest().hasData("cvv") ? super.getRequest().getData("cvv", String.class) : null;
 		workTime = this.repository.findWorktimeByEnrolmentId(object.getId());
 		workTime = workTime != null ? workTime : 0.0;
 
