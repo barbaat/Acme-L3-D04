@@ -1,0 +1,15 @@
+auditIndex,code,auditingRecordIndex,subject,assessment,startTime,finishTime,mark,moreInfo
+1,D0000,0,Matemáticas editado,Examen final,2022/04/04 11:11,2022/04/04 12:11,A,http://google.com
+1,D0000,0,Matemáticas,Examen final editado,2022/04/04 11:11,2022/04/04 12:11,A,http://google.com
+1,D0000,0,Matemáticas,Examen final,2022/04/03 11:11,2022/04/04 12:11,A,http://google.com
+1,D0000,0,Matemáticas,Examen final,2022/04/04 11:11,2022/04/06 12:11,A,http://google.com
+1,D0000,0,Matemáticas,Examen final,2022/04/04 11:11,2022/04/04 12:11,APLUS,http://google.com
+1,D0000,0,Matemáticas,Examen final,2022/04/04 11:11,2022/04/04 12:11,A,http://googleeditado.com
+1,D0000,0,Matemáticas,Examen final,2022/04/04 11:11,2022/04/04 12:11,A,
+1,D0000,1,Tecnología editado,Proyecto,2022/04/04 12:11,2022/04/04 04:11,A,http://shein.com
+1,D0000,1,Tecnología,Proyecto editado,2022/04/04 12:11,2022/04/04 04:11,A,http://shein.com
+1,D0000,1,Tecnología,Proyecto,2022/04/03 11:11,2022/04/04 04:11,A,http://shein.com
+1,D0000,1,Tecnología,Proyecto,2022/04/04 12:11,2022/04/07 07:11,A,http://shein.com
+1,D0000,1,Tecnología,Proyecto,2022/04/04 12:11,2022/04/04 04:11,C,http://shein.com
+1,D0000,1,Tecnología,Proyecto,2022/04/04 12:11,2022/04/04 04:11,A,http://sheineditado.com
+1,D0000,1,Tecnología,Proyecto,2022/04/04 12:11,2022/04/04 04:11,A,
