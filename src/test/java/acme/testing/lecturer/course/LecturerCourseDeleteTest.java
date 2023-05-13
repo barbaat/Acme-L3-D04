@@ -82,7 +82,7 @@ public class LecturerCourseDeleteTest extends TestHarness {
 		Collection<Course> cursos;
 		String param;
 
-		cursos = this.repository.findManyCoursesByLecturerUsername("lecturer1");
+		cursos = this.repository.findManyCoursesByLecturerUsername("lecturer2");
 		for (final Course curso : cursos) {
 			param = String.format("id=%d", curso.getId());
 

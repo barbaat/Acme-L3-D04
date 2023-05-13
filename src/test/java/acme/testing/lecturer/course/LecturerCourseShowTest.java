@@ -59,7 +59,6 @@ public class LecturerCourseShowTest extends TestHarness {
 			if (course.isDraftMode()) {
 				param = String.format("id=%d", course.getId());
 
-				super.checkLinkExists("Sign in");
 				super.request("/lecturer/course/show", param);
 				super.checkPanicExists();
 			}

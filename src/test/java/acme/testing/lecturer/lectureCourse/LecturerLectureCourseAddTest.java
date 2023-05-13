@@ -162,9 +162,11 @@ public class LecturerLectureCourseAddTest extends TestHarness {
 
 		Collection<Lecture> lectures;
 		String param;
-		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer1");
+		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer2");
 		for (final Lecture lecture : lectures) {
+
 			param = String.format("lectureId=%d", lecture.getId());
+
 			super.checkLinkExists("Sign in");
 			super.request("/lecturer/lecture-course/create" + param);
 			super.checkPanicExists();
@@ -230,9 +232,9 @@ public class LecturerLectureCourseAddTest extends TestHarness {
 
 		Collection<Lecture> lectures;
 		String param;
-		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer1");
 
-		super.signIn("lecturer2", "lecturer2");
+		super.signIn("lecturer1", "lecturer1");
+		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer2");
 
 		for (final Lecture lecture : lectures) {
 			param = String.format("lectureId=%d", lecture.getId());
