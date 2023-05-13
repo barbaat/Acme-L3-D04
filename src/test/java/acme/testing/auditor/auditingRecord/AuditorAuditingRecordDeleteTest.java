@@ -25,6 +25,7 @@ public class AuditorAuditingRecordDeleteTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/auditingRecord/delete-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String startTime, final String finishTime, final String mark, final String moreInfo) {
+		//Compruebo que puedo eliminar un auditingRecord correctamente
 
 		super.signIn("auditor1", "auditor1");
 
@@ -63,6 +64,7 @@ public class AuditorAuditingRecordDeleteTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/auditingRecord/delete-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test200Negative(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String startTime, final String finishTime, final String mark, final String moreInfo) {
+		//Compruebo que no puedo eliminar un correction record
 
 		super.signIn("auditor1", "auditor1");
 
@@ -100,6 +102,7 @@ public class AuditorAuditingRecordDeleteTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
+		//Compruebo que solo auditor1 puede eliminar sus auditingRecords
 
 		final Collection<Audit> audits = this.repository.findAuditsByAuditorUsername("auditor1");
 		for (final Audit audit : audits) {
@@ -121,7 +124,22 @@ public class AuditorAuditingRecordDeleteTest extends TestHarness {
 				super.checkPanicExists();
 				super.signOut();
 
+				super.signIn("student1", "student1");
+				super.request("/auditor/auditingRecord/delete", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("assistant1", "assistant1");
+				super.request("/auditor/auditingRecord/delete", param);
+				super.checkPanicExists();
+				super.signOut();
+
 				super.signIn("lecturer1", "lecturer1");
+				super.request("/auditor/auditingRecord/delete", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("company1", "company1");
 				super.request("/auditor/auditingRecord/delete", param);
 				super.checkPanicExists();
 				super.signOut();
