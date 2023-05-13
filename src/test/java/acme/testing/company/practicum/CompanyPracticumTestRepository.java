@@ -13,4 +13,7 @@ public interface CompanyPracticumTestRepository extends AbstractRepository {
 	@Query("select p from Practicum p where p.company.userAccount.username = :username")
 	Collection<Practicum> findManyPracticumsByCompanyUsername(String username);
 
+	@Query("select p from Practicum p where p.code=:code")
+	Practicum findPracticumByCode(String code);
+
 }
