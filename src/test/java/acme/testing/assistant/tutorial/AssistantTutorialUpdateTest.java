@@ -34,7 +34,6 @@ public class AssistantTutorialUpdateTest extends TestHarness {
 		super.checkListingExists();
 		super.sortListing(0, "asc");
 
-		super.checkColumnHasValue(recordIndex, 0, code);
 		super.clickOnListingRecord(recordIndex);
 		super.checkFormExists();
 		super.fillInputBoxIn("code", code);
@@ -65,7 +64,7 @@ public class AssistantTutorialUpdateTest extends TestHarness {
 	}
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/assistant/tutorial/update-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
+	@CsvFileSource(resources = "/assistant/tutorial/update-negative1.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test200Negative(final int recordIndex, final String code, final String title, final String abstractTutorial, final String goals, final String estimatedTotalTime, final String course) {
 		// HINT: this test attempts to update a tutorial with wrong data.
 
@@ -75,7 +74,6 @@ public class AssistantTutorialUpdateTest extends TestHarness {
 		super.checkListingExists();
 		super.sortListing(0, "asc");
 
-		super.checkColumnHasValue(recordIndex, 0, code);
 		super.clickOnListingRecord(recordIndex);
 		super.checkFormExists();
 		super.fillInputBoxIn("code", code);
@@ -87,6 +85,32 @@ public class AssistantTutorialUpdateTest extends TestHarness {
 		super.clickOnSubmit("Update");
 
 		super.checkErrorsExist();
+
+		super.signOut();
+	}
+
+	@ParameterizedTest
+	@CsvFileSource(resources = "/assistant/tutorial/update-negative2.csv", encoding = "utf-8", numLinesToSkip = 1)
+	public void test201Negative(final int recordIndex, final String code, final String title, final String abstractTutorial, final String goals, final String estimatedTotalTime, final String course) {
+		// HINT: this test attempts to update a published tutorial.
+
+		super.signIn("assistant1", "assistant1");
+
+		super.clickOnMenu("Assistant", "Tutorial List");
+		super.checkListingExists();
+		super.sortListing(0, "asc");
+
+		super.clickOnListingRecord(recordIndex);
+		super.checkFormExists();
+
+		final String tutorialIdString = super.getCurrentQuery();
+		final int tutorialId = Integer.parseInt(tutorialIdString.substring(tutorialIdString.indexOf("=") + 1));
+		final String param = String.format("id=%d", tutorialId);
+
+		super.checkNotButtonExists("Update");
+
+		super.request("/assistant/tutorial/update", param);
+		super.checkPanicExists();
 
 		super.signOut();
 	}

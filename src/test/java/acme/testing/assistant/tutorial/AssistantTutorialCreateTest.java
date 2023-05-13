@@ -46,6 +46,8 @@ public class AssistantTutorialCreateTest extends TestHarness {
 		super.checkInputBoxHasValue("course", course);
 		super.checkInputBoxHasValue("estimatedTotalTime", estimatedTotalTime);
 
+		super.checkSubmitExists("Publish");
+
 		super.clickOnButton("Sessions");
 
 		super.checkListingExists();
