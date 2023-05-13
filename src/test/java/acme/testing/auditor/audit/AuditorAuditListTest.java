@@ -4,14 +4,20 @@ package acme.testing.auditor.audit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.testing.TestHarness;
 
 public class AuditorAuditListTest extends TestHarness {
 
+	@Autowired
+	protected AuditorAuditTestRepository repository;
+
+
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/audit/list-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int auditIndex, final String code, final String conclusion) {
+		//Compruebo que puedo visualizar correctamente un listado
 
 		super.signIn("auditor1", "auditor1");
 
@@ -33,8 +39,7 @@ public class AuditorAuditListTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
-		// HINT: this test tries to list the audits of an auditor as a
-		// HINT+ principal with the wrong role.
+		// Compruebo que si no eres auditor no puedes acceder al listado de audits
 
 		super.checkLinkExists("Sign in");
 		super.request("/auditor/audit/list");
@@ -52,4 +57,24 @@ public class AuditorAuditListTest extends TestHarness {
 		super.checkPanicExists();
 		super.signOut();
 	}
+
+	//	@Test
+	//	public void test301Hacking() {
+	//		// Compruebo que como auditor2 no puedo ver el listado de audits no publicadas del auditor1
+	//
+	//		final Collection<Audit> audits = this.repository.findAuditsByAuditorUsername("auditor1");
+	//		for (final Audit audit : audits)
+	//			if (audit.isDraftMode()) {
+	//				final String param = String.format("id=%d", audit.getId());
+	//
+	//				super.checkLinkExists("Sign in");
+	//				super.request("/auditor/audit/list", param);
+	//				super.checkPanicExists();
+	//
+	//				super.signIn("auditor2", "auditor2");
+	//				super.request("/auditor/audit/list", param);
+	//				super.checkPanicExists();
+	//				super.signOut();
+	//			}
+	//	}
 }
