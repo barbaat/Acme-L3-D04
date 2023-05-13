@@ -1,0 +1,8 @@
+enrolmentIndex,code,cardLowerNibble,cardHolder,cvv,expireDate
+4,ABM1549,,campos en blanco,,
+4,ABM1549,1234ae,Tarjeta con formato incorrecto,191,2024/09
+4,ABM1549,1234567654345676,cvv con formato incorrecto,11,2024/01
+4,ABM1549,1234567654345676,cvv con formato incorrecto letra,11a,2024/01
+4,ABM1549,1234567654345676,,111,2024/02
+4,ABM1549,1234567654345676,fecha caducada,141,2021/01
+4,ABM1549,1234567654345676,fecha con formato incorrecto,11,01/2024

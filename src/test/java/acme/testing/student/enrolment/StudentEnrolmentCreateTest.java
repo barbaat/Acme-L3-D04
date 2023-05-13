@@ -4,19 +4,11 @@ package acme.testing.student.enrolment;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.testing.TestHarness;
-import acme.testing.lecturer.course.LecturerCourseTestRepository;
 
 public class StudentEnrolmentCreateTest extends TestHarness {
 	// Internal state ---------------------------------------------------------
-
-	@Autowired
-	protected LecturerCourseTestRepository repository;
-
-	// Test methods -----------------------------------------------------------
-
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/student/enrolment/create-positive.csv", encoding = "utf-8", numLinesToSkip = 1)

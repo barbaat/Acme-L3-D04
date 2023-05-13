@@ -38,16 +38,34 @@ public class CompanyPracticumListTest extends TestHarness {
 		super.signOut();
 	}
 
-	//Duda: ¿Este test se hace?
 	@Test
 	public void test200Negative() {
-		// No puede haber		
+		// HINT: there's no negative test case for this listing, since it doesn't
+		// HINT+ involve filling in any forms.
+
 	}
 
-	//Duda: ¿Este test se hace?
 	@Test
 	public void test300Hacking() {
-		// Preguntar al profesor
+		// HINT: this test tries to list the duties of a job that is unpublished
+		// HINT+ using a principal that didn't create it. 
+
+		super.checkLinkExists("Sign in");
+		super.request("/company/practicum/list");
+		super.checkPanicExists();
+
+		super.checkLinkExists("Sign in");
+		super.signIn("auditor1", "auditor1");
+		super.request("/company/practicum/list");
+		super.checkPanicExists();
+		super.signOut();
+
+		super.checkLinkExists("Sign in");
+		super.signIn("student1", "student1");
+		super.request("/company/practicum/list");
+		super.checkPanicExists();
+		super.signOut();
+
 	}
 
 }
