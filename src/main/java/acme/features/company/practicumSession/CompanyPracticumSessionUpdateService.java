@@ -29,10 +29,9 @@ public class CompanyPracticumSessionUpdateService extends AbstractService<Compan
 
 	@Override
 	public void check() {
+
 		boolean status;
-
 		status = super.getRequest().hasData("id", int.class);
-
 		super.getResponse().setChecked(status);
 	}
 
@@ -53,6 +52,7 @@ public class CompanyPracticumSessionUpdateService extends AbstractService<Compan
 
 	@Override
 	public void load() {
+
 		PracticumSession object;
 		int id;
 
@@ -72,7 +72,7 @@ public class CompanyPracticumSessionUpdateService extends AbstractService<Compan
 		practicumId = super.getRequest().getData("practicum", int.class);
 		practicum = this.psRepository.findPracticumById(practicumId);
 
-		super.bind(object, "title", "abstract$", "optionalLink", "startPeriod", "finishPeriod");
+		super.bind(object, "title", "abstract$", "startPeriod", "finishPeriod", "optionalLink");
 
 		object.setPracticum(practicum);
 	}
@@ -81,16 +81,17 @@ public class CompanyPracticumSessionUpdateService extends AbstractService<Compan
 	public void validate(final PracticumSession object) {
 		assert object != null;
 
-		final Date startPeriod = super.getRequest().getData("startPeriod", Date.class);
-		final Date finishPeriod = super.getRequest().getData("finishPeriod", Date.class);
-		final Date availableStart = MomentHelper.deltaFromCurrentMoment(7, ChronoUnit.DAYS);
-		final Date availableEnd = MomentHelper.deltaFromMoment(startPeriod, 7, ChronoUnit.DAYS);
+		if (!super.getBuffer().getErrors().hasErrors("startPeriod")) {
+			Date minStartPeriod;
+			minStartPeriod = MomentHelper.deltaFromCurrentMoment(7, ChronoUnit.DAYS);
+			super.state(MomentHelper.isAfterOrEqual(object.getStartPeriod(), minStartPeriod), "startPeriod", "company.practicum-session.validation.startPeriod.error.WeekAhead");
+		}
 
-		final boolean validStart = startPeriod.getTime() >= availableStart.getTime();
-		super.state(validStart, "startPeriod", "company.practicum-session.validation.startPeriod.error.WeekAhead");
-
-		final boolean validEnd = finishPeriod.getTime() >= availableEnd.getTime();
-		super.state(validEnd, "finishPeriod", "company.practicum-session.validation.finishPeriod.error.WeekLong");
+		if (!super.getBuffer().getErrors().hasErrors("finishPeriod")) {
+			Date minFinishPeriod;
+			minFinishPeriod = MomentHelper.deltaFromMoment(object.getStartPeriod(), 7, ChronoUnit.DAYS);
+			super.state(MomentHelper.isAfterOrEqual(object.getFinishPeriod(), minFinishPeriod), "finishPeriod", "company.practicum-session.validation.finishPeriod.error.WeekLong");
+		}
 
 		//Practicum Validation
 		final Collection<Practicum> practica;
@@ -118,7 +119,6 @@ public class CompanyPracticumSessionUpdateService extends AbstractService<Compan
 	@Override
 	public void unbind(final PracticumSession object) {
 		assert object != null;
-		assert object != null;
 		final Collection<Practicum> practica;
 		final SelectChoices choices;
 		final int companyId = super.getRequest().getPrincipal().getActiveRoleId();
@@ -127,7 +127,7 @@ public class CompanyPracticumSessionUpdateService extends AbstractService<Compan
 		choices = SelectChoices.from(practica, "code", object.getPracticum());
 		Tuple tuple;
 
-		tuple = super.unbind(object, "title", "abstract$", "startPeriod", "finishPeriod", "draftMode", "exceptional", "optionalLink", "estimatedTotalTime");
+		tuple = super.unbind(object, "title", "abstract$", "startPeriod", "finishPeriod", "draftMode", "exceptional", "optionalLink");
 		tuple.put("practicum", choices.getSelected().getKey());
 		tuple.put("practica", choices);
 

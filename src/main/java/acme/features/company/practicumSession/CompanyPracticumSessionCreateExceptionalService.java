@@ -70,16 +70,17 @@ public class CompanyPracticumSessionCreateExceptionalService extends AbstractSer
 	public void validate(final PracticumSession object) {
 		assert object != null;
 
-		final Date startPeriod = super.getRequest().getData("startPeriod", Date.class);
-		final Date finishPeriod = super.getRequest().getData("finishPeriod", Date.class);
-		final Date availableStart = MomentHelper.deltaFromCurrentMoment(7, ChronoUnit.DAYS);
-		final Date availableEnd = MomentHelper.deltaFromMoment(startPeriod, 7, ChronoUnit.DAYS);
+		if (!super.getBuffer().getErrors().hasErrors("startPeriod")) {
+			Date minStartPeriod;
+			minStartPeriod = MomentHelper.deltaFromCurrentMoment(7, ChronoUnit.DAYS);
+			super.state(MomentHelper.isAfterOrEqual(object.getStartPeriod(), minStartPeriod), "startPeriod", "company.practicum-session.validation.startPeriod.error.WeekAhead");
+		}
 
-		final boolean validStart = startPeriod.getTime() >= availableStart.getTime();
-		super.state(validStart, "startPeriod", "company.practicum-session.validation.startPeriod.error.WeekAhead");
-
-		final boolean validEnd = finishPeriod.getTime() >= availableEnd.getTime();
-		super.state(validEnd, "finishPeriod", "company.practicum-session.validation.finishPeriod.error.WeekLong");
+		if (!super.getBuffer().getErrors().hasErrors("finishPeriod")) {
+			Date minFinishPeriod;
+			minFinishPeriod = MomentHelper.deltaFromMoment(object.getStartPeriod(), 7, ChronoUnit.DAYS);
+			super.state(MomentHelper.isAfterOrEqual(object.getFinishPeriod(), minFinishPeriod), "finishPeriod", "company.practicum-session.validation.finishPeriod.error.WeekLong");
+		}
 
 		boolean confirmation;
 
