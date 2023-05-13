@@ -24,6 +24,7 @@ public class AuditorAuditDeleteTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/audit/delete-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int auditIndex, final String course, final String code, final String conclusion, final String strongPoints, final String weakPoints, final String mark) {
+		//Elimino un audit correctamente
 
 		super.signIn("auditor1", "auditor1");
 
@@ -56,6 +57,8 @@ public class AuditorAuditDeleteTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/audit/delete-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test200Negative(final int auditIndex, final String course, final String code, final String conclusion, final String strongPoints, final String weakPoints, final String mark) {
+		//Compruebo que no puedo eliminar un audit publicado
+
 		super.signIn("auditor1", "auditor1");
 
 		super.clickOnMenu("Auditor", "List of audits");
@@ -80,6 +83,7 @@ public class AuditorAuditDeleteTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
+		//Compruebo que solo auditor1 puede eliminar sus audits
 
 		final Collection<Audit> audits = this.repository.findAuditsByAuditorUsername("auditor1");
 		for (final Audit audit : audits) {

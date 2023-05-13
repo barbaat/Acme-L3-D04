@@ -54,8 +54,8 @@ public class AuditorAuditShowTest extends TestHarness {
 	public void test300Hacking() {
 		//Compruebo que solo auditor1 pueda ver sus audits sin publicar
 
-		super.signIn("auditor1", "auditor1");
 		final Collection<Audit> audits = this.repository.findAuditsByAuditorUsername("auditor1");
+
 		for (final Audit audit : audits)
 			if (audit.isDraftMode()) {
 				final String param = String.format("id=%d", audit.getId());

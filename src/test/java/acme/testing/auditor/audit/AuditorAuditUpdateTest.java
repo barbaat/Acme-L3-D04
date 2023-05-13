@@ -24,6 +24,7 @@ public class AuditorAuditUpdateTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/audit/update-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int auditIndex, final String course, final String code, final String conclusion, final String strongPoints, final String weakPoints) {
+		//Compruebo que puedo editar un audit correctamente
 
 		super.signIn("auditor1", "auditor1");
 
@@ -83,7 +84,7 @@ public class AuditorAuditUpdateTest extends TestHarness {
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/audit/update-negative2.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test200Negative2(final int auditIndex, final String course, final String code, final String conclusion, final String strongPoints, final String weakPoints) {
+	public void test201Negative(final int auditIndex, final String course, final String code, final String conclusion, final String strongPoints, final String weakPoints) {
 		//Comprueba que no puedo editar un audit publicado
 
 		super.signIn("auditor1", "auditor1");
@@ -109,12 +110,11 @@ public class AuditorAuditUpdateTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
-
-		String param;
+		//Compruebo que solo auditor1 puede editar sus audits
 
 		final Collection<Audit> audits = this.repository.findAuditsByAuditorUsername("auditor1");
 		for (final Audit audit : audits) {
-			param = String.format("id=%d", audit.getId());
+			final String param = String.format("id=%d", audit.getId());
 
 			super.checkLinkExists("Sign in");
 			super.request("/auditor/audit/update", param);

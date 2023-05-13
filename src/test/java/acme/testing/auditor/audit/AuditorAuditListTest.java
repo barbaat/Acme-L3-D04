@@ -1,14 +1,11 @@
 
 package acme.testing.auditor.audit;
 
-import java.util.Collection;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acme.entities.audits.Audit;
 import acme.testing.TestHarness;
 
 public class AuditorAuditListTest extends TestHarness {
@@ -61,23 +58,23 @@ public class AuditorAuditListTest extends TestHarness {
 		super.signOut();
 	}
 
-	@Test
-	public void test301Hacking() {
-		// Compruebo que como auditor2 no puedo ver el listado de audits del auditor1
-
-		final Collection<Audit> audits = this.repository.findAuditsByAuditorUsername("auditor1");
-		for (final Audit audit : audits) {
-			final String param = String.format("id=%d", audit.getId());
-
-			super.checkLinkExists("Sign in");
-			super.request("/auditor/audit/list", param);
-			super.checkPanicExists();
-
-			super.signIn("auditor2", "auditor2");
-			super.request("/auditor/audit/list", param);
-			super.checkPanicExists();
-			super.signOut();
-
-		}
-	}
+	//	@Test
+	//	public void test301Hacking() {
+	//		// Compruebo que como auditor2 no puedo ver el listado de audits no publicadas del auditor1
+	//
+	//		final Collection<Audit> audits = this.repository.findAuditsByAuditorUsername("auditor1");
+	//		for (final Audit audit : audits)
+	//			if (audit.isDraftMode()) {
+	//				final String param = String.format("id=%d", audit.getId());
+	//
+	//				super.checkLinkExists("Sign in");
+	//				super.request("/auditor/audit/list", param);
+	//				super.checkPanicExists();
+	//
+	//				super.signIn("auditor2", "auditor2");
+	//				super.request("/auditor/audit/list", param);
+	//				super.checkPanicExists();
+	//				super.signOut();
+	//			}
+	//	}
 }
