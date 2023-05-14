@@ -2,6 +2,7 @@
 package acme.features.company.practicumSession;
 
 import java.time.temporal.ChronoUnit;
+import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,17 @@ public class CompanyPracticumSessionCreateService extends AbstractService<Compan
 	@Override
 	public void validate(final PracticumSession object) {
 
+		//Sesión exceptional única
+		final int masterId = super.getRequest().getData("masterId", int.class);
+		final Practicum practicum = this.psRepository.findPracticumById(masterId);
+		Collection<PracticumSession> exceptionals;
+		exceptionals = this.psRepository.findExceptionalSessionsByPracticumId(masterId);
+
+		if (!practicum.isDraftMode()) {
+			final boolean valid = exceptionals.size() == 0;
+			super.state(valid, "valid", "company.practicum-session.validation.practicum.error.ExceptionalAlreadyExists");
+		}
+
 		final boolean confirmation = object.getPracticum().isDraftMode() ? true : super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "company.practicum-session.form.label.confirmation");
 
@@ -101,21 +113,6 @@ public class CompanyPracticumSessionCreateService extends AbstractService<Compan
 			minFinishPeriod = MomentHelper.deltaFromMoment(object.getStartPeriod(), 7, ChronoUnit.DAYS);
 			super.state(MomentHelper.isAfterOrEqual(object.getFinishPeriod(), minFinishPeriod), "finishPeriod", "company.practicum-session.validation.finishPeriod.error.WeekLong");
 		}
-
-		//Sesión exceptional única
-		//		final Collection<Practicum> practica;
-		//		Collection<PracticumSession> exceptionals;
-		//		final SelectChoices choices;
-		//		final int companyId = super.getRequest().getPrincipal().getActiveRoleId();
-		//
-		//		practica = this.psRepository.findManyPublishedPracticaByCompanyId(companyId);
-		//		choices = SelectChoices.from(practica, "code", object.getPracticum());
-		//
-		//		final int selectedId = Integer.parseInt(choices.getSelected().getKey());
-		//		exceptionals = this.psRepository.findExceptionalSessionsByPracticumId(selectedId);
-		//
-		//		final boolean valid = exceptionals.size() == 0;
-		//		super.state(valid, "practicum", "company.practicum-session.validation.practicum.error.ExceptionalAlreadyExists");
 
 	}
 
@@ -147,11 +144,10 @@ public class CompanyPracticumSessionCreateService extends AbstractService<Compan
 		final int masterId = super.getRequest().getData("masterId", int.class);
 		final Practicum practicum = this.psRepository.findPracticumById(masterId);
 		final Tuple tuple = super.unbind(object, "title", "abstract$", "optionalLink", "startPeriod", "finishPeriod", "exceptional");
-		//final SelectChoices choices = SelectChoices.from(TypeMark.class, object.getMark());
-
 		tuple.put("masterId", masterId);
 		tuple.put("draftMode", practicum.isDraftMode());
 		tuple.put("confirmation", false);
+		tuple.put("valid", false);
 		super.getResponse().setData(tuple);
 	}
 

@@ -35,7 +35,7 @@
 			<acme:submit code="company.practicum-session.form.button.create" action="/company/practicum-session/create?masterId=${masterId}"/>
 		</jstl:when>
 		<jstl:when test="${_command == 'create'&& !draftMode }">
-			<acme:input-checkbox code="company.practicum-session.form.button.confirmation" path="confirmation"/>
+			<acme:input-checkbox code="company.practicum-session.form.label.confirmation" path="confirmation"/>
 			<acme:submit code="company.practicum-session.form.button.create-exceptional" action="/company/practicum-session/create?masterId=${masterId}"/>
 		</jstl:when>
 	</jstl:choose>
