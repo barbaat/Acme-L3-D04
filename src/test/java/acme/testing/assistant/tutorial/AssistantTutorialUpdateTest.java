@@ -36,6 +36,7 @@ public class AssistantTutorialUpdateTest extends TestHarness {
 
 		super.clickOnListingRecord(recordIndex);
 		super.checkFormExists();
+		super.checkSubmitExists("Publish");
 		super.fillInputBoxIn("code", code);
 		super.fillInputBoxIn("title", title);
 		super.fillInputBoxIn("abstractTutorial", abstractTutorial);
@@ -123,38 +124,49 @@ public class AssistantTutorialUpdateTest extends TestHarness {
 		String param;
 
 		tutorials = this.repository.findManyTutorialsByAssistantUsername("assistant1");
-		for (final Tutorial tutorial : tutorials) {
-			param = String.format("id=%d", tutorial.getId());
+		for (final Tutorial tutorial : tutorials)
+			if (tutorial.isDraftMode()) {
 
-			super.checkLinkExists("Sign in");
-			super.request("/assistant/tutorial/update", param);
-			super.checkPanicExists();
+				param = String.format("id=%d", tutorial.getId());
+				super.checkLinkExists("Sign in");
+				super.request("/assistant/tutorial/update", param);
+				super.checkPanicExists();
 
-			super.signIn("administrator", "administrator");
-			super.request("/assistant/tutorial/update", param);
-			super.checkPanicExists();
-			super.signOut();
+				super.signIn("administrator", "administrator");
+				super.request("/assistant/tutorial/update", param);
+				super.checkPanicExists();
+				super.signOut();
 
-			super.signIn("employer1", "employer1");
-			super.request("/assistant/tutorial/update", param);
-			super.checkPanicExists();
-			super.signOut();
+				super.signIn("assistant2", "assistant2");
+				super.request("/assistant/tutorial/update", param);
+				super.checkPanicExists();
+				super.signOut();
 
-			super.signIn("lecturer1", "lecturer1");
-			super.request("/assistant/tutorial/update", param);
-			super.checkPanicExists();
-			super.signOut();
+				super.signIn("student1", "student1");
+				super.request("/assistant/tutorial/update", param);
+				super.checkPanicExists();
+				super.signOut();
 
-			super.signIn("auditor1", "auditor1");
-			super.request("/assistant/tutorial/update", param);
-			super.checkPanicExists();
-			super.signOut();
+				super.signIn("lecturer1", "lecturer1");
+				super.request("/assistant/tutorial/update", param);
+				super.checkPanicExists();
+				super.signOut();
 
-			super.signIn("company1", "company1");
-			super.request("/assistant/tutorial/update", param);
-			super.checkPanicExists();
-			super.signOut();
-		}
+				super.signIn("employer1", "employer1");
+				super.request("/assistant/tutorial/update", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("auditor1", "auditor1");
+				super.request("/assistant/tutorial/update", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("company1", "company1");
+				super.request("/assistant/tutorial/update", param);
+				super.checkPanicExists();
+				super.signOut();
+			}
 	}
 
 }

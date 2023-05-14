@@ -34,6 +34,7 @@ public class AssistantSessionCreateTest extends TestHarness {
 		super.sortListing(0, "asc");
 
 		super.clickOnListingRecord(tutorialRecordIndex);
+		super.checkNotSubmitExists("Publish");
 		super.clickOnButton("Sessions");
 
 		super.clickOnButton("Create");
@@ -49,10 +50,13 @@ public class AssistantSessionCreateTest extends TestHarness {
 		super.sortListing(0, "asc");
 		super.checkColumnHasValue(sessionRecordIndex, 0, title);
 		super.checkColumnHasValue(sessionRecordIndex, 1, abstractSession);
-		super.checkColumnHasValue(sessionRecordIndex, 2, isTheorySession);
+
+		if (isTheorySession.equals("true"))
+			super.checkColumnHasValue(sessionRecordIndex, 2, "Yes");
+		else
+			super.checkColumnHasValue(sessionRecordIndex, 2, "No");
+
 		super.checkColumnHasValue(sessionRecordIndex, 3, initTimePeriod);
-		super.checkColumnHasValue(sessionRecordIndex, 4, finishTimePeriod);
-		super.checkColumnHasValue(sessionRecordIndex, 5, link);
 
 		super.clickOnListingRecord(sessionRecordIndex);
 		super.checkInputBoxHasValue("title", title);
@@ -61,6 +65,8 @@ public class AssistantSessionCreateTest extends TestHarness {
 		super.checkInputBoxHasValue("initTimePeriod", initTimePeriod);
 		super.checkInputBoxHasValue("finishTimePeriod", finishTimePeriod);
 		super.checkInputBoxHasValue("link", link);
+
+		super.checkSubmitExists("Publish");
 
 		super.signOut();
 	}

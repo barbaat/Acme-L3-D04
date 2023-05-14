@@ -22,7 +22,7 @@ public class AssistantSessionShowTest extends TestHarness {
 
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/assistant/session/show-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
+	@CsvFileSource(resources = "/assistant/session/show-positive1.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int tutorialRecordIndex, final String code, final int sessionRecordIndex, final String title, final String abstractSession, final String isTheorySession, final String initTimePeriod, final String finishTimePeriod,
 		final String link) {
 		// HINT: this test signs in as an assistant, lists his or her tutorials, selects
@@ -49,9 +49,37 @@ public class AssistantSessionShowTest extends TestHarness {
 		super.signOut();
 	}
 
+	@ParameterizedTest
+	@CsvFileSource(resources = "/assistant/session/show-positive2.csv", encoding = "utf-8", numLinesToSkip = 1)
+	public void test101Positive(final int tutorialRecordIndex, final String code, final int sessionRecordIndex, final String title, final String abstractSession, final String isTheorySession, final String initTimePeriod, final String finishTimePeriod,
+		final String link) {
+		// HINT: this test signs in as an assistant, lists his or her tutorials, selects
+		// HINT+ one of them and checks that it's as expected.
+
+		super.signIn("assistant2", "assistant2");
+
+		super.clickOnMenu("Assistant", "Tutorial List");
+		super.checkListingExists();
+		super.sortListing(0, "asc");
+		super.clickOnListingRecord(tutorialRecordIndex);
+		super.clickOnButton("Sessions");
+		super.checkListingExists();
+		super.clickOnListingRecord(sessionRecordIndex);
+		super.checkFormExists();
+
+		super.checkInputBoxHasValue("title", title);
+		super.checkInputBoxHasValue("abstractSession", abstractSession);
+		super.checkInputBoxHasValue("isTheorySession", isTheorySession);
+		super.checkInputBoxHasValue("initTimePeriod", initTimePeriod);
+		super.checkInputBoxHasValue("finishTimePeriod", finishTimePeriod);
+		super.checkInputBoxHasValue("link", link);
+
+		super.signOut();
+	}
+
 	@Test
 	public void test200Negative() {
-		// HINT: there's no negative test case for this listing, since it doesn't
+		// HINT: there's no negative test case for this show, since it doesn't
 		// HINT+ involve filling in any forms.
 	}
 
@@ -83,12 +111,17 @@ public class AssistantSessionShowTest extends TestHarness {
 				super.checkPanicExists();
 				super.signOut();
 
-				super.signIn("employer1", "employer1");
+				super.signIn("student1", "student1");
 				super.request("/assistant/session/show", param);
 				super.checkPanicExists();
 				super.signOut();
 
 				super.signIn("lecturer1", "lecturer1");
+				super.request("/assistant/session/show", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("employer1", "employer1");
 				super.request("/assistant/session/show", param);
 				super.checkPanicExists();
 				super.signOut();

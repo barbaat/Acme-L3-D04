@@ -124,7 +124,12 @@ public class AssistantTutorialPublishTest extends TestHarness {
 				super.checkPanicExists();
 				super.signOut();
 
-				super.signIn("employer1", "employer1");
+				super.signIn("assistant2", "assistant2");
+				super.request("/assistant/tutorial/publish", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("student1", "student1");
 				super.request("/assistant/tutorial/publish", param);
 				super.checkPanicExists();
 				super.signOut();
@@ -134,8 +139,13 @@ public class AssistantTutorialPublishTest extends TestHarness {
 				super.checkPanicExists();
 				super.signOut();
 
+				super.signIn("employer1", "employer1");
+				super.request("/assistant/tutorial/publish", param);
+				super.checkPanicExists();
+				super.signOut();
+
 				super.signIn("auditor1", "auditor1");
-				super.request("/assistant/tutorial/update", param);
+				super.request("/assistant/tutorial/publish", param);
 				super.checkPanicExists();
 				super.signOut();
 
