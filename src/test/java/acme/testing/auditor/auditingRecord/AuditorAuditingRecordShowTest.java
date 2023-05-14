@@ -96,7 +96,7 @@ public class AuditorAuditingRecordShowTest extends TestHarness {
 					super.checkPanicExists();
 					super.signOut();
 
-					super.signIn("company1", "company");
+					super.signIn("company1", "company1");
 					super.request("/auditor/auditingRecord/show", param);
 					super.checkPanicExists();
 					super.signOut();
