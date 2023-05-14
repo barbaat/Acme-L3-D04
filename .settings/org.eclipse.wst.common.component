@@ -9,7 +9,10 @@
     
     <wb-module deploy-name="Acme-L3-D04-23.4.0">
                                                                         
+<<<<<<< HEAD
         
+=======
+>>>>>>> refs/remotes/origin/main
         
         
         
@@ -27,7 +30,10 @@
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
                                                                         
+<<<<<<< HEAD
         
+=======
+>>>>>>> refs/remotes/origin/main
         
         
         
@@ -36,7 +42,10 @@
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
                                                                         
+<<<<<<< HEAD
         
+=======
+>>>>>>> refs/remotes/origin/main
         
         
         
@@ -54,7 +63,10 @@
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp"/>
                                                                         
+<<<<<<< HEAD
         
+=======
+>>>>>>> refs/remotes/origin/main
         
         
         
@@ -78,11 +90,17 @@
         
         
         
+<<<<<<< HEAD
         
+=======
+>>>>>>> refs/remotes/origin/main
         <property name="java-output-path" value="/Hello-World-22.0/target/classes"/>
         <property name="context-root" value="Acme-L3-D04"/>
                                                                     
+<<<<<<< HEAD
     
+=======
+>>>>>>> refs/remotes/origin/main
     
     
     
