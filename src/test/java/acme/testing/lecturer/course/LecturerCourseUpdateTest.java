@@ -60,7 +60,7 @@ public class LecturerCourseUpdateTest extends TestHarness {
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/lecturer/course/update-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test200Negative(final int courseIndex, final String code, final String title, final String retailPrice, final String abstractCourse, final String link) {
+	public void test200Negative(final int courseIndex, final String originalCode, final String code, final String title, final String retailPrice, final String abstractCourse, final String link) {
 
 		super.signIn("lecturer1", "lecturer1");
 
@@ -68,7 +68,7 @@ public class LecturerCourseUpdateTest extends TestHarness {
 		super.checkListingExists();
 		super.sortListing(0, "asc");
 
-		super.checkColumnHasValue(courseIndex, 0, code);
+		super.checkColumnHasValue(courseIndex, 0, originalCode);
 		super.clickOnListingRecord(courseIndex);
 		super.checkFormExists();
 		super.fillInputBoxIn("code", code);

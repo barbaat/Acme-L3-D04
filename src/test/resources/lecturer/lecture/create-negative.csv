@@ -3,3 +3,10 @@ lectureIndex,title,abstractLecture,body,estimatedLearningTimeInHours,lectureType
 0,Muy largo AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,Introduction to Math,This course will teach you how to program in Java.,60.00,HANDS_ON,https://www.us.es/abc123
 0,AbstractLecture vacío,,This course will teach you how to program in Java.,30.00,THEORY,https://www.us.es/abc123
 0,AbstractLecture muy largo,Muy largo AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,This course will teach you how to program in Java.,30.00,THEORY,https://www.us.es/abc123
+0,Body vacío,Introduction to Programming,,90.00,THEORY,https://www.us.es/abc123
+0,Body muy largo,Introduction to Programming,This course will introduce you to the basics of programming AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,90.00,THEORY,https://www.us.es/abc123
+0,Hora nula,Introduction to Programming,This course will introduce you to the basics of programming,,THEORY,https://www.us.es/abc123
+0,Hora negativa,Introduction to Programming,This course will introduce you to the basics of programming,-90.00,THEORY,https://www.us.es/abc123
+0,Hora igual a 0,Introduction to Programming,This course will introduce you to the basics of programming,0,THEORY,https://www.us.es/abc123
+0,Hora con más de 3 enteros,Introduction to Programming,This course will introduce you to the basics of programming,942340.00,THEORY,https://www.us.es/abc123
+0,Formato link mal,Introduction to Programming,This course will introduce you to the basics of programming,942340.00,THEORY,dasdasfasfaf
