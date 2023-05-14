@@ -47,13 +47,14 @@ public class StudentActivityDeleteTest extends TestHarness {
 		super.checkInputBoxHasValue("startPeriod", startPeriod);
 		super.checkInputBoxHasValue("endPeriod", endPeriod);
 
-		//		final Activity activity = this.repository.findActivityById();
-		//		final String param = String.format("id=%d", activity.getId());
-		super.clickOnSubmit("Delete");
+		final String activityIdString = super.getCurrentQuery();
+		final int activityId = Integer.parseInt(activityIdString.substring(activityIdString.indexOf("=") + 1));
+		final String param = String.format("id=%d", activityId);
+		super.clickOnSubmit("Delete activity");
 		super.checkNotErrorsExist();
 
-		//super.request("/student/activity/delete", param);
-		//super.checkPanicExists();
+		super.request("/student/activity/delete", param);
+		super.checkPanicExists();
 
 		super.signOut();
 
@@ -88,7 +89,14 @@ public class StudentActivityDeleteTest extends TestHarness {
 	//		super.checkInputBoxHasValue("startPeriod", startPeriod);
 	//		super.checkInputBoxHasValue("endPeriod", endPeriod);
 	//
-	//		super.checkNotButtonExists("Delete");
+	//		final String activityIdString = super.getCurrentQuery();
+	//		final int activityRecordId = Integer.parseInt(activityIdString.substring(activityIdString.indexOf("=") + 1));
+	//		final String param = String.format("id=%d", activityRecordId);
+	//
+	//		super.checkNotSubmitExists("Delete activity");
+	//
+	//		super.request("/student/activity/delete", param);
+	//		super.checkPanicExists();
 	//
 	//		super.signOut();
 	//	}
