@@ -23,7 +23,7 @@ auditor.auditing-record.list.label.exceptional = Modified after been published
 auditor.auditing-record.list.button.create = Create
 auditor.auditing-record.list.button.create-correctionRecord = Create correction record
 
-auditor.auditing-record.form.error.start-before-finish = Finish time must be before start time
+auditor.auditing-record.form.error.start-before-finish = Finish time must be after start time
 auditor.auditing-record.form.error.at-least-1-hour = Duration must be at least 1 hour
 
 auditor.auditing-record.form.button.create-correction = Create correction

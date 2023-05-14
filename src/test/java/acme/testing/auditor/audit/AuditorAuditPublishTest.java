@@ -23,7 +23,7 @@ public class AuditorAuditPublishTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/audit/publish-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int auditIndex, final String course, final String code, final String conclusion, final String strongPoints, final String weakPoints) {
-		//Publicar correctamente un audit
+		//Compruebo que puedo publicar correctamente un audit
 
 		super.signIn("auditor1", "auditor1");
 
@@ -72,7 +72,7 @@ public class AuditorAuditPublishTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/audit/publish-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test200Negative(final int auditIndex, final String course, final String code, final String conclusion, final String strongPoints, final String weakPoints) {
-		//No poder publicar un audit porque ya está publicado
+		//Compruebo que no puedo publicar un audit ya publicado
 
 		super.signIn("auditor1", "auditor1");
 
@@ -100,7 +100,7 @@ public class AuditorAuditPublishTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
-		// Publicar audit con otro rol que no es Auditor
+		//Compruebo que solo auditor1 puede publicar sus audits
 
 		Collection<Audit> audits;
 		String params;

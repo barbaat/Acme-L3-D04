@@ -10,12 +10,32 @@ import acme.testing.TestHarness;
 public class AssistantTutorialListTest extends TestHarness {
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/assistant/tutorial/list-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
+	@CsvFileSource(resources = "/assistant/tutorial/list-positive1.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int recordIndex, final String code, final String title, final String abstractTutorial, final String goals) {
 		// HINT: this test authenticates as an assistant, lists his or her tutorials,
 		// HINT+ and then checks that the listing has the expected data.
 
 		super.signIn("assistant1", "assistant1");
+
+		super.clickOnMenu("Assistant", "Tutorial List");
+		super.checkListingExists();
+		super.sortListing(0, "asc");
+
+		super.checkColumnHasValue(recordIndex, 0, code);
+		super.checkColumnHasValue(recordIndex, 1, title);
+		super.checkColumnHasValue(recordIndex, 2, abstractTutorial);
+		super.checkColumnHasValue(recordIndex, 3, goals);
+
+		super.signOut();
+	}
+
+	@ParameterizedTest
+	@CsvFileSource(resources = "/assistant/tutorial/list-positive2.csv", encoding = "utf-8", numLinesToSkip = 1)
+	public void test101Positive(final int recordIndex, final String code, final String title, final String abstractTutorial, final String goals) {
+		// HINT: this test authenticates as an assistant, lists his or her tutorials,
+		// HINT+ and then checks that the listing has the expected data.
+
+		super.signIn("assistant2", "assistant2");
 
 		super.clickOnMenu("Assistant", "Tutorial List");
 		super.checkListingExists();
