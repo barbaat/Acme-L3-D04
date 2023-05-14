@@ -1,2 +1,12 @@
-courseIndex,code,title,abstractCourse,retailPrice,link,draftMode
-0,AB123,Introduction to Rust,This course will teach you how to program in Rust.,20.00,https://www.us.es/abc123,true
+courseIndex,originalCode,code,title,retailPrice,abstractCourse,link,draftMode
+0,AB123,,Código vacío,EUR 20.00,This course will teach you how to program in Rust.,https://www.us.es/abc123,true
+0,AB123,123,Código mal de patrón,EUR 20.00,This course will teach you how to program in Rust.,https://www.us.es/abc123,true
+0,AB123,ABC128,Código repetido,EUR 20.00,This course will teach you how to program in Rust.,https://www.us.es/abc123,true
+0,AB123,AB123,,EUR 20.00,Título vacío,https://www.us.es/abc123,true
+0,AB123,AB123,Título largo AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,EUR 20.00,This course will teach you how to program in Rust.,https://www.us.es/abc123,true
+0,AB123,AB123,Precio vacío,,This course will teach you how to program in Rust.,https://www.us.es/abc123,true
+0,AB123,AB123,Precio mal de formato,80.00,This course will teach you how to program in Rust.,https://www.us.es/abc123,true
+0,AB123,AB123,AbstractCourse vacío,EUR 20.00,,https://www.us.es/abc123,true
+0,AB123,AB123,AbstractCourse largo,EUR 20.00,AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,https://www.us.es/abc123,true
+0,AB123,AB123,Link mal de formato,EUR 20.00,This course will teach you how to program in Rust.,link de prueba,true
+
