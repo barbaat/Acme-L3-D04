@@ -102,6 +102,11 @@ public class LecturerCourseUpdateTest extends TestHarness {
 			super.checkPanicExists();
 			super.signOut();
 
+			super.signIn("lecturer1", "lecturer1");
+			super.request("/lecturer/course/update", param);
+			super.checkPanicExists();
+			super.signOut();
+
 		}
 	}
 }
