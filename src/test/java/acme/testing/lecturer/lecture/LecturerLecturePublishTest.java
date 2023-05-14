@@ -60,7 +60,6 @@ public class LecturerLecturePublishTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
-		// HINT: this test tries to publish a lecture with a role other than "lecturer".
 
 		Collection<Lecture> lectures;
 		String params;

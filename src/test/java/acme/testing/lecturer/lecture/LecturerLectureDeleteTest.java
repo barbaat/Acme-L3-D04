@@ -41,8 +41,10 @@ public class LecturerLectureDeleteTest extends TestHarness {
 		super.checkInputBoxHasValue("estimatedLearningTimeInHours", estimatedLearningTimeInHours);
 		super.checkInputBoxHasValue("lectureType", lectureType);
 		super.checkInputBoxHasValue("link", link);
-		final Lecture lecture = this.repository.findLectureByTitle(title);
-		final String param = String.format("id=%d", lecture.getId());
+
+		final String lectureIdString = super.getCurrentQuery();
+		final int lectureId = Integer.parseInt(lectureIdString.substring(lectureIdString.indexOf("=") + 1));
+		final String param = String.format("id=%d", lectureId);
 		super.clickOnSubmit("Delete a lecture");
 		super.checkNotErrorsExist();
 
