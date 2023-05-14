@@ -16,4 +16,7 @@ public interface StudentActivityTestRepository extends AbstractRepository {
 
 	@Query("select a from Activity a where a.enrolment.id=:id")
 	Collection<Activity> findActivitiesByEnrolmentId(int id);
+
+	@Query("SELECT a FROM Activity a WHERE a.id = :id")
+	Activity findActivityById(String id);
 }
