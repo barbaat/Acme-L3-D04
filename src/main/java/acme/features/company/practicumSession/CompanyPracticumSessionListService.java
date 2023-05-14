@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import acme.entities.practicums.Practicum;
 import acme.entities.sessions.PracticumSession;
+import acme.framework.components.accounts.Principal;
 import acme.framework.components.models.Tuple;
 import acme.framework.services.AbstractService;
 import acme.roles.Company;
@@ -27,7 +28,7 @@ public class CompanyPracticumSessionListService extends AbstractService<Company,
 	public void check() {
 		boolean status;
 
-		status = super.getRequest().hasData("practicumId", int.class);
+		status = super.getRequest().hasData("masterId", int.class);
 
 		super.getResponse().setChecked(status);
 	}
@@ -35,23 +36,25 @@ public class CompanyPracticumSessionListService extends AbstractService<Company,
 	@Override
 	public void authorise() {
 		boolean status;
-		final int practicumId;
+		final int masterId;
 		final Practicum practicum;
 
-		practicumId = super.getRequest().getData("practicumId", int.class);
-		practicum = this.psRepository.findPracticumById(practicumId);
-		status = practicum != null && super.getRequest().getPrincipal().getActiveRoleId() == practicum.getCompany().getId();
-
+		masterId = super.getRequest().getData("masterId", int.class);
+		practicum = this.psRepository.findPracticumById(masterId);
+		final Principal principal = super.getRequest().getPrincipal();
+		final int userAccountId = principal.getAccountId();
+		status = practicum.getCompany().getUserAccount().getId() == userAccountId;
 		super.getResponse().setAuthorised(status);
+
 	}
 
 	@Override
 	public void load() {
 		Collection<PracticumSession> object;
-		int practicumId;
+		int masterId;
 
-		practicumId = super.getRequest().getData("practicumId", int.class);
-		object = this.psRepository.findManyPracticumSessionsByPracticumId(practicumId);
+		masterId = super.getRequest().getData("masterId", int.class);
+		object = this.psRepository.findPracticumSessionsByPracticumId(masterId);
 
 		super.getBuffer().setData(object);
 	}
@@ -59,11 +62,39 @@ public class CompanyPracticumSessionListService extends AbstractService<Company,
 	@Override
 	public void unbind(final PracticumSession object) {
 		assert object != null;
-
-		Tuple tuple;
-
-		tuple = super.unbind(object, "title", "abstract$", "startPeriod", "finishPeriod", "draftMode", "exceptional");
-
+		final int masterId = super.getRequest().getData("masterId", int.class);
+		final Practicum practicum = this.psRepository.findPracticumById(masterId);
+		final boolean exceptional = object.isExceptional();
+		String res = "";
+		if (exceptional == true)
+			res = "*";
+		else
+			res = " ";
+		final Tuple tuple = super.unbind(object, "title", "abstract$", "startPeriod", "finishPeriod");
+		tuple.put("draftMode", practicum.isDraftMode());
+		tuple.put("exceptional", res);
 		super.getResponse().setData(tuple);
+	}
+
+	@Override
+	public void unbind(final Collection<PracticumSession> object) {
+		//		assert object != null;
+		//
+		//		Tuple tuple;
+		//
+		//		tuple = super.unbind(object, "title", "abstract$", "startPeriod", "finishPeriod", "draftMode", "exceptional");
+		//
+		//		super.getResponse().setData(tuple);
+
+		assert object != null;
+		boolean createButton = false;
+		final int masterId = super.getRequest().getData("masterId", int.class);
+		final Practicum practicum = this.psRepository.findPracticumById(masterId);
+		if (super.getRequest().getPrincipal().getAccountId() == practicum.getCompany().getUserAccount().getId())
+			createButton = true;
+		super.getResponse().setGlobal("createButton", createButton);
+		super.getResponse().setGlobal("draftMode", practicum.isDraftMode());
+		super.getResponse().setGlobal("masterId", masterId);
+
 	}
 }

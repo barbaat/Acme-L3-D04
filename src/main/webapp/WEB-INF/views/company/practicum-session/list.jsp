@@ -17,14 +17,18 @@
 <%@taglib prefix="acme" uri="http://www.the-acme-framework.org/"%>
 
 <acme:list>
-	<acme:list-column code="company.practicum-session.list.label.title" path="title"/>
-	<acme:list-column code="company.practicum-session.list.label.startPeriod" path="startPeriod"/>
-	<acme:list-column code="company.practicum-session.list.label.finishPeriod" path="finishPeriod"/>
+	<acme:list-column code="company.practicum-session.list.label.title" path="title" width="30%"/>
+	<acme:list-column code="company.practicum-session.list.label.startPeriod" path="startPeriod" width="30%"/>
+	<acme:list-column code="company.practicum-session.list.label.finishPeriod" path="finishPeriod" width="30%"/>
+	<acme:list-column code="company.practicum-session.list.label.exceptional" path="exceptional" width="10%"/>
+	
 </acme:list>
 
-<acme:button code="company.practicum-session.list.button.create" action="/company/practicum-session/create"/>
+<%-- <acme:button code="company.practicum-session.list.button.create" action="/company/practicum-session/create"/>
 <acme:button code="company.practicum-session.list.button.create-exceptional" action="/company/practicum-session/create-exceptional"/>
-					
+ --%>					
+<acme:button test = "${draftMode == true && createButton}" code="company.practicum-session.list.button.create" action="/company/practicum-session/create?masterId=${masterId}"/>
+<acme:button test = "${draftMode == false && createButton}" code="company.practicum-session.list.button.create-exceptional" action="/company/practicum-session/create?masterId=${masterId}"/>
 
 					
 					

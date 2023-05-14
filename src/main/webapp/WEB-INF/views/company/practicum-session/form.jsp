@@ -26,26 +26,18 @@
 		
 	
 	<jstl:choose>
-		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode == true}">
-			<acme:input-select code="company.practicum-session.form.label.practicum" path="practicum" choices="${practica}"/>
+		<jstl:when test="${acme:anyOf(_command, 'show|update|delete') && draftMode == true}">
 			<acme:submit code="company.practicum-session.form.button.update" action="/company/practicum-session/update"/>
 			<acme:submit code="company.practicum-session.form.button.delete" action="/company/practicum-session/delete"/>
-			<acme:submit code="company.practicum-session.form.button.publish" action="/company/practicum-session/publish"/>
-			
 		</jstl:when>
 		
-		<jstl:when test="${acme:anyOf(_command, 'show|update|delete') && draftMode == false}">
-			<acme:input-textbox code="company.practicum-session.form.label.practicum" path="practicum.code"/>			
+		<jstl:when test="${_command == 'create' && draftMode}">
+			<acme:submit code="company.practicum-session.form.button.create" action="/company/practicum-session/create?masterId=${masterId}"/>
 		</jstl:when>
-		<jstl:when test="${_command == 'create'}">
-			<acme:input-select code="company.practicum-session.form.label.practicum" path="practicum" choices="${practica}"/>
-			<acme:submit code="company.practicum-session.form.button.create" action="/company/practicum-session/create"/>
+		<jstl:when test="${_command == 'create'&& !draftMode }">
+			<acme:input-checkbox code="company.practicum-session.form.button.confirmation" path="confirmation"/>
+			<acme:submit code="company.practicum-session.form.button.create-exceptional" action="/company/practicum-session/create?masterId=${masterId}"/>
 		</jstl:when>
-		<jstl:when test="${_command == 'create-exceptional'}">
-			<acme:input-select code="company.practicum-session.form.label.practicum" path="practicum" choices="${practica}"/>
-			<acme:input-checkbox code="company.practicum-session.form.label.confirmation" path="confirmation"/>
-			<acme:submit code="company.practicum-session.form.button.create-exceptional" action="/company/practicum-session/create-exceptional"/>
-		</jstl:when>		
 	</jstl:choose>
 	<jstl:if test="${exceptional == true}">
 		<acme:message code="company.practicum-session.form.message.exceptional"/>
