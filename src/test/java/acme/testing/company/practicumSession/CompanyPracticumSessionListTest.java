@@ -22,7 +22,7 @@ public class CompanyPracticumSessionListTest extends TestHarness {
 
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/company/praticumSession/list-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
+	@CsvFileSource(resources = "/company/practicumSession/list-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int practicumIndex, final String practicumCode, final int practicumSessionIndex, final String title, final String startPeriod, final String finishPeriod) {
 		// HINT: this test authenticates as a company, then lists his or her practicums, 
 		// HINT+ selects one of them, and check that it has the expected duties.
