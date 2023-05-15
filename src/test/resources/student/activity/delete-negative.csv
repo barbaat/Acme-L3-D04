@@ -1,0 +1,4 @@
+enrolmentIndex,code,activityIndex,title,abstractt,activityType,link,startPeriod,endPeriod
+0,ABM1236,1,no,coincide,THEORY,http://www.example.com,2023/04/16 22:00,2023/04/16 23:00
+1,ABM1237,1,title,no coincide,HANDS_ON,http://www.exammple.com,2023/07/16 16:00,2023/07/16 22:00
+2,ABM1538,2,title,no coincide,THEORY,http://www.example.com,2023/07/16 16:00,2023/07/16 22:00

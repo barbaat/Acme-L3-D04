@@ -19,6 +19,7 @@ student.enrolment.list.button.register = Register
 
 student.enrolment.form.label.code = Code
 student.enrolment.form.label.courseTitle = Course
+student.enrolment.form.label.course = Course
 student.enrolment.form.label.workTime = Work time in hours
 student.enrolment.form.label.motivation = Motivation
 student.enrolment.form.label.goals = Goals

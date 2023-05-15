@@ -60,7 +60,6 @@ public class LecturerLecturePublishTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
-		// HINT: this test tries to publish a lecture with a role other than "lecturer".
 
 		Collection<Lecture> lectures;
 		String params;
@@ -75,6 +74,11 @@ public class LecturerLecturePublishTest extends TestHarness {
 				super.checkPanicExists();
 
 				super.signIn("administrator", "administrator");
+				super.request("/lecturer/lecture/publish", params);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("lecturer1", "lecturer1");
 				super.request("/lecturer/lecture/publish", params);
 				super.checkPanicExists();
 				super.signOut();
