@@ -10,4 +10,5 @@ lectureIndex,originalTitle,title,abstractLecture,body,estimatedLearningTimeInHou
 2,Lecture 3,Hora igual a 0,Introduction to Programming,Actualizado,0.00,THEORY,https://www.us.es/abc123,true
 2,Lecture 3,Hora con más de 3 enteros,Introduction to Programming,Actualizado,492083490.00,THEORY,https://www.us.es/abc123,true
 2,Lecture 3,Hora con más de 2 decimales,Introduction to Programming,Actualizado,45.9832183718923,THEORY,https://www.us.es/abc123,true
-2,Lecture 3,Formato link mal,Introduction to Programming,Actualizado,0.00,THEORY,rsersere,true
+2,Lecture 3,Tipo de lecture NULL,Introduction to Programming,Actualizado,40.00,---,rsersere,true
+2,Lecture 3,Formato link mal,Introduction to Programming,Actualizado,40.00,THEORY,rsersere,true

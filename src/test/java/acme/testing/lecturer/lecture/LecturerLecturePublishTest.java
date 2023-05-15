@@ -92,8 +92,8 @@ public class LecturerLecturePublishTest extends TestHarness {
 		Collection<Lecture> lectures;
 		String params;
 
-		super.signIn("lecturer1", "lecturer1");
-		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer1");
+		super.signIn("lecturer2", "lecturer2");
+		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer2");
 		for (final Lecture leccion : lectures)
 			if (!leccion.isDraftMode()) {
 				params = String.format("id=%d", leccion.getId());
@@ -108,8 +108,8 @@ public class LecturerLecturePublishTest extends TestHarness {
 		Collection<Lecture> lectures;
 		String params;
 
-		super.signIn("lecturer2", "lecturer2");
-		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer1");
+		super.signIn("lecturer1", "lecturer1");
+		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer2");
 		for (final Lecture lecture : lectures) {
 			params = String.format("id=%d", lecture.getId());
 			super.request("/lecturer/lecture/publish", params);
