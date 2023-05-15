@@ -30,7 +30,8 @@ company.practicum-session.form.button.delete = Eliminar
 company.practicum-session.form.button.publish = Publicar
 
 company.practicum-session.form.label.confirmation = Confirmar sesión de práctica excepcional
-company.practicum-session.form.message.exceptional = ¡ESTO ES UNA SESIÓN PRÁCTICA!
+company.practicum-session.form.message.exceptional = ¡ESTO ES UNA SESIÓN PRACTICA EXCEPCIONAL!
+company.practicum-session.list.label.exceptional = Sesión práctica excepcional
 
 company.practicum-session.validation.startPeriod.error.WeekAhead = Error: La Fecha de Inicio debe comenzar al menos una semana después del momento actual
 company.practicum-session.validation.finishPeriod.error.WeekLong = Error: La Fecha de Fin debe establecerse al menos una semana después de la Fecha de Inicio

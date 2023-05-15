@@ -1,14 +1,12 @@
 
 package acme.features.company.practicumSession;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.components.SystemConfigurationService;
 import acme.entities.practicums.Practicum;
 import acme.entities.sessions.PracticumSession;
-import acme.framework.components.jsp.SelectChoices;
 import acme.framework.components.models.Tuple;
 import acme.framework.services.AbstractService;
 import acme.roles.Company;
@@ -19,7 +17,10 @@ public class CompanyPracticumSessionShowService extends AbstractService<Company,
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected CompanyPracticumSessionRepository psRepository;
+	protected CompanyPracticumSessionRepository	psRepository;
+
+	@Autowired
+	protected SystemConfigurationService		scService;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -36,14 +37,17 @@ public class CompanyPracticumSessionShowService extends AbstractService<Company,
 	@Override
 	public void authorise() {
 		boolean status;
-		int sessionId;
-		final PracticumSession session;
+		int pId;
+		final Practicum p;
 
-		sessionId = super.getRequest().getData("id", int.class);
-		session = this.psRepository.findPracticumSessionById(sessionId);
-		status = session != null && super.getRequest().getPrincipal().getActiveRoleId() == session.getPracticum().getCompany().getId();
+		pId = super.getRequest().getData("id", int.class);
+		p = this.psRepository.findPracticumByPracticumSessionId(pId);
+
+		final int userAccountId = super.getRequest().getPrincipal().getAccountId();
+		status = p.getCompany().getUserAccount().getId() == userAccountId;
 
 		super.getResponse().setAuthorised(status);
+
 	}
 
 	@Override
@@ -60,23 +64,35 @@ public class CompanyPracticumSessionShowService extends AbstractService<Company,
 
 	@Override
 	public void unbind(final PracticumSession object) {
+		//		assert object != null;
+		//		final Collection<Practicum> practica;
+		//		final SelectChoices choices;
+		//		final int companyId = super.getRequest().getPrincipal().getActiveRoleId();
+		//
+		//		practica = this.psRepository.findManyPracticaByCompanyId(companyId);
+		//		choices = SelectChoices.from(practica, "code", object.getPracticum());
+		//		Tuple tuple;
+		//
+		//		tuple = super.unbind(object, "title", "abstract$", "startPeriod", "finishPeriod", "draftMode", "exceptional");
+		//		tuple.put("practicum", choices.getSelected().getKey());
+		//		tuple.put("practica", choices);
+		//
+		//		final int selectedId = Integer.parseInt(choices.getSelected().getKey());
+		//		final Practicum selectedPracticum = this.psRepository.findPracticumById(selectedId);
+		//
+		//		tuple.put("practicum.code", selectedPracticum.getCode());
+		//
+		//		super.getResponse().setData(tuple);
+
 		assert object != null;
-		final Collection<Practicum> practica;
-		final SelectChoices choices;
-		final int companyId = super.getRequest().getPrincipal().getActiveRoleId();
-
-		practica = this.psRepository.findManyPracticaByCompanyId(companyId);
-		choices = SelectChoices.from(practica, "code", object.getPracticum());
-		Tuple tuple;
-
-		tuple = super.unbind(object, "title", "abstract$", "startPeriod", "finishPeriod", "draftMode", "exceptional");
-		tuple.put("practicum", choices.getSelected().getKey());
-		tuple.put("practica", choices);
-
-		final int selectedId = Integer.parseInt(choices.getSelected().getKey());
-		final Practicum selectedPracticum = this.psRepository.findPracticumById(selectedId);
-
-		tuple.put("practicum.code", selectedPracticum.getCode());
+		final int id = super.getRequest().getData("id", int.class);
+		final Practicum practicum = this.psRepository.findPracticumByPracticumSessionId(id);
+		final Tuple tuple = super.unbind(object, "title", "abstract$", "optionalLink", "exceptional");
+		final String lang = super.getRequest().getLocale().getLanguage();
+		tuple.put("startPeriod", this.scService.translateDate(object.getStartPeriod(), lang));
+		tuple.put("finishPeriod", this.scService.translateDate(object.getFinishPeriod(), lang));
+		tuple.put("masterId", practicum.getId());
+		tuple.put("draftMode", practicum.isDraftMode());
 
 		super.getResponse().setData(tuple);
 	}
