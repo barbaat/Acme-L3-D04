@@ -23,7 +23,7 @@ public class AssistantTutorialPublishTest extends TestHarness {
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/assistant/tutorial/publish-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test100Positive(final int recordIndex, final String code) {
+	public void test100Positive(final int recordIndex, final String code, final String title, final String abstractTutorial, final String goals, final String estimatedTotalTime, final String course) {
 		// HINT: this test authenticates as an assistant, lists his or her tutorials,
 		// HINT: then selects one of them, and publishes it.
 
@@ -36,18 +36,21 @@ public class AssistantTutorialPublishTest extends TestHarness {
 
 		super.clickOnListingRecord(recordIndex);
 		super.checkFormExists();
+		super.checkInputBoxHasValue("code", code);
+		super.checkInputBoxHasValue("title", title);
+		super.checkInputBoxHasValue("abstractTutorial", abstractTutorial);
+		super.checkInputBoxHasValue("goals", goals);
+		super.checkInputBoxHasValue("estimatedTotalTime", estimatedTotalTime);
+		super.checkInputBoxHasValue("course", course);
+
+		super.checkSubmitExists("Publish");
 		super.clickOnSubmit("Publish");
 		super.checkNotErrorsExist();
 
-		super.signOut();
-	}
-
-	@ParameterizedTest
-	@CsvFileSource(resources = "/assistant/tutorial/publish-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test200Negative(final int recordIndex, final String code) {
-		// HINT: this test attempts to publish a tutorial that cannot be published, yet.
-
-		super.signIn("assistant1", "assistant1");
+		final Tutorial tutorial = this.repository.findTutorialByCode(code);
+		final String param = String.format("id=%d", tutorial.getId());
+		super.request("/assistant/tutorial/publish", param);
+		super.checkPanicExists();
 
 		super.clickOnMenu("Assistant", "Tutorial List");
 		super.checkListingExists();
@@ -56,8 +59,46 @@ public class AssistantTutorialPublishTest extends TestHarness {
 		super.checkColumnHasValue(recordIndex, 0, code);
 		super.clickOnListingRecord(recordIndex);
 		super.checkFormExists();
-		super.clickOnSubmit("Publish");
-		super.checkAlertExists(false);
+
+		super.checkInputBoxHasValue("code", code);
+		super.checkInputBoxHasValue("title", title);
+		super.checkInputBoxHasValue("abstractTutorial", abstractTutorial);
+		super.checkInputBoxHasValue("goals", goals);
+		super.checkInputBoxHasValue("estimatedTotalTime", estimatedTotalTime);
+		super.checkInputBoxHasValue("course", course);
+
+		super.checkNotSubmitExists("Publish");
+		super.signOut();
+	}
+
+	@ParameterizedTest
+	@CsvFileSource(resources = "/assistant/tutorial/publish-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
+	public void test200Negative(final int recordIndex, final String code, final String title, final String abstractTutorial, final String goals, final String estimatedTotalTime, final String course) {
+		// HINT: this test attempts to publish a tutorial that cannot be published, yet.
+
+		super.signIn("assistant1", "assistant1");
+
+		super.clickOnMenu("Assistant", "Tutorial List");
+		super.checkListingExists();
+		super.sortListing(0, "desc");
+
+		super.checkColumnHasValue(recordIndex, 0, code);
+		super.clickOnListingRecord(recordIndex);
+		super.checkFormExists();
+
+		super.checkInputBoxHasValue("code", code);
+		super.checkInputBoxHasValue("title", title);
+		super.checkInputBoxHasValue("abstractTutorial", abstractTutorial);
+		super.checkInputBoxHasValue("goals", goals);
+		super.checkInputBoxHasValue("estimatedTotalTime", estimatedTotalTime);
+		super.checkInputBoxHasValue("course", course);
+
+		final Tutorial tutorial = this.repository.findTutorialByCode(code);
+		final String param = String.format("id=%d", tutorial.getId());
+		super.checkNotSubmitExists("Publish");
+
+		super.request("/assistant/tutorial/publish", param);
+		super.checkPanicExists();
 
 		super.signOut();
 	}
@@ -83,7 +124,12 @@ public class AssistantTutorialPublishTest extends TestHarness {
 				super.checkPanicExists();
 				super.signOut();
 
-				super.signIn("employer1", "employer1");
+				super.signIn("assistant2", "assistant2");
+				super.request("/assistant/tutorial/publish", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("student1", "student1");
 				super.request("/assistant/tutorial/publish", param);
 				super.checkPanicExists();
 				super.signOut();
@@ -93,8 +139,13 @@ public class AssistantTutorialPublishTest extends TestHarness {
 				super.checkPanicExists();
 				super.signOut();
 
+				super.signIn("employer1", "employer1");
+				super.request("/assistant/tutorial/publish", param);
+				super.checkPanicExists();
+				super.signOut();
+
 				super.signIn("auditor1", "auditor1");
-				super.request("/assistant/tutorial/update", param);
+				super.request("/assistant/tutorial/publish", param);
 				super.checkPanicExists();
 				super.signOut();
 

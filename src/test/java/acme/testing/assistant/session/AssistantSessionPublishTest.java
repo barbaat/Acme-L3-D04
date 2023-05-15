@@ -23,7 +23,8 @@ public class AssistantSessionPublishTest extends TestHarness {
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/assistant/session/publish-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test100Positive(final int tutorialRecordIndex, final String code, final int sessionRecordIndex, final String title) {
+	public void test100Positive(final int tutorialRecordIndex, final String code, final int sessionRecordIndex, final String title, final String abstractSession, final String isTheorySession, final String initTimePeriod, final String finishTimePeriod,
+		final String link) {
 		// HINT: this test authenticates as an assistant, lists his or her tutorials,
 		// HINT: then selects one of them, list the sessions, select one of them
 		// HINT:, and publishes it.
@@ -37,24 +38,80 @@ public class AssistantSessionPublishTest extends TestHarness {
 
 		super.clickOnListingRecord(tutorialRecordIndex);
 		super.checkFormExists();
+		super.checkInputBoxHasValue("code", code);
 		super.clickOnButton("Sessions");
+
 		super.checkListingExists();
 		super.sortListing(0, "asc");
-		super.checkFormExists();
 		super.checkColumnHasValue(sessionRecordIndex, 0, title);
+		super.checkColumnHasValue(sessionRecordIndex, 1, abstractSession);
+
+		if (isTheorySession.equals("true"))
+			super.checkColumnHasValue(sessionRecordIndex, 2, "Yes");
+		else
+			super.checkColumnHasValue(sessionRecordIndex, 2, "No");
+
+		super.checkColumnHasValue(sessionRecordIndex, 3, initTimePeriod);
 
 		super.clickOnListingRecord(sessionRecordIndex);
 		super.checkFormExists();
+		super.checkInputBoxHasValue("title", title);
+		super.checkInputBoxHasValue("abstractSession", abstractSession);
+		super.checkInputBoxHasValue("isTheorySession", isTheorySession);
+		super.checkInputBoxHasValue("initTimePeriod", initTimePeriod);
+		super.checkInputBoxHasValue("finishTimePeriod", finishTimePeriod);
+		super.checkInputBoxHasValue("link", link);
+		super.checkSubmitExists("Publish");
 		super.clickOnSubmit("Publish");
 		super.checkNotErrorsExist();
+
+		final Session session = this.repository.findSessionByTitleAndAbstract(title, abstractSession);
+		final String param = String.format("id=%d", session.getId());
+
+		super.request("/assistant/session/publish", param);
+		super.checkPanicExists();
+
+		super.clickOnMenu("Assistant", "Tutorial List");
+		super.checkListingExists();
+		super.sortListing(0, "asc");
+
+		super.checkColumnHasValue(tutorialRecordIndex, 0, code);
+		super.clickOnListingRecord(tutorialRecordIndex);
+		super.checkFormExists();
+		super.checkInputBoxHasValue("code", code);
+
+		super.clickOnButton("Sessions");
+
+		super.checkListingExists();
+		super.sortListing(0, "asc");
+		super.checkColumnHasValue(sessionRecordIndex, 0, title);
+		super.checkColumnHasValue(sessionRecordIndex, 1, abstractSession);
+
+		if (isTheorySession.equals("true"))
+			super.checkColumnHasValue(sessionRecordIndex, 2, "Yes");
+		else
+			super.checkColumnHasValue(sessionRecordIndex, 2, "No");
+
+		super.checkColumnHasValue(sessionRecordIndex, 3, initTimePeriod);
+
+		super.clickOnListingRecord(sessionRecordIndex);
+		super.checkFormExists();
+		super.checkInputBoxHasValue("title", title);
+		super.checkInputBoxHasValue("abstractSession", abstractSession);
+		super.checkInputBoxHasValue("isTheorySession", isTheorySession);
+		super.checkInputBoxHasValue("initTimePeriod", initTimePeriod);
+		super.checkInputBoxHasValue("finishTimePeriod", finishTimePeriod);
+		super.checkInputBoxHasValue("link", link);
+		super.checkNotSubmitExists("Publish");
 
 		super.signOut();
 	}
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/assistant/session/publish-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test200Negative(final int tutorialRecordIndex, final String code, final int sessionRecordIndex, final String title) {
-		// HINT: this test attempts to publish a session that cannot be published, yet.
+	public void test200Negative(final int tutorialRecordIndex, final String code, final int sessionRecordIndex, final String title, final String abstractSession, final String isTheorySession, final String initTimePeriod, final String finishTimePeriod,
+		final String link) {
+		// HINT: this test attempts to publish a session that cannot be published.
 
 		super.signIn("assistant1", "assistant1");
 
@@ -68,13 +125,30 @@ public class AssistantSessionPublishTest extends TestHarness {
 		super.clickOnButton("Sessions");
 		super.checkListingExists();
 		super.sortListing(0, "asc");
-		super.checkFormExists();
 		super.checkColumnHasValue(sessionRecordIndex, 0, title);
+		super.checkColumnHasValue(sessionRecordIndex, 1, abstractSession);
+
+		if (isTheorySession.equals("true"))
+			super.checkColumnHasValue(sessionRecordIndex, 2, "Yes");
+		else
+			super.checkColumnHasValue(sessionRecordIndex, 2, "No");
+
+		super.checkColumnHasValue(sessionRecordIndex, 3, initTimePeriod);
 
 		super.clickOnListingRecord(sessionRecordIndex);
 		super.checkFormExists();
-		super.clickOnSubmit("Publish");
-		super.checkAlertExists(false);
+		super.checkInputBoxHasValue("title", title);
+		super.checkInputBoxHasValue("abstractSession", abstractSession);
+		super.checkInputBoxHasValue("isTheorySession", isTheorySession);
+		super.checkInputBoxHasValue("initTimePeriod", initTimePeriod);
+		super.checkInputBoxHasValue("finishTimePeriod", finishTimePeriod);
+		super.checkInputBoxHasValue("link", link);
+
+		final Session session = this.repository.findSessionByTitleAndAbstract(title, abstractSession);
+		final String param = String.format("id=%d", session.getId());
+
+		super.request("/assistant/session/publish", param);
+		super.checkPanicExists();
 
 		super.signOut();
 	}
@@ -92,31 +166,41 @@ public class AssistantSessionPublishTest extends TestHarness {
 				param = String.format("id=%d", session.getId());
 
 				super.checkLinkExists("Sign in");
-				super.request("/assistant/session/publish", param);
+				super.request("/assistant/tutorial/publish", param);
 				super.checkPanicExists();
 
 				super.signIn("administrator", "administrator");
-				super.request("/assistant/session/publish", param);
+				super.request("/assistant/tutorial/publish", param);
 				super.checkPanicExists();
 				super.signOut();
 
-				super.signIn("employer1", "employer1");
-				super.request("/assistant/session/publish", param);
+				super.signIn("assistant2", "assistant2");
+				super.request("/assistant/tutorial/publish", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("student1", "student1");
+				super.request("/assistant/tutorial/publish", param);
 				super.checkPanicExists();
 				super.signOut();
 
 				super.signIn("lecturer1", "lecturer1");
-				super.request("/assistant/session/publish", param);
+				super.request("/assistant/tutorial/publish", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("employer1", "employer1");
+				super.request("/assistant/tutorial/publish", param);
 				super.checkPanicExists();
 				super.signOut();
 
 				super.signIn("auditor1", "auditor1");
-				super.request("/assistant/session/update", param);
+				super.request("/assistant/tutorial/publish", param);
 				super.checkPanicExists();
 				super.signOut();
 
 				super.signIn("company1", "company1");
-				super.request("/assistant/session/publish", param);
+				super.request("/assistant/tutorial/publish", param);
 				super.checkPanicExists();
 				super.signOut();
 			}

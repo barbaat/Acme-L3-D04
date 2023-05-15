@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.entities.sessions.Session;
+import acme.entities.tutorials.Tutorial;
 import acme.testing.TestHarness;
 
 public class AssistantSessionUpdateTest extends TestHarness {
@@ -31,19 +32,23 @@ public class AssistantSessionUpdateTest extends TestHarness {
 
 		super.signIn("assistant1", "assistant1");
 
-		super.clickOnMenu("Assistant", "session List");
+		super.clickOnMenu("Assistant", "Tutorial List");
 		super.checkListingExists();
 		super.sortListing(0, "asc");
 
 		super.checkColumnHasValue(tutorialRecordIndex, 0, code);
 		super.clickOnListingRecord(tutorialRecordIndex);
-		super.clickOnButton("Sessions");
+		super.checkInputBoxHasValue("code", code);
+		super.checkNotSubmitExists("Publish");
 
+		super.clickOnButton("Sessions");
 		super.checkListingExists();
 		super.sortListing(0, "asc");
 
 		super.checkColumnHasValue(sessionRecordIndex, 0, title);
 		super.clickOnListingRecord(sessionRecordIndex);
+		super.checkSubmitExists("Update");
+
 		super.checkFormExists();
 		super.fillInputBoxIn("title", title);
 		super.fillInputBoxIn("abstractSession", abstractSession);
@@ -53,7 +58,22 @@ public class AssistantSessionUpdateTest extends TestHarness {
 		super.fillInputBoxIn("link", link);
 		super.clickOnSubmit("Update");
 
+		super.clickOnMenu("Assistant", "Tutorial List");
+		super.checkListingExists();
+		super.sortListing(0, "asc");
+
+		super.checkColumnHasValue(tutorialRecordIndex, 0, code);
+		super.clickOnListingRecord(tutorialRecordIndex);
+		super.checkInputBoxHasValue("code", code);
+
+		super.clickOnButton("Sessions");
+
+		super.checkListingExists();
+		super.sortListing(0, "asc");
+		super.checkColumnHasValue(sessionRecordIndex, 0, title);
+
 		super.clickOnListingRecord(sessionRecordIndex);
+
 		super.checkFormExists();
 		super.checkInputBoxHasValue("title", title);
 		super.checkInputBoxHasValue("abstractSession", abstractSession);
@@ -79,8 +99,9 @@ public class AssistantSessionUpdateTest extends TestHarness {
 
 		super.checkColumnHasValue(tutorialRecordIndex, 0, code);
 		super.clickOnListingRecord(tutorialRecordIndex);
-		super.clickOnButton("Sessions");
+		super.checkInputBoxHasValue("code", code);
 
+		super.clickOnButton("Sessions");
 		super.checkListingExists();
 		super.sortListing(0, "asc");
 
@@ -93,9 +114,15 @@ public class AssistantSessionUpdateTest extends TestHarness {
 		super.fillInputBoxIn("initTimePeriod", initTimePeriod);
 		super.fillInputBoxIn("finishTimePeriod", finishTimePeriod);
 		super.fillInputBoxIn("link", link);
-		super.clickOnSubmit("Update");
 
-		super.checkErrorsExist();
+		final String sessionIdString = super.getCurrentQuery();
+		final int sessionId = Integer.parseInt(sessionIdString.substring(sessionIdString.indexOf("=") + 1));
+		final String param = String.format("id=%d", sessionId);
+
+		super.checkNotButtonExists("Update");
+
+		super.request("/assistant/session/update", param);
+		super.checkPanicExists();
 
 		super.signOut();
 	}
@@ -105,41 +132,53 @@ public class AssistantSessionUpdateTest extends TestHarness {
 		// HINT: this test tries to update a session for a session as a principal without 
 		// HINT: the "Assistant" role.
 
-		Collection<Session> sessions;
 		String param;
+		final Collection<Tutorial> tutorials = this.repository.findManyTutorialsByAssistantUsername("assistant1");
+		for (final Tutorial tutorial : tutorials) {
+			final Collection<Session> sessions = this.repository.findManySessionsByTutorialId(tutorial.getId());
+			for (final Session session : sessions)
+				if (!session.getTutorial().isDraftMode() && session.isDraftMode()) {
+					param = String.format("id=%d", session.getId());
 
-		sessions = this.repository.findManySessionsByAssistantUsername("assistant1");
-		for (final Session session : sessions) {
-			param = String.format("id=%d", session.getId());
+					super.checkLinkExists("Sign in");
+					super.request("/assistant/session/update", param);
+					super.checkPanicExists();
 
-			super.checkLinkExists("Sign in");
-			super.request("/assistant/session/update", param);
-			super.checkPanicExists();
+					super.signIn("administrator", "administrator");
+					super.request("/assistant/assistant/update", param);
+					super.checkPanicExists();
+					super.signOut();
 
-			super.signIn("administrator", "administrator");
-			super.request("/assistant/session/update", param);
-			super.checkPanicExists();
-			super.signOut();
+					super.signIn("assistant2", "assistant2");
+					super.request("/assistant/assistant/update", param);
+					super.checkPanicExists();
+					super.signOut();
 
-			super.signIn("employer1", "employer1");
-			super.request("/assistant/session/update", param);
-			super.checkPanicExists();
-			super.signOut();
+					super.signIn("student1", "student1");
+					super.request("/assistant/assistant/update", param);
+					super.checkPanicExists();
+					super.signOut();
 
-			super.signIn("lecturer1", "lecturer1");
-			super.request("/assistant/session/update", param);
-			super.checkPanicExists();
-			super.signOut();
+					super.signIn("lecturer1", "lecturer1");
+					super.request("/assistant/assistant/update", param);
+					super.checkPanicExists();
+					super.signOut();
 
-			super.signIn("auditor1", "auditor1");
-			super.request("/assistant/session/update", param);
-			super.checkPanicExists();
-			super.signOut();
+					super.signIn("employer1", "employer1");
+					super.request("/assistant/assistant/update", param);
+					super.checkPanicExists();
+					super.signOut();
 
-			super.signIn("company1", "company1");
-			super.request("/assistant/session/update", param);
-			super.checkPanicExists();
-			super.signOut();
+					super.signIn("auditor1", "auditor1");
+					super.request("/assistant/assistant/update", param);
+					super.checkPanicExists();
+					super.signOut();
+
+					super.signIn("company1", "company1");
+					super.request("/assistant/assistant/update", param);
+					super.checkPanicExists();
+					super.signOut();
+				}
 		}
 	}
 

@@ -48,7 +48,7 @@ public class AssistantSessionUpdateService extends AbstractService<Assistant, Se
 		sessionId = super.getRequest().getData("id", int.class);
 		tutorial = this.repository.findTutorialBySessionId(sessionId);
 		session = this.repository.findSessionById(sessionId);
-		status = tutorial != null && super.getRequest().getPrincipal().hasRole(tutorial.getAssistant()) && session.isDraftMode();
+		status = session != null && !tutorial.isDraftMode() && super.getRequest().getPrincipal().hasRole(tutorial.getAssistant()) && session.isDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}
