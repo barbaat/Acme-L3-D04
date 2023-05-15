@@ -1,4 +1,6 @@
 lectureIndex,title,abstractLecture,body,estimatedLearningTimeInHours,lectureType,link,draftMode
 0,AAAAA,Introduction to Programming,This course will introduce you to the basics of programming,90.00,THEORY,,Yes
 1,BBBBB,Introduction to Math,This course will teach you how to program in Java,60.00,HANDS_ON,https://www.us.es/abc123,Yes
-2,CCCCCC,Introduction to Programming,This course will teach you how to program in Java,30.00,THEORY,,Yes
+2,BBBBÑÑñ,Introduction to Math,This course will teach you how to program in Java,60.00,HANDS_ON,https://www.us.es/abc123,Yes
+1,AAAAA こんにちは,Introduction to Programming,This course will teach you how to program in Java,30.00,THEORY,,Yes
+4,BBBBÑÑñ عبارة,Introduction to Programming,This course will teach you how to program in Java,30.00,THEORY,,Yes

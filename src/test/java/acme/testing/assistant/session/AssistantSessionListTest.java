@@ -22,12 +22,38 @@ public class AssistantSessionListTest extends TestHarness {
 
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/assistant/session/list-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
+	@CsvFileSource(resources = "/assistant/session/list-positive1.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int tutorialRecordIndex, final String code, final int sessionRecordIndex, final String title, final String abstractSession, final String isTheorySession, final String initTimePeriod) {
 		// HINT: this test authenticates as an assistant, then lists his or her tutorials, 
 		// HINT+ selects one of them, and check that it has the expected sessions.
 
 		super.signIn("assistant1", "assistant1");
+
+		super.clickOnMenu("Assistant", "Tutorial List");
+		super.checkListingExists();
+		super.sortListing(0, "asc");
+
+		super.checkColumnHasValue(tutorialRecordIndex, 0, code);
+		super.clickOnListingRecord(tutorialRecordIndex);
+		super.checkInputBoxHasValue("code", code);
+		super.clickOnButton("Sessions");
+
+		super.checkListingExists();
+		super.checkColumnHasValue(sessionRecordIndex, 0, title);
+		super.checkColumnHasValue(sessionRecordIndex, 1, abstractSession);
+		super.checkColumnHasValue(sessionRecordIndex, 2, isTheorySession);
+		super.checkColumnHasValue(sessionRecordIndex, 3, initTimePeriod);
+
+		super.signOut();
+	}
+
+	@ParameterizedTest
+	@CsvFileSource(resources = "/assistant/session/list-positive2.csv", encoding = "utf-8", numLinesToSkip = 1)
+	public void test101Positive(final int tutorialRecordIndex, final String code, final int sessionRecordIndex, final String title, final String abstractSession, final String isTheorySession, final String initTimePeriod) {
+		// HINT: this test authenticates as an assistant, then lists his or her tutorials, 
+		// HINT+ selects one of them, and check that it has the expected sessions.
+
+		super.signIn("assistant2", "assistant2");
 
 		super.clickOnMenu("Assistant", "Tutorial List");
 		super.checkListingExists();

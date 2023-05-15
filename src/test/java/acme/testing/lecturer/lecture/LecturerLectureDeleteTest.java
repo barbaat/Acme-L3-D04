@@ -41,8 +41,10 @@ public class LecturerLectureDeleteTest extends TestHarness {
 		super.checkInputBoxHasValue("estimatedLearningTimeInHours", estimatedLearningTimeInHours);
 		super.checkInputBoxHasValue("lectureType", lectureType);
 		super.checkInputBoxHasValue("link", link);
-		final Lecture lecture = this.repository.findLectureByTitle(title);
-		final String param = String.format("id=%d", lecture.getId());
+
+		final String lectureIdString = super.getCurrentQuery();
+		final int lectureId = Integer.parseInt(lectureIdString.substring(lectureIdString.indexOf("=") + 1));
+		final String param = String.format("id=%d", lectureId);
 		super.clickOnSubmit("Delete a lecture");
 		super.checkNotErrorsExist();
 
@@ -83,7 +85,7 @@ public class LecturerLectureDeleteTest extends TestHarness {
 		Collection<Lecture> lectures;
 		String param;
 
-		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer1");
+		lectures = this.repository.findManyLecturesByLecturerUsername("lecturer2");
 		for (final Lecture leccion : lectures) {
 			param = String.format("id=%d", leccion.getId());
 
@@ -96,7 +98,7 @@ public class LecturerLectureDeleteTest extends TestHarness {
 			super.checkPanicExists();
 			super.signOut();
 
-			super.signIn("lecturer2", "lecturer2");
+			super.signIn("lecturer1", "lecturer1");
 			super.request("/lecturer/lecture/delete", param);
 			super.checkPanicExists();
 			super.signOut();

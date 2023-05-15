@@ -46,6 +46,8 @@ public class AssistantTutorialCreateTest extends TestHarness {
 		super.checkInputBoxHasValue("course", course);
 		super.checkInputBoxHasValue("estimatedTotalTime", estimatedTotalTime);
 
+		super.checkSubmitExists("Publish");
+
 		super.clickOnButton("Sessions");
 
 		super.checkListingExists();
@@ -92,12 +94,17 @@ public class AssistantTutorialCreateTest extends TestHarness {
 		super.checkPanicExists();
 		super.signOut();
 
-		super.signIn("employer1", "employer1");
+		super.signIn("student1", "student1");
 		super.request("/assistant/tutorial/create");
 		super.checkPanicExists();
 		super.signOut();
 
 		super.signIn("lecturer1", "lecturer1");
+		super.request("/assistant/tutorial/create");
+		super.checkPanicExists();
+		super.signOut();
+
+		super.signIn("employer1", "employer1");
 		super.request("/assistant/tutorial/create");
 		super.checkPanicExists();
 		super.signOut();

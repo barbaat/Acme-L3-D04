@@ -18,4 +18,10 @@ public interface AssistantSessionTestRepository extends AbstractRepository {
 	@Query("select s from Session s where s.tutorial.assistant.userAccount.username = :username")
 	Collection<Session> findManySessionsByAssistantUsername(@Param("username") String username);
 
+	@Query("select s from Session s where s.tutorial.id = :id")
+	Collection<Session> findManySessionsByTutorialId(@Param("id") int id);
+
+	@Query("select s from Session s where s.title = :title AND s.abstractSession = :abstractSession")
+	Session findSessionByTitleAndAbstract(@Param("title") String title, @Param("abstractSession") String abstractSession);
+
 }

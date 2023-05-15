@@ -1,5 +1,6 @@
 key,code,title,abstractTutorial,goals,estimatedTotalTime,draftMode,key:assistant,key:course
-tutorial1,ABC123,Title 1,Abstract 1,Goals 1,5.00,false,assistant1,course1
-tutorial2,ABC456,Title 2,Abstract 2,Goals 2,6.00,false,assistant1,course1
-tutorial3,ABC789,Title 3,Abstract 3,Goals 3,2.50,false,assistant2,course2
-tutorial4,ABC999,Title 4,Abstract 4,Goals 4,50.00,false,assistant2,course2
+tutorial1,ABC123,Title 1,Abstract 1,Goals 1,5.00,true,assistant1,course1
+tutorial2,ABC456,Title 2,Abstract 2,Goals 2,6.00,true,assistant1,course1
+tutorial3,ZZC456,Title 3,Abstract 3,Goals 3,6.00,false,assistant1,course7
+tutorial4,ABC789,Title 4,Abstract 4,Goals 4,2.50,false,assistant2,course7
+tutorial5,ABC999,Title 5,Abstract 5,Goals 5,50.00,false,assistant2,course7
