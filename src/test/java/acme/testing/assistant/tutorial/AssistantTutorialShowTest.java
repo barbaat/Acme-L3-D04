@@ -22,12 +22,35 @@ public class AssistantTutorialShowTest extends TestHarness {
 
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/assistant/tutorial/show-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
+	@CsvFileSource(resources = "/assistant/tutorial/show-positive1.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int recordIndex, final String code, final String title, final String abstractTutorial, final String goals, final String estimatedTotalTime, final String course) {
 		// HINT: this test signs in as an assistant, lists the tutorials, click on  
 		// HINT+ one of them, and checks that the form has the expected data.
 
 		super.signIn("assistant1", "assistant1");
+
+		super.clickOnMenu("Assistant", "Tutorial List");
+		super.sortListing(0, "asc");
+		super.clickOnListingRecord(recordIndex);
+		super.checkFormExists();
+
+		super.checkInputBoxHasValue("code", code);
+		super.checkInputBoxHasValue("title", title);
+		super.checkInputBoxHasValue("abstractTutorial", abstractTutorial);
+		super.checkInputBoxHasValue("goals", goals);
+		super.checkInputBoxHasValue("estimatedTotalTime", estimatedTotalTime);
+		super.checkInputBoxHasValue("course", course);
+
+		super.signOut();
+	}
+
+	@ParameterizedTest
+	@CsvFileSource(resources = "/assistant/tutorial/show-positive2.csv", encoding = "utf-8", numLinesToSkip = 1)
+	public void test101Positive(final int recordIndex, final String code, final String title, final String abstractTutorial, final String goals, final String estimatedTotalTime, final String course) {
+		// HINT: this test signs in as an assistant, lists the tutorials, click on  
+		// HINT+ one of them, and checks that the form has the expected data.
+
+		super.signIn("assistant2", "assistant2");
 
 		super.clickOnMenu("Assistant", "Tutorial List");
 		super.sortListing(0, "asc");
@@ -71,12 +94,22 @@ public class AssistantTutorialShowTest extends TestHarness {
 				super.checkPanicExists();
 				super.signOut();
 
-				super.signIn("employer1", "employer1");
+				super.signIn("assistant2", "assistant2");
+				super.request("/assistant/tutorial/show", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("student1", "student1");
 				super.request("/assistant/tutorial/show", param);
 				super.checkPanicExists();
 				super.signOut();
 
 				super.signIn("lecturer1", "lecturer1");
+				super.request("/assistant/tutorial/show", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("employer1", "employer1");
 				super.request("/assistant/tutorial/show", param);
 				super.checkPanicExists();
 				super.signOut();

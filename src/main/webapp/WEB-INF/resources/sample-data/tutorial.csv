@@ -1,4 +1,6 @@
 key,code,title,abstractTutorial,goals,estimatedTotalTime,draftMode,key:assistant,key:course
-tutorial1,ABC123,Matrix texture,abstract_de_prueba,Learning how to put the matrix texture in blender,5.0,false,assistant1,course1
-tutorial2,ABC456,Matrix 2,abstract_de_prueba1,jajaj,6.0,false,assistant1,course1
-tutorial3,ABC789,Matrix 3,abstract_de_prueba2,xd,2.5,false,assistant2,course1
+tutorial1,ABC123,Title 1,Abstract 1,Goals 1,5.00,true,assistant1,course1
+tutorial2,ABC456,Title 2,Abstract 2,Goals 2,6.00,true,assistant1,course1
+tutorial3,ZZC456,Title 3,Abstract 3,Goals 3,6.00,false,assistant1,course7
+tutorial4,ABC789,Title 4,Abstract 4,Goals 4,2.50,false,assistant2,course7
+tutorial5,ABC999,Title 5,Abstract 5,Goals 5,50.00,false,assistant2,course7

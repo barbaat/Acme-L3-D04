@@ -18,4 +18,7 @@ public interface AssistantTutorialTestRepository extends AbstractRepository {
 	@Query("select s from Session s where s.tutorial.assistant.userAccount.username = :username")
 	Collection<Session> findManySessionsByAssistantUsername(@Param("username") String username);
 
+	@Query("select t from Tutorial t where t.code = :code")
+	Tutorial findTutorialByCode(@Param("code") String code);
+
 }

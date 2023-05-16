@@ -58,7 +58,7 @@ public class AssistantSessionDeleteService extends AbstractService<Assistant, Se
 		sessionId = super.getRequest().getData("id", int.class);
 		session = this.repository.findSessionById(sessionId);
 		assistant = session == null ? null : session.getTutorial().getAssistant();
-		status = session != null && session.getTutorial().isDraftMode() && super.getRequest().getPrincipal().hasRole(assistant);
+		status = session != null && !session.getTutorial().isDraftMode() && session.isDraftMode() && super.getRequest().getPrincipal().hasRole(assistant);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -78,13 +78,7 @@ public class AssistantSessionDeleteService extends AbstractService<Assistant, Se
 	public void bind(final Session object) {
 		assert object != null;
 
-		int tutorialId;
-		Tutorial tutorial;
-		tutorialId = super.getRequest().getData("tutorial", int.class);
-		tutorial = this.repository.findTutorialById(tutorialId);
-
 		super.bind(object, "title", "abstractSession", "isTheorySession", "initTimePeriod", "finishTimePeriod", "link");
-		object.setTutorial(tutorial);
 	}
 
 	@Override

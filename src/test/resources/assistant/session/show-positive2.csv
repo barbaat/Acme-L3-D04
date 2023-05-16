@@ -1,0 +1,5 @@
+tutorialRecordIndex,code,sessionRecordIndex,title,abstractSession,isTheorySession,initTimePeriod,finishTimePeriod,link
+0,ABC789,0,Session 789.1,Abstract 9,false,2030/10/11 21:00,2030/10/11 22:00,
+0,ABC789,1,Session 789.2,Abstract 10,true,2035/12/11 19:00,2035/12/11 20:00,
+0,ABC789,2,Session 789.3,Abstract 11,true,2030/12/11 12:00,2030/12/11 14:00,
+1,ABC999,0,Session 999.1,Abstract 12,true,2022/07/30 03:00,2022/07/30 08:00,

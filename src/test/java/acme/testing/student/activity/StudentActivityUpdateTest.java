@@ -1,11 +1,15 @@
 
 package acme.testing.student.activity;
 
+import java.util.Collection;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acme.entities.activities.Activity;
+import acme.entities.enrolments.Enrolment;
 import acme.testing.TestHarness;
 
 public class StudentActivityUpdateTest extends TestHarness {
@@ -106,33 +110,44 @@ public class StudentActivityUpdateTest extends TestHarness {
 	@Test
 	public void test300Hacking() {
 
-		super.checkLinkExists("Sign in");
-		super.request("/student/activity/update");
-		super.checkPanicExists();
+		String param;
+		final Collection<Enrolment> enrolments = this.repository.findManyEnrolmentsByStudentUsername("student1");
 
-		super.signIn("administrator", "administrator");
-		super.request("/student/activity/update");
-		super.checkPanicExists();
-		super.signOut();
+		for (final Enrolment enrolment : enrolments) {
+			final Collection<Activity> activities = this.repository.findActivitiesByEnrolmentId(enrolment.getId());
+			for (final Activity activity : activities)
+				if (!activity.getEnrolment().isDraftMode()) {
+					param = String.format("id=%d", activity.getEnrolment().getId());
 
-		super.signIn("auditor1", "auditor1");
-		super.request("/student/activity/update");
-		super.checkPanicExists();
-		super.signOut();
+					super.checkLinkExists("Sign in");
+					super.request("/student/activity/update", param);
+					super.checkPanicExists();
 
-		super.signIn("lecturer1", "lecturer1");
-		super.request("/student/activity/update");
-		super.checkPanicExists();
-		super.signOut();
+					super.signIn("administrator", "administrator");
+					super.request("/student/activity/update", param);
+					super.checkPanicExists();
+					super.signOut();
 
-		super.signIn("company1", "company1");
-		super.request("/student/activity/update");
-		super.checkPanicExists();
-		super.signOut();
+					super.signIn("auditor1", "auditor1");
+					super.request("/student/activity/update", param);
+					super.checkPanicExists();
+					super.signOut();
 
-		super.signIn("assistant1", "assistant1");
-		super.request("/student/activity/update");
-		super.checkPanicExists();
-		super.signOut();
+					super.signIn("lecturer1", "lecturer1");
+					super.request("/student/activity/update", param);
+					super.checkPanicExists();
+					super.signOut();
+
+					super.signIn("company1", "company1");
+					super.request("/student/activity/update", param);
+					super.checkPanicExists();
+					super.signOut();
+
+					super.signIn("assistant1", "assistant1");
+					super.request("/student/activity/update", param);
+					super.checkPanicExists();
+					super.signOut();
+				}
+		}
 	}
 }
