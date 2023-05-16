@@ -7,8 +7,6 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.components.SystemConfigurationService;
-import acme.entities.practicums.Practicum;
 import acme.entities.sessions.PracticumSession;
 import acme.framework.components.models.Tuple;
 import acme.framework.helpers.MomentHelper;
@@ -21,10 +19,7 @@ public class CompanyPracticumSessionUpdateService extends AbstractService<Compan
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected CompanyPracticumSessionRepository	psRepository;
-
-	@Autowired
-	protected SystemConfigurationService		scService;
+	protected CompanyPracticumSessionRepository psRepository;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -39,25 +34,11 @@ public class CompanyPracticumSessionUpdateService extends AbstractService<Compan
 
 	@Override
 	public void authorise() {
-		//		boolean status;
-		//		int sessionId;
-		//		PracticumSession session;
-		//		Company company;
-		//
-		//		sessionId = super.getRequest().getData("id", int.class);
-		//		session = this.psRepository.findPracticumSessionById(sessionId);
-		//		company = session == null ? null : session.getPracticum().getCompany();
-		//		status = session != null && session.isDraftMode() && super.getRequest().getPrincipal().hasRole(company);
-		//
-		//		super.getResponse().setAuthorised(status);
 
-		int pId;
-		Practicum practicum;
-
-		pId = super.getRequest().getData("id", int.class);
-		practicum = this.psRepository.findPracticumByPracticumSessionId(pId);
+		final int id = super.getRequest().getData("id", int.class);
+		final PracticumSession object = this.psRepository.findPracticumSessionById(id);
 		final int userAccountId = super.getRequest().getPrincipal().getAccountId();
-		super.getResponse().setAuthorised(practicum.getCompany().getUserAccount().getId() == userAccountId && practicum.isDraftMode());
+		super.getResponse().setAuthorised(object.getPracticum().getCompany().getUserAccount().getId() == userAccountId && object.getPracticum().isDraftMode());
 
 	}
 
@@ -75,18 +56,6 @@ public class CompanyPracticumSessionUpdateService extends AbstractService<Compan
 
 	@Override
 	public void bind(final PracticumSession object) {
-		//		assert object != null;
-		//
-		//		int practicumId;
-		//		Practicum practicum;
-		//
-		//		practicumId = super.getRequest().getData("practicum", int.class);
-		//		practicum = this.psRepository.findPracticumById(practicumId);
-		//
-		//		super.bind(object, "title", "abstract$", "startPeriod", "finishPeriod", "optionalLink");
-		//
-		//		object.setPracticum(practicum);
-
 		assert object != null;
 		super.bind(object, "title", "abstract$", "startPeriod", "finishPeriod", "optionalLink");
 
@@ -108,20 +77,6 @@ public class CompanyPracticumSessionUpdateService extends AbstractService<Compan
 			super.state(MomentHelper.isAfterOrEqual(object.getFinishPeriod(), minFinishPeriod), "finishPeriod", "company.practicum-session.validation.finishPeriod.error.WeekLong");
 		}
 
-		//Practicum Validation: si quito esto, el error de null pointer exception al poner "---" se quita, pero sí puedo seleccionar una practica publicada por lo que eso no se puede.
-		//		final Collection<Practicum> practica;
-		//		final SelectChoices choices;
-		//		final int companyId = super.getRequest().getPrincipal().getActiveRoleId();
-		//
-		//		practica = this.psRepository.findManyPrivatePracticaByCompanyId(companyId);
-		//		choices = SelectChoices.from(practica, "code", object.getPracticum());
-		//
-		//		final int selectedId = Integer.parseInt(choices.getSelected().getKey());
-		//		final Practicum selectedPracticum = this.psRepository.findPracticumById(selectedId);
-		//
-		//		final boolean valid = selectedPracticum.isDraftMode();
-		//		super.state(valid, "practicum", "company.practicum-session.validation.practicum.error.Published");
-
 	}
 
 	@Override
@@ -133,30 +88,13 @@ public class CompanyPracticumSessionUpdateService extends AbstractService<Compan
 
 	@Override
 	public void unbind(final PracticumSession object) {
-		//		assert object != null;
-		//		final Collection<Practicum> practica;
-		//		final SelectChoices choices;
-		//		final int companyId = super.getRequest().getPrincipal().getActiveRoleId();
-		//
-		//		practica = this.psRepository.findManyPrivatePracticaByCompanyId(companyId);
-		//		choices = SelectChoices.from(practica, "code", object.getPracticum());
-		//		Tuple tuple;
-		//
-		//		tuple = super.unbind(object, "title", "abstract$", "startPeriod", "finishPeriod", "draftMode", "exceptional", "optionalLink");
-		//		tuple.put("practicum", choices.getSelected().getKey());
-		//		tuple.put("practica", choices);
-		//
-		//		super.getResponse().setData(tuple);
 
 		assert object != null;
-		final int masterId = super.getRequest().getData("masterId", int.class);
-		final Practicum practicum = this.psRepository.findPracticumById(masterId);
-		final Tuple tuple = super.unbind(object, "title", "abstract$", "optionalLink");
-		final String lang = super.getRequest().getLocale().getLanguage();
-		tuple.put("startPeriod", this.scService.translateDate(object.getStartPeriod(), lang));
-		tuple.put("finishPeriod", this.scService.translateDate(object.getFinishPeriod(), lang));
-		tuple.put("masterId", masterId);
-		tuple.put("draftMode", practicum.isDraftMode());
+
+		final Tuple tuple = super.unbind(object, "title", "abstract$", "startPeriod", "finishPeriod", "optionalLink");
+		tuple.put("id", object.getId());
+		tuple.put("draftMode", object.getPracticum().isDraftMode());
 		super.getResponse().setData(tuple);
+
 	}
 }
