@@ -31,6 +31,7 @@ company.practicum-session.form.button.publish = Publish
 
 company.practicum-session.form.label.confirmation = Confirm exceptional practicum session
 company.practicum-session.form.message.exceptional = THIS IS AN EXCEPTIONAL SESSION!
+company.practicum-session.list.label.exceptional = Exceptional practicum session
 
 company.practicum-session.validation.startPeriod.error.WeekAhead = Error: The Start Date must be at least one week ahead
 company.practicum-session.validation.finishPeriod.error.WeekLong = Error: The Finish Date must be at least one week ahead from the Start Date

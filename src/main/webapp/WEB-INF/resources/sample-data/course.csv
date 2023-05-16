@@ -4,7 +4,7 @@ course2,lecturer1,ABC128,Introduction to Java,This course will teach you how to 
 course3,lecturer1,AB123,Introduction to Rust,This course will teach you how to program in Rust.,EUR 20.00,https://www.us.es/abc123,true
 course4,lecturer2,ABC000,Introduction to Haskell,This course will teach you how to program in Haskell.,EUR 80.00,https://www.us.es/abc123,true
 course5,lecturer2,ABC124,Introduction to C++,This course will teach you how to program in C++.,EUR 60.00,https://www.us.es/abc123,true
-course6,lecturer2,ABC146,Introduction to Javascript,This course will teach you how to program in Javascript.,EUR 50.00,https://www.us.es/abc123,true
+course6,lecturer2,ABC146,Introduction to Javascript,This course will teach you how to program in Javascript.,EUR 50.00,https://www.us.es/abc123,false
 course7,lecturer1,ABC168,Introduction to HTML,This course will teach you how to program in HTML.,EUR 100.00,https://www.us.es/abc123,false
 course8,lecturer1,ABC289, Introducion to R,This course will teach you how to program in R,EUR 100.00,,true
 course9,lecturer1,ABC302, Introducion to CSS,This course will teach you how to program in CSS,EUR 200.00,,true

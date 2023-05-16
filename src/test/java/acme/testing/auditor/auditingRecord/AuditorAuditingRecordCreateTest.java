@@ -21,6 +21,8 @@ public class AuditorAuditingRecordCreateTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/auditingRecord/create-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String startTime, final String finishTime, final String mark, final String moreInfo) {
+		//Compruebo que puedo crear correctamente un auditingRecord
+
 		super.signIn("auditor1", "auditor1");
 
 		super.clickOnMenu("Auditor", "List of audits");
@@ -73,6 +75,7 @@ public class AuditorAuditingRecordCreateTest extends TestHarness {
 	@CsvFileSource(resources = "/auditor/auditingRecord/create-positive-exceptional.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100PositiveExceptional(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String startTime, final String finishTime, final String mark, final String moreInfo,
 		final String confirmation) {
+		//Compruebo que puedo crear correctamente un correction record de un audit publicado
 
 		super.signIn("auditor1", "auditor1");
 
@@ -109,6 +112,7 @@ public class AuditorAuditingRecordCreateTest extends TestHarness {
 
 		super.checkListingExists();
 		super.sortListing(0, "asc");
+		super.checkColumnHasValue(auditingRecordIndex, 2, "*");
 
 		super.clickOnListingRecord(auditingRecordIndex);
 
@@ -125,6 +129,7 @@ public class AuditorAuditingRecordCreateTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/auditingRecord/create-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test200Negative(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String startTime, final String finishTime, final String mark, final String moreInfo) {
+		//Compruebo que no puedo crear un auditingRecord con datos vacíos o erróneos
 
 		super.signIn("auditor1", "auditor1");
 
@@ -155,6 +160,7 @@ public class AuditorAuditingRecordCreateTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/auditingRecord/create-negative-exceptional.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test200NegativeExceptional(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String startTime, final String finishTime, final String mark, final String moreInfo) {
+		//Compruebo que no puedo crear un correction record con datos vacíos o erróneos
 
 		super.signIn("auditor1", "auditor1");
 
@@ -184,6 +190,7 @@ public class AuditorAuditingRecordCreateTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
+		//Compruebo que solo un auditor puede crear un auditingRecord
 
 		super.checkLinkExists("Sign in");
 		super.request("/auditor/auditingRecord/create");
@@ -198,5 +205,21 @@ public class AuditorAuditingRecordCreateTest extends TestHarness {
 		super.request("/auditor/auditingRecord/create");
 		super.checkPanicExists();
 		super.signOut();
+
+		super.signIn("student1", "student1");
+		super.request("/auditor/auditingRecord/create");
+		super.checkPanicExists();
+		super.signOut();
+
+		super.signIn("company1", "company1");
+		super.request("/auditor/auditingRecord/create");
+		super.checkPanicExists();
+		super.signOut();
+
+		super.signIn("assistant1", "assistant1");
+		super.request("/auditor/auditingRecord/create");
+		super.checkPanicExists();
+		super.signOut();
+
 	}
 }
