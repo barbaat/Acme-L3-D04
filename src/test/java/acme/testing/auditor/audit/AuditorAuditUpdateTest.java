@@ -102,7 +102,7 @@ public class AuditorAuditUpdateTest extends TestHarness {
 
 		super.checkNotButtonExists("Update");
 
-		super.request("/auditor/auditingRecord/update", param);
+		super.request("/auditor/audit/update", param);
 		super.checkPanicExists();
 
 		super.signOut();

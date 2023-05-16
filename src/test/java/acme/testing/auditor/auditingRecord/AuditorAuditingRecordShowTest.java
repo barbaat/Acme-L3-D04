@@ -25,8 +25,7 @@ public class AuditorAuditingRecordShowTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/auditingRecord/show-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String startTime, final String finishTime, final String mark, final String moreInfo) {
-		// HINT: this test signs in as an auditor, lists his or her audits, selects
-		// HINT+ one of them and checks that it's as expected.
+		//Compruebo que puedo visualizar un auditingRecord correctamente
 
 		super.signIn("auditor1", "auditor1");
 
@@ -61,14 +60,14 @@ public class AuditorAuditingRecordShowTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
+		//Compruebo que solo auditor1 puede ver los auditingRecords de sus audits no publicadas
 
-		String param;
 		final Collection<Audit> audits = this.repository.findAuditsByAuditorUsername("auditor1");
 		for (final Audit audit : audits) {
 			final Collection<AuditingRecord> auditingRecords = this.repository.findAuditingRecordsByAuditId(audit.getId());
 			for (final AuditingRecord auditingRecord : auditingRecords)
 				if (auditingRecord.getAudit().isDraftMode()) {
-					param = String.format("id=%d", auditingRecord.getAudit().getId());
+					final String param = String.format("id=%d", auditingRecord.getAudit().getId());
 
 					//Si no estoy autenticado
 					super.checkLinkExists("Sign in");
@@ -88,6 +87,16 @@ public class AuditorAuditingRecordShowTest extends TestHarness {
 					super.signOut();
 
 					super.signIn("student1", "student1");
+					super.request("/auditor/auditingRecord/show", param);
+					super.checkPanicExists();
+					super.signOut();
+
+					super.signIn("assistant1", "assistant1");
+					super.request("/auditor/auditingRecord/show", param);
+					super.checkPanicExists();
+					super.signOut();
+
+					super.signIn("company1", "company1");
 					super.request("/auditor/auditingRecord/show", param);
 					super.checkPanicExists();
 					super.signOut();

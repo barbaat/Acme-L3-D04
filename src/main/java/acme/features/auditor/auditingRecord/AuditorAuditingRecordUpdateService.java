@@ -6,10 +6,8 @@ import java.time.temporal.ChronoUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.components.SystemConfigurationService;
 import acme.entities.auditingRecords.AuditingRecord;
 import acme.entities.auditingRecords.TypeMark;
-import acme.entities.audits.Audit;
 import acme.framework.components.jsp.SelectChoices;
 import acme.framework.components.models.Tuple;
 import acme.framework.helpers.MomentHelper;
@@ -20,10 +18,7 @@ import acme.roles.Auditor;
 public class AuditorAuditingRecordUpdateService extends AbstractService<Auditor, AuditingRecord> {
 
 	@Autowired
-	protected AuditorAuditingRecordRepository	repo;
-
-	@Autowired
-	protected SystemConfigurationService		scService;
+	protected AuditorAuditingRecordRepository repo;
 
 
 	@Override
@@ -35,9 +30,9 @@ public class AuditorAuditingRecordUpdateService extends AbstractService<Auditor,
 	@Override
 	public void authorise() {
 		final int id = super.getRequest().getData("id", int.class);
-		final Audit object = this.repo.findAuditByAuditingRecordId(id);
+		final AuditingRecord object = this.repo.findAuditingRecordById(id);
 		final int userAccountId = super.getRequest().getPrincipal().getAccountId();
-		super.getResponse().setAuthorised(object.getAuditor().getUserAccount().getId() == userAccountId && object.isDraftMode());
+		super.getResponse().setAuthorised(object.getAudit().getAuditor().getUserAccount().getId() == userAccountId && object.getAudit().isDraftMode());
 	}
 
 	@Override
@@ -71,17 +66,17 @@ public class AuditorAuditingRecordUpdateService extends AbstractService<Auditor,
 	@Override
 	public void unbind(final AuditingRecord object) {
 		assert object != null;
-		final int masterId = super.getRequest().getData("masterId", int.class);
-		final Audit audit = this.repo.findAuditById(masterId);
-		final Tuple tuple = super.unbind(object, "subject", "assessment", "mark", "moreInfo");
-		final String lang = super.getRequest().getLocale().getLanguage();
-		tuple.put("startTime", this.scService.translateDate(object.getStartTime(), lang));
-		tuple.put("finishTime", this.scService.translateDate(object.getFinishTime(), lang));
+		//		final int id = super.getRequest().getData("id", int.class);
+		//		final Audit audit = this.repo.findAuditById(id);
+		final Tuple tuple = super.unbind(object, "subject", "assessment", "startTime", "finishTime", "mark", "moreInfo");
 		final SelectChoices choices = SelectChoices.from(TypeMark.class, object.getMark());
 		tuple.put("mark", choices.getSelected().getKey());
 		tuple.put("marks", choices);
-		tuple.put("masterId", masterId);
-		tuple.put("draftMode", audit.isDraftMode());
+		//		tuple.put("id", id);
+		//		tuple.put("draftMode", audit.isDraftMode());
+		//		
+		tuple.put("id", object.getId());
+		tuple.put("draftMode", object.getAudit().isDraftMode());
 		super.getResponse().setData(tuple);
 	}
 }
