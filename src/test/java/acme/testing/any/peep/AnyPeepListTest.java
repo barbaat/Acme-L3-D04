@@ -25,7 +25,7 @@ public class AnyPeepListTest extends TestHarness {
 
 		super.checkColumnHasValue(recordIndex, 0, moment);
 		super.checkColumnHasValue(recordIndex, 1, title);
-		super.checkColumnHasValue(recordIndex, 2, title);
+		super.checkColumnHasValue(recordIndex, 2, nick);
 		super.checkColumnHasValue(recordIndex, 3, message);
 
 		// Comprobamos que logueandonos en la aplicacion tambien nos lo muestra
@@ -37,7 +37,7 @@ public class AnyPeepListTest extends TestHarness {
 
 		super.checkColumnHasValue(recordIndex, 0, moment);
 		super.checkColumnHasValue(recordIndex, 1, title);
-		super.checkColumnHasValue(recordIndex, 2, title);
+		super.checkColumnHasValue(recordIndex, 2, nick);
 		super.checkColumnHasValue(recordIndex, 3, message);
 		super.signOut();
 
