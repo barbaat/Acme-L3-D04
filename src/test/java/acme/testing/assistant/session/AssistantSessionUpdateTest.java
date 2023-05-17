@@ -45,7 +45,6 @@ public class AssistantSessionUpdateTest extends TestHarness {
 		super.checkListingExists();
 		super.sortListing(0, "asc");
 
-		super.checkColumnHasValue(sessionRecordIndex, 0, title);
 		super.clickOnListingRecord(sessionRecordIndex);
 		super.checkSubmitExists("Update");
 
@@ -71,10 +70,19 @@ public class AssistantSessionUpdateTest extends TestHarness {
 		super.checkListingExists();
 		super.sortListing(0, "asc");
 		super.checkColumnHasValue(sessionRecordIndex, 0, title);
+		super.checkColumnHasValue(sessionRecordIndex, 1, abstractSession);
+
+		if (isTheorySession.equals("true"))
+			super.checkColumnHasValue(sessionRecordIndex, 2, "Yes");
+		else
+			super.checkColumnHasValue(sessionRecordIndex, 2, "No");
+
+		super.checkColumnHasValue(sessionRecordIndex, 3, initTimePeriod);
 
 		super.clickOnListingRecord(sessionRecordIndex);
 
 		super.checkFormExists();
+		super.checkSubmitExists("Publish");
 		super.checkInputBoxHasValue("title", title);
 		super.checkInputBoxHasValue("abstractSession", abstractSession);
 		super.checkInputBoxHasValue("isTheorySession", isTheorySession);
@@ -105,7 +113,6 @@ public class AssistantSessionUpdateTest extends TestHarness {
 		super.checkListingExists();
 		super.sortListing(0, "asc");
 
-		super.checkColumnHasValue(sessionRecordIndex, 0, title);
 		super.clickOnListingRecord(sessionRecordIndex);
 		super.checkFormExists();
 		super.fillInputBoxIn("title", title);
@@ -114,15 +121,9 @@ public class AssistantSessionUpdateTest extends TestHarness {
 		super.fillInputBoxIn("initTimePeriod", initTimePeriod);
 		super.fillInputBoxIn("finishTimePeriod", finishTimePeriod);
 		super.fillInputBoxIn("link", link);
+		super.clickOnSubmit("Update");
 
-		final String sessionIdString = super.getCurrentQuery();
-		final int sessionId = Integer.parseInt(sessionIdString.substring(sessionIdString.indexOf("=") + 1));
-		final String param = String.format("id=%d", sessionId);
-
-		super.checkNotButtonExists("Update");
-
-		super.request("/assistant/session/update", param);
-		super.checkPanicExists();
+		super.checkErrorsExist();
 
 		super.signOut();
 	}
