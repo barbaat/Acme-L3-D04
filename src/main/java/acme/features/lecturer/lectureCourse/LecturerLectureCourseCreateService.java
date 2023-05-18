@@ -98,8 +98,8 @@ public class LecturerLectureCourseCreateService extends AbstractService<Lecturer
 		tuple.put("lectureId", lectureId);
 
 		lecturer = this.repository.findOneLecturerById(super.getRequest().getPrincipal().getActiveRoleId());
-		courses = this.repository.findManyCoursesByLecturer(lecturer);
 		lecture = this.repository.findOneLectureById(lectureId);
+		courses = this.repository.findManyCoursesNotPublishedWithoutLectureAndWithDraftMode(lecturer, lecture);
 
 		final SelectChoices choices = SelectChoices.from(courses, "code", object.getCourse());
 		tuple.put("course", choices.getSelected().getKey());
