@@ -43,7 +43,15 @@ public class LecturerCourseListTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
-		// Preguntar al profesor
+		super.checkLinkExists("Sign in");
+		super.request("/lecturer/course/list");
+		super.checkPanicExists();
+
+		super.signIn("administrator", "administrator");
+		super.request("/lecturer/course/list");
+		super.checkPanicExists();
+
+		super.signOut();
 	}
 
 }

@@ -62,6 +62,8 @@ public class LecturerCourseShowTest extends TestHarness {
 				super.request("/lecturer/course/show", param);
 				super.checkPanicExists();
 			}
+
+		super.signOut();
 	}
 
 }
