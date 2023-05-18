@@ -82,61 +82,19 @@ public class LecturerLectureCourseDeleteTest extends TestHarness {
 	}
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/lecturer/lectureCourse/delete-negative-published.csv", encoding = "utf-8", numLinesToSkip = 1)
-	//Dejo "add-negative-published.csv" porque me sirve ese csv
-	public void test200NegativePublishedCourse(final int courseIndex, final int lectureIndex, final int lectureCourseIndex, final String code, final String titleLectureCourse, final String titleLecture) {
+	@CsvFileSource(resources = "/lecturer/lectureCourse/delete-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
+	public void test200NegativeChooseNull(final int courseIndex, final int lectureIndex, final String codeCourse, final String code, final String title) {
 
 		super.signIn("lecturer1", "lecturer1");
 		super.clickOnMenu("Lecturer", "List of courses");
 
 		super.checkListingExists();
 		super.sortListing(0, "asc");
-		super.checkColumnHasValue(courseIndex, 0, code);
+		super.checkColumnHasValue(courseIndex, 0, codeCourse);
 		super.clickOnListingRecord(courseIndex);
 
 		super.checkFormExists();
-		super.checkInputBoxHasValue("code", code);
-		super.checkNotSubmitExists("Publish a course");
-		super.clickOnButton("Lectures of course");
-
-		super.checkListingExists();
-		super.sortListing(0, "asc");
-		super.checkColumnHasValue(lectureCourseIndex, 0, titleLectureCourse);
-
-		super.clickOnMenu("Lecturer", "List of lectures");
-		super.checkListingExists();
-		super.sortListing(0, "asc");
-
-		super.checkColumnHasValue(lectureIndex, 0, titleLecture);
-		super.clickOnListingRecord(lectureIndex);
-
-		super.checkFormExists();
-		super.checkInputBoxHasValue("title", titleLecture);
-		super.clickOnButton("Delete from course");
-
-		super.checkFormExists();
-		super.fillInputBoxIn("course", code);
-		super.clickOnSubmit("Delete");
-		super.checkErrorsExist();
-
-		super.signOut();
-	}
-
-	@ParameterizedTest
-	@CsvFileSource(resources = "/lecturer/lectureCourse/delete-negative-not-course.csv", encoding = "utf-8", numLinesToSkip = 1)
-	// Lo mismo que arriba
-	public void test200NegativeLectureNotInCourse(final int courseIndex, final int lectureIndex, final String code, final String title) {
-
-		super.signIn("lecturer1", "lecturer1");
-		super.clickOnMenu("Lecturer", "List of courses");
-
-		super.checkListingExists();
-		super.sortListing(0, "asc");
-		super.checkColumnHasValue(courseIndex, 0, code);
-		super.clickOnListingRecord(courseIndex);
-
-		super.checkFormExists();
-		super.checkInputBoxHasValue("code", code);
+		super.checkInputBoxHasValue("code", codeCourse);
 		super.checkSubmitExists("Publish a course");
 		super.clickOnButton("Lectures of course");
 

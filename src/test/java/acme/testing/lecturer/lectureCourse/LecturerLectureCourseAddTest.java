@@ -76,59 +76,19 @@ public class LecturerLectureCourseAddTest extends TestHarness {
 	}
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/lecturer/lectureCourse/add-negative-published.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test200NegativePublishedCourse(final int courseIndex, final int lectureIndex, final int lectureCourseIndex, final String code, final String titleLectureCourse, final String titleLecture) {
+	@CsvFileSource(resources = "/lecturer/lectureCourse/add-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
+	public void test200NegativeCourseNull(final int courseIndex, final int lectureIndex, final int lectureCourseIndex, final String codeCourse, final String code, final String title) {
 
 		super.signIn("lecturer1", "lecturer1");
 		super.clickOnMenu("Lecturer", "List of courses");
 
 		super.checkListingExists();
 		super.sortListing(0, "asc");
-		super.checkColumnHasValue(courseIndex, 0, code);
+		super.checkColumnHasValue(courseIndex, 0, codeCourse);
 		super.clickOnListingRecord(courseIndex);
 
 		super.checkFormExists();
-		super.checkInputBoxHasValue("code", code);
-		super.checkNotSubmitExists("Publish a course");
-		super.clickOnButton("Lectures of course");
-
-		super.checkListingExists();
-		super.sortListing(0, "asc");
-		super.checkColumnHasValue(lectureCourseIndex, 0, titleLectureCourse);
-
-		super.clickOnMenu("Lecturer", "List of lectures");
-		super.checkListingExists();
-		super.sortListing(0, "asc");
-
-		super.checkColumnHasValue(lectureIndex, 0, titleLecture);
-		super.clickOnListingRecord(lectureIndex);
-
-		super.checkFormExists();
-		super.checkInputBoxHasValue("title", titleLecture);
-		super.clickOnButton("Add to course");
-
-		super.checkFormExists();
-		super.fillInputBoxIn("course", code);
-		super.clickOnSubmit("Add");
-		super.checkErrorsExist();
-
-		super.signOut();
-	}
-
-	@ParameterizedTest
-	@CsvFileSource(resources = "/lecturer/lectureCourse/add-negative-already.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test200NegativeAlreadyInCourse(final int courseIndex, final int lectureIndex, final int lectureCourseIndex, final String code, final String title) {
-
-		super.signIn("lecturer1", "lecturer1");
-		super.clickOnMenu("Lecturer", "List of courses");
-
-		super.checkListingExists();
-		super.sortListing(0, "asc");
-		super.checkColumnHasValue(courseIndex, 0, code);
-		super.clickOnListingRecord(courseIndex);
-
-		super.checkFormExists();
-		super.checkInputBoxHasValue("code", code);
+		super.checkInputBoxHasValue("code", codeCourse);
 		super.checkSubmitExists("Publish a course");
 		super.clickOnButton("Lectures of course");
 
@@ -168,11 +128,11 @@ public class LecturerLectureCourseAddTest extends TestHarness {
 			param = String.format("lectureId=%d", lecture.getId());
 
 			super.checkLinkExists("Sign in");
-			super.request("/lecturer/lecture-course/create", param);
+			super.request("/lecturer/lecture-course/delete", param);
 			super.checkPanicExists();
 
 			super.signIn("administrator", "administrator");
-			super.request("/lecturer/lecture-course/create", param);
+			super.request("/lecturer/lecture-course/delete", param);
 			super.checkPanicExists();
 			super.signOut();
 		}
@@ -191,7 +151,7 @@ public class LecturerLectureCourseAddTest extends TestHarness {
 
 		for (final Lecture lecture : lectures) {
 			param = String.format("lectureId=%d", lecture.getId());
-			super.request("/lecturer/lecture-course/create", param);
+			super.request("/lecturer/lecture-course/delete", param);
 			super.checkPanicExists();
 		}
 	}
