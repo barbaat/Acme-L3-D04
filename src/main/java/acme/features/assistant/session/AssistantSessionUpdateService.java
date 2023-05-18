@@ -87,8 +87,8 @@ public class AssistantSessionUpdateService extends AbstractService<Assistant, Se
 			boolean maximumFinishTimeOneHour;
 			boolean maximumFinishTimeFiveHours;
 
-			maximumFinishTimeOneHour = MomentHelper.isLongEnough(object.getInitTimePeriod(), object.getFinishTimePeriod(), 1, ChronoUnit.HOURS);
-			maximumFinishTimeFiveHours = MomentHelper.isLongEnough(object.getInitTimePeriod(), object.getFinishTimePeriod(), 6, ChronoUnit.HOURS);
+			maximumFinishTimeOneHour = MomentHelper.isLongEnough(object.getInitTimePeriod(), object.getFinishTimePeriod(), 60, ChronoUnit.MINUTES);
+			maximumFinishTimeFiveHours = MomentHelper.isLongEnough(object.getInitTimePeriod(), object.getFinishTimePeriod(), 301, ChronoUnit.MINUTES);
 
 			// Calculamos la duracion de la sesion -> 1 hora como minimo
 			super.state(maximumFinishTimeOneHour, "finishTimePeriod", "assistant.session.form.error.too-little");

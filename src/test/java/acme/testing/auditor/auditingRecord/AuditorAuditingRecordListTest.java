@@ -21,9 +21,8 @@ public class AuditorAuditingRecordListTest extends TestHarness {
 	// Test methods -----------------------------------------------------------
 	@ParameterizedTest
 	@CsvFileSource(resources = "/auditor/auditingRecord/list-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test100Positive(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment) {
-		// HINT: this test authenticates as an employer, then lists his or her jobs, 
-		// HINT+ selects one of them, and check that it has the expected duties.
+	public void test100Positive(final int auditIndex, final String code, final int auditingRecordIndex, final String subject, final String assessment, final String correctionRecord) {
+		//Compruebo que puedo listar auditingRecords correctamente y que las correctionRecords aparecen destacadas en el listado
 
 		super.signIn("auditor1", "auditor1");
 
@@ -39,6 +38,7 @@ public class AuditorAuditingRecordListTest extends TestHarness {
 		super.checkListingExists();
 		super.checkColumnHasValue(auditingRecordIndex, 0, subject);
 		super.checkColumnHasValue(auditingRecordIndex, 1, assessment);
+		super.checkColumnHasValue(auditingRecordIndex, 2, correctionRecord);
 		super.clickOnListingRecord(auditingRecordIndex);
 
 		super.signOut();
@@ -52,18 +52,46 @@ public class AuditorAuditingRecordListTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
+		//Compruebo que solo auditor1 puede ver el listado de auditingRecords de sus audits no publicadas
 
-		Collection<Audit> audits;
-		String param;
-
-		audits = this.repository.findAuditsByAuditorUsername("auditor1");
+		final Collection<Audit> audits = this.repository.findAuditsByAuditorUsername("auditor1");
 		for (final Audit audit : audits)
 			if (audit.isDraftMode()) {
-				param = String.format("id=%d", audit.getId());
+				final String param = String.format("id=%d", audit.getId());
 
 				super.checkLinkExists("Sign in");
-				super.request("/auditor/audit/list", param);
+				super.request("/auditor/auditing-record/list", param);
 				super.checkPanicExists();
+
+				super.signIn("auditor2", "auditor2");
+				super.request("/auditor/auditing-record/list", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("lecturer1", "lecturer1");
+				super.request("/auditor/auditing-record/list", param);
+				super.checkPanicExists();
+				super.signOut();
+				super.signIn("student1", "student1");
+				super.request("/auditor/auditing-record/list", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("company1", "company1");
+				super.request("/auditor/auditing-record/list", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("assistant1", "assistant1");
+				super.request("/auditor/auditing-record/list", param);
+				super.checkPanicExists();
+				super.signOut();
+
+				super.signIn("administrator", "administrator");
+				super.request("/auditor/auditing-record/list", param);
+				super.checkPanicExists();
+				super.signOut();
+
 			}
 	}
 }

@@ -34,8 +34,16 @@ public class LecturerLecturePublishTest extends TestHarness {
 		super.checkColumnHasValue(lectureIndex, 0, title);
 		super.clickOnListingRecord(lectureIndex);
 		super.checkFormExists();
+
+		final String lectureIdString = super.getCurrentQuery();
+		final int lectureId = Integer.parseInt(lectureIdString.substring(lectureIdString.indexOf("=") + 1));
+		final String param = String.format("id=%d", lectureId);
+
 		super.clickOnSubmit("Publish a lecture");
 		super.checkNotErrorsExist();
+
+		super.request("/lecturer/lecture/publish", param);
+		super.checkPanicExists();
 
 		super.signOut();
 	}
@@ -53,7 +61,7 @@ public class LecturerLecturePublishTest extends TestHarness {
 		super.checkColumnHasValue(lectureIndex, 0, title);
 		super.clickOnListingRecord(lectureIndex);
 		super.checkFormExists();
-		super.checkNotButtonExists("Publish a lecture");
+		super.checkNotSubmitExists("Publish a lecture");
 
 		super.signOut();
 	}
@@ -98,6 +106,7 @@ public class LecturerLecturePublishTest extends TestHarness {
 			if (!leccion.isDraftMode()) {
 				params = String.format("id=%d", leccion.getId());
 				super.request("/lecturer/lecture/publish", params);
+				super.checkPanicExists();
 			}
 		super.signOut();
 	}
@@ -113,6 +122,7 @@ public class LecturerLecturePublishTest extends TestHarness {
 		for (final Lecture lecture : lectures) {
 			params = String.format("id=%d", lecture.getId());
 			super.request("/lecturer/lecture/publish", params);
+			super.checkPanicExists();
 		}
 		super.signOut();
 	}
