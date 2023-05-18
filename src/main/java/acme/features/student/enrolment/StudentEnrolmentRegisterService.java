@@ -68,9 +68,13 @@ public class StudentEnrolmentRegisterService extends AbstractService<Student, En
 	@Override
 	public void validate(final Enrolment object) {
 		assert object != null;
+		final Collection<Course> courses = this.repository.findAllPublishedCourses();
 		final Enrolment enrolmentWithSameCode = this.repository.findEnrolmentByCode(object.getCode());
 
 		super.state(enrolmentWithSameCode == null, "code", "student.enrolment.form.error.duplicated-code");
+
+		if (!super.getBuffer().getErrors().hasErrors("code"))
+			super.state(courses.contains(object.getCourse()), "course", "Error al seleccionar un curso no publicado");
 	}
 
 	@Override

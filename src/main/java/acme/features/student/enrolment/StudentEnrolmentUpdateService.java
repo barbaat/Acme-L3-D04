@@ -78,9 +78,15 @@ public class StudentEnrolmentUpdateService extends AbstractService<Student, Enro
 	@Override
 	public void validate(final Enrolment object) {
 		assert object != null;
+		final Collection<Course> courses = this.repository.findAllPublishedCourses();
+
 		final Enrolment enrolmentWithSameCode = this.repository.findEnrolmentByCode(object.getCode());
 		super.state(enrolmentWithSameCode == null || enrolmentWithSameCode.getId() == object.getId(), "code", "student.enrolment.form.error.duplicated-code");
 		super.state(object.isDraftMode(), "draftMode", "student.enrolment.form.error.finalised");
+
+		if (!super.getBuffer().getErrors().hasErrors("code"))
+			super.state(courses.contains(object.getCourse()), "course", "Error al seleccionar un curso no publicado");
+
 	}
 
 	@Override
