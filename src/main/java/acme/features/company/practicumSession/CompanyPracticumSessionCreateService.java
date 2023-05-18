@@ -147,7 +147,6 @@ public class CompanyPracticumSessionCreateService extends AbstractService<Compan
 		tuple.put("masterId", masterId);
 		tuple.put("draftMode", practicum.isDraftMode());
 		tuple.put("confirmation", false);
-		tuple.put("valid", false);
 		super.getResponse().setData(tuple);
 	}
 
