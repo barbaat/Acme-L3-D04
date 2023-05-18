@@ -22,7 +22,7 @@ public class StudentEnrolmentPublishTest extends TestHarness {
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/student/enrolment/publish-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
-	public void test100Positive(final int enrolmentIndex, final String code, final String cardLowerNibble, final String cardHolder, final String cvv, final String expireDate) {
+	public void test100Positive(final int enrolmentIndex, final String code, final String cardLowerNibble, final String cardLowerNibble4, final String cardHolder, final String cvv, final String expireDate) {
 
 		super.signIn("student1", "student1");
 
@@ -54,7 +54,7 @@ public class StudentEnrolmentPublishTest extends TestHarness {
 
 		super.clickOnListingRecord(enrolmentIndex);
 		super.checkFormExists();
-		//super.checkInputBoxHasValue("cardLowerNibble", cardLowerNibble); Aquí hay los 4 últimos debido al perform del servicio
+		super.checkInputBoxHasValue("cardLowerNibble", cardLowerNibble4);
 		super.checkInputBoxHasValue("code", code);
 		super.checkInputBoxHasValue("cardHolder", cardHolder);
 
