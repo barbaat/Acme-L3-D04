@@ -1,2 +1,2 @@
-enrolmentIndex,code,cardLowerNibble,cardHolder,cvv,expireDate
-3,ABM1539,1234567898765434,安吉拉 Bernal,191,2024/09
+enrolmentIndex,code,cardLowerNibble,cardLowerNibble4,cardHolder,cvv,expireDate
+3,ABM1539,1234567898765434,5434,安吉拉 Bernal,191,2024/09
