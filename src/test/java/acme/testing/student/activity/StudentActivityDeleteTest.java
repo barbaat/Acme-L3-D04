@@ -60,47 +60,6 @@ public class StudentActivityDeleteTest extends TestHarness {
 
 	}
 
-	//	@ParameterizedTest
-	//	@CsvFileSource(resources = "/student/activity/delete-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
-	//	public void test200Negative(final int enrolmentIndex, final String code, final int activityIndex, final String title, final String abstractt, final String activityType, final String link, final String startPeriod, final String endPeriod) {
-	//		super.signIn("student1", "student1");
-	//
-	//		super.clickOnMenu("Student", "List of enrolments");
-	//		super.checkListingExists();
-	//		super.sortListing(0, "asc");
-	//
-	//		super.checkColumnHasValue(enrolmentIndex, 0, code);
-	//		super.clickOnListingRecord(enrolmentIndex);
-	//		super.checkInputBoxHasValue("code", code);
-	//
-	//		super.clickOnButton("See workbook");
-	//		super.clickOnButton("Activities");
-	//
-	//		super.checkListingExists();
-	//		super.sortListing(0, "asc");
-	//
-	//		super.clickOnListingRecord(activityIndex);
-	//		super.checkFormExists();
-	//
-	//		super.checkInputBoxHasValue("title", title);
-	//		super.checkInputBoxHasValue("abstractt", abstractt);
-	//		super.checkInputBoxHasValue("activityType", activityType);
-	//		super.checkInputBoxHasValue("link", link);
-	//		super.checkInputBoxHasValue("startPeriod", startPeriod);
-	//		super.checkInputBoxHasValue("endPeriod", endPeriod);
-	//
-	//		final String activityIdString = super.getCurrentQuery();
-	//		final int activityRecordId = Integer.parseInt(activityIdString.substring(activityIdString.indexOf("=") + 1));
-	//		final String param = String.format("id=%d", activityRecordId);
-	//
-	//		super.checkNotSubmitExists("Delete activity");
-	//
-	//		super.request("/student/activity/delete", param);
-	//		super.checkPanicExists();
-	//
-	//		super.signOut();
-	//	}
-
 	@Test
 	public void test300Hacking() {
 

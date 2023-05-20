@@ -35,4 +35,13 @@ public interface LecturerLectureCourseRepository extends AbstractRepository {
 
 	@Query("select lc from LectureCourse lc where lc.lecture = :lecture and lc.course = :course")
 	LectureCourse findOneLectureCourseByLectureAndCourse(Lecture lecture, Course course);
+
+	// Filtro add
+	@Query("SELECT c FROM Course c WHERE c.lecturer = :lecturer AND c.draftMode = true AND c NOT IN (SELECT lc.course FROM LectureCourse lc WHERE lc.lecture = :lecture)")
+	Collection<Course> findManyCoursesNotPublishedWithoutLectureAndWithDraftMode(Lecturer lecturer, Lecture lecture);
+	
+	// Filtro delete
+	@Query("SELECT c FROM Course c WHERE c.lecturer = :lecturer AND c.draftMode = true AND c IN (SELECT lc.course FROM LectureCourse lc WHERE lc.lecture = :lecture)")
+	Collection<Course> findManyCoursesNotPublishedWithLectureAndDraftMode(Lecturer lecturer, Lecture lecture);
+
 }
