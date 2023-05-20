@@ -87,8 +87,6 @@
 		<acme:menu-option code="master.menu.assistant" access="hasRole('Assistant')">
 			<acme:menu-suboption code="master.menu.assistant.tutorial.list" action="/assistant/tutorial/list"/>
 			<acme:menu-suboption code="master.menu.assistant.tutorial.create" action="/assistant/tutorial/create"/>	
-			<acme:menu-separator/>
-			<%-- <acme:menu-suboption code="master.menu.auditor.auditor-dashboard.show" action="/auditor/auditor-dashboard/show"/> --%>
 		</acme:menu-option>
 	</acme:menu-left>
 
