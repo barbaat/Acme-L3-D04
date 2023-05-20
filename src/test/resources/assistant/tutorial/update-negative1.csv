@@ -11,3 +11,5 @@ recordIndex,code,title,abstractTutorial,goals,estimatedTotalTime,course
 0,ABC123,Title 1,Abstract 1,Goal1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111,5.00,ABC123
 0,ABC123,Title 1,Abstract 1, ,5.00,ABC123
 0,ABC123,Title 1,Abstract 1,Goal 1,5.00,---
+0,ABC141,Title 1,Abstract 1,Goal,5.00,ABC000
+0,ABC141,Title 1,Abstract 1,Goal,-5.00,ABC123
