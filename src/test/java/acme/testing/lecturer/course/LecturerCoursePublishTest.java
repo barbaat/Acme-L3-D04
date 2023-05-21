@@ -196,6 +196,7 @@ public class LecturerCoursePublishTest extends TestHarness {
 			if (!curso.isDraftMode()) {
 				params = String.format("id=%d", curso.getId());
 				super.request("/lecturer/course/publish", params);
+				super.checkPanicExists();
 			}
 		super.signOut();
 	}
@@ -211,6 +212,7 @@ public class LecturerCoursePublishTest extends TestHarness {
 		for (final Course curso : cursos) {
 			params = String.format("id=%d", curso.getId());
 			super.request("/lecturer/course/publish", params);
+			super.checkPanicExists();
 		}
 		super.signOut();
 	}

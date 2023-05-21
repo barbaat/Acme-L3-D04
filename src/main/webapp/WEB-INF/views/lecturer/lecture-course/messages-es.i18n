@@ -15,3 +15,5 @@ lecturer.lectureCourse.form.lecture.delete.info = Eliminar la lección dentro de
 lecturer.lectureCourse.form.error.lecture = La lección seleccionada ya estaba en el curso
 lecturer.lectureCourse.form.error.lectureDeleted = El curso no contiene la lección
 lecturer.lectureCourse.form.error.course = El curso seleccionado está publicado
+
+lecturer.lectureCourse.form.error.null = Tienes que seleccionar un curso

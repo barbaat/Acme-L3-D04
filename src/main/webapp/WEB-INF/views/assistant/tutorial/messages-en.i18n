@@ -12,6 +12,9 @@ assistant.tutorial.form.label.goals = Goals
 assistant.tutorial.form.label.estimatedTotalTime = Estimated total time
 assistant.tutorial.form.label.course = Course
 assistant.tutorial.form.label.sessions = Sessions
+assistant.tutorial.form.error.course-not-published = You cannot select a course that is not published
+assistant.tutorial.form.error.negative-estimatedTotalTime = You cannot put a negative estimated time
+assistant.tutorial.form.error.course-not-in-select = You cannot select a course that is not in the options
 
 assistant.tutorial.form.button.update = Update
 assistant.tutorial.form.button.publish = Publish

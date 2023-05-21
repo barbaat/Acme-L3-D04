@@ -15,3 +15,5 @@ lecturer.lectureCourse.form.lecture.delete.info = Delete lecture with the follow
 lecturer.lectureCourse.form.error.lecture = The lecture is already in the course
 lecturer.lectureCourse.form.error.lectureDeleted = The selected course doesn't contain the lecture
 lecturer.lectureCourse.form.error.course = The selected course is published
+
+lecturer.lectureCourse.form.error.null = You need to select a course!
