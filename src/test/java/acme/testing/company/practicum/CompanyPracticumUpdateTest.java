@@ -24,6 +24,7 @@ public class CompanyPracticumUpdateTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/company/practicum/update-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test100Positive(final int practicumIndex, final String course, final String practicumCode, final String title, final String abstract$, final String goals, final String estimatedTotalTime) {
+		//Compruebo que puedo editar un practicum correctamente
 
 		super.signIn("company1", "company1");
 
@@ -62,6 +63,7 @@ public class CompanyPracticumUpdateTest extends TestHarness {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/company/practicum/update-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
 	public void test200Negative(final int practicumIndex, final String course, final String practicumCode, final String title, final String abstract$, final String goals, final String estimatedTotalTime) {
+		//Comprueba que no puedo editar un practicum con datos erróneos
 
 		super.signIn("company1", "company1");
 
@@ -80,6 +82,32 @@ public class CompanyPracticumUpdateTest extends TestHarness {
 		super.clickOnSubmit("Update");
 
 		super.checkErrorsExist();
+
+		super.signOut();
+	}
+
+	@ParameterizedTest
+	@CsvFileSource(resources = "/company/practicum/update-negative2.csv", encoding = "utf-8", numLinesToSkip = 1)
+	public void test201Negative(final int practicumIndex, final String course, final String practicumCode, final String title, final String abstract$, final String goals, final String estimatedTotalTime) {
+		//Comprueba que no puedo editar un practicum publicado
+
+		super.signIn("company1", "company1");
+
+		super.clickOnMenu("Company", "List of practicums");
+		super.checkListingExists();
+		super.sortListing(0, "asc");
+
+		super.clickOnListingRecord(practicumIndex);
+		super.checkFormExists();
+
+		final String practicumIdString = super.getCurrentQuery();
+		final int practicumId = Integer.parseInt(practicumIdString.substring(practicumIdString.indexOf("=") + 1));
+		final String param = String.format("id=%d", practicumId);
+
+		super.checkNotButtonExists("Update");
+
+		super.request("/company/practicum/update", param);
+		super.checkPanicExists();
 
 		super.signOut();
 	}
