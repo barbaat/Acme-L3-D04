@@ -12,6 +12,9 @@ assistant.tutorial.form.label.goals = Objetivos
 assistant.tutorial.form.label.estimatedTotalTime = Tiempo total estimado
 assistant.tutorial.form.label.course = Curso
 assistant.tutorial.form.label.sessions = Sesiones
+assistant.tutorial.form.error.course-not-published = No puedes seleccionar un curso que no esta publicado
+assistant.tutorial.form.error.negative-estimatedTotalTime = No puedes poner un tiempo estimado negativo
+assistant.tutorial.form.error.course-not-in-select = No puedes seleccionar un curso que no esta en las opciones
 
 assistant.tutorial.form.button.update = Actualizar
 assistant.tutorial.form.button.publish = Publicar

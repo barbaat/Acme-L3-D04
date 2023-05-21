@@ -77,6 +77,15 @@ public class AssistantTutorialUpdateService extends AbstractService<Assistant, T
 	@Override
 	public void validate(final Tutorial object) {
 		assert object != null;
+
+		final Collection<Course> courses = this.repository.findAllCourses();
+
+		if (!super.getBuffer().getErrors().hasErrors("course"))
+			super.state(!object.getCourse().isDraftMode(), "course", "assistant.tutorial.form.error.course-not-published");
+		if (!super.getBuffer().getErrors().hasErrors("estimatedTotalTime"))
+			super.state(object.getEstimatedTotalTime() > 0, "estimatedTotalTime", "assistant.tutorial.form.error.negative-estimatedTotalTime");
+		if (!super.getBuffer().getErrors().hasErrors("course"))
+			super.state(courses.contains(object.getCourse()), "course", "assistant.tutorial.form.error.course-not-in-select");
 	}
 
 	@Override
@@ -94,7 +103,7 @@ public class AssistantTutorialUpdateService extends AbstractService<Assistant, T
 		SelectChoices choices;
 		Tuple tuple;
 
-		courses = this.repository.findAllCourses();
+		courses = this.repository.findAllPublishedCourses();
 		choices = SelectChoices.from(courses, "code", object.getCourse());
 
 		tuple = super.unbind(object, "code", "title", "abstractTutorial", "goals", "estimatedTotalTime", "draftMode");
