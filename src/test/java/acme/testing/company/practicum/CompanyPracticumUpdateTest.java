@@ -135,6 +135,11 @@ public class CompanyPracticumUpdateTest extends TestHarness {
 			super.checkPanicExists();
 			super.signOut();
 
+			super.signIn("company2", "company2");
+			super.request("/auditor/audit/update", param);
+			super.checkPanicExists();
+			super.signOut();
+
 		}
 	}
 }
