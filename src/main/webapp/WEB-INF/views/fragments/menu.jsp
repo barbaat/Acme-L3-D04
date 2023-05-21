@@ -81,7 +81,6 @@
 		<acme:menu-option code="master.menu.company" access="hasRole('Company')">
 			<acme:menu-suboption code="master.menu.company.practicum.create" action="/company/practicum/create"/>		
 			<acme:menu-suboption code="master.menu.company.practicum.list" action="/company/practicum/list"/>	
-			<acme:menu-separator/>	
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.assistant" access="hasRole('Assistant')">

@@ -70,6 +70,7 @@ public class CompanyPracticumCreateService extends AbstractService<Company, Prac
 		assert object != null;
 
 		int practicumId;
+		final Collection<Course> courses = this.practicumRepository.findPublishedCourses();
 
 		practicumId = super.getRequest().getData("id", int.class);
 		if (!super.getBuffer().getErrors().hasErrors("estimatedTotalTime")) {
@@ -89,6 +90,9 @@ public class CompanyPracticumCreateService extends AbstractService<Company, Prac
 
 		if (!super.getBuffer().getErrors().hasErrors("code"))
 			super.state(this.practicumRepository.findPracticumByCode(object.getCode()) == null, "code", "company.practicum.form.error.existing-code");
+
+		if (!super.getBuffer().getErrors().hasErrors("code"))
+			super.state(courses.contains(object.getCourse()), "course", "Error al seleccionar un curso no publicado");
 
 	}
 

@@ -71,7 +71,7 @@ public class CompanyPracticumSessionUpdateService extends AbstractService<Compan
 			super.state(MomentHelper.isAfterOrEqual(object.getStartPeriod(), minStartPeriod), "startPeriod", "company.practicum-session.validation.startPeriod.error.WeekAhead");
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("finishPeriod")) {
+		if (!super.getBuffer().getErrors().hasErrors("finishPeriod") && !super.getBuffer().getErrors().hasErrors("startPeriod")) {
 			Date minFinishPeriod;
 			minFinishPeriod = MomentHelper.deltaFromMoment(object.getStartPeriod(), 7, ChronoUnit.DAYS);
 			super.state(MomentHelper.isAfterOrEqual(object.getFinishPeriod(), minFinishPeriod), "finishPeriod", "company.practicum-session.validation.finishPeriod.error.WeekLong");
