@@ -40,7 +40,7 @@ public class CompanyPracticumSessionShowTest extends TestHarness {
 
 		super.clickOnButton("Practicum sessions");
 		super.checkListingExists();
-		super.clickOnListingRecord(practicumIndex);
+		super.clickOnListingRecord(practicumSessionIndex);
 		super.checkFormExists();
 
 		super.checkInputBoxHasValue("title", title);
