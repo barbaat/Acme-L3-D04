@@ -64,8 +64,11 @@ public class AuditorAuditUpdateService extends AbstractService<Auditor, Audit> {
 	@Override
 	public void validate(final Audit object) {
 		assert object != null;
+		final Collection<Course> courses = this.repo.findPublishedCourses();
 		if (!super.getBuffer().getErrors().hasErrors("code"))
 			super.state(this.repo.findAuditByCode(object.getCode()) == null || this.repo.findAuditByCode(object.getCode()).equals(object), "code", "auditor.audit.form.error.existing-code");
+		else if (!super.getBuffer().getErrors().hasErrors("code"))
+			super.state(courses.contains(object.getCourse()), "course", "This course has not been published");
 	}
 
 	@Override
