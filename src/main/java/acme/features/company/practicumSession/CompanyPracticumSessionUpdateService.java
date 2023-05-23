@@ -65,6 +65,7 @@ public class CompanyPracticumSessionUpdateService extends AbstractService<Compan
 	public void validate(final PracticumSession object) {
 		assert object != null;
 
+		//Validaciones de la fecha de comienzo y de la fecha de finalización
 		if (!super.getBuffer().getErrors().hasErrors("startPeriod")) {
 			Date minStartPeriod;
 			minStartPeriod = MomentHelper.deltaFromCurrentMoment(7, ChronoUnit.DAYS);

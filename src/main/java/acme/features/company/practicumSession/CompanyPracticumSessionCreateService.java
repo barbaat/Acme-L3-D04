@@ -28,7 +28,6 @@ public class CompanyPracticumSessionCreateService extends AbstractService<Compan
 
 	@Override
 	public void check() {
-		//super.getResponse().setChecked(true);
 		boolean status;
 		status = super.getRequest().hasData("masterId", int.class);
 		super.getResponse().setChecked(status);
@@ -37,7 +36,6 @@ public class CompanyPracticumSessionCreateService extends AbstractService<Compan
 
 	@Override
 	public void authorise() {
-		//super.getResponse().setAuthorised(true);
 		final int masterId = super.getRequest().getData("masterId", int.class);
 		final Practicum object = this.psRepository.findPracticumById(masterId);
 		final int userAccountId = super.getRequest().getPrincipal().getAccountId();
@@ -47,13 +45,6 @@ public class CompanyPracticumSessionCreateService extends AbstractService<Compan
 
 	@Override
 	public void load() {
-		//		PracticumSession object;
-		//
-		//		object = new PracticumSession();
-		//		object.setDraftMode(true);
-		//		object.setExceptional(false);
-		//
-		//		super.getBuffer().setData(object);
 
 		PracticumSession object;
 
@@ -70,17 +61,6 @@ public class CompanyPracticumSessionCreateService extends AbstractService<Compan
 	public void bind(final PracticumSession object) {
 		assert object != null;
 		super.bind(object, "title", "abstract$", "optionalLink", "startPeriod", "finishPeriod", "confirmation");
-
-		//		int practicumId;
-		//		Practicum practicum;
-		//
-		//		practicumId = super.getRequest().getData("practicum", int.class);
-		//		practicum = this.psRepository.findPracticumById(practicumId);
-		//
-		//		super.bind(object, "title", "abstract$", "optionalLink", "startPeriod", "finishPeriod");
-		//
-		//		object.setPracticum(practicum);
-
 	}
 
 	@Override
@@ -97,9 +77,11 @@ public class CompanyPracticumSessionCreateService extends AbstractService<Compan
 			super.state(valid, "*", "company.practicum-session.validation.practicum.error.ExceptionalAlreadyExists");
 		}
 
+		//Confirmación para la sesiones de práctica únicas
 		final boolean confirmation = object.getPracticum().isDraftMode() ? true : super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "company.practicum-session.form.label.confirmation");
 
+		//Validaciones de la fecha de comienzo y de la fecha de finalización
 		assert object != null;
 
 		if (!super.getBuffer().getErrors().hasErrors("startPeriod")) {
@@ -125,22 +107,9 @@ public class CompanyPracticumSessionCreateService extends AbstractService<Compan
 
 	@Override
 	public void unbind(final PracticumSession object) {
-		//		assert object != null;
-		//		final Collection<Practicum> practica;
-		//		final SelectChoices choices;
-		//		final int companyId = super.getRequest().getPrincipal().getActiveRoleId();
-		//
-		//		practica = this.psRepository.findManyPrivatePracticaByCompanyId(companyId);
-		//		choices = SelectChoices.from(practica, "code", object.getPracticum());
-		//		Tuple tuple;
-		//
-		//		tuple = super.unbind(object, "title", "abstract$", "optionalLink", "startPeriod", "finishPeriod", "confirmation");
-		//		tuple.put("practicum", choices.getSelected().getKey());
-		//		tuple.put("practica", choices);
-		//
-		//		super.getResponse().setData(tuple);		
 
 		assert object != null;
+
 		final int masterId = super.getRequest().getData("masterId", int.class);
 		final Practicum practicum = this.psRepository.findPracticumById(masterId);
 		final Tuple tuple = super.unbind(object, "title", "abstract$", "optionalLink", "startPeriod", "finishPeriod", "exceptional");

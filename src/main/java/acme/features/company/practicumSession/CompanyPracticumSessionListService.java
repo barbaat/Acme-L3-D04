@@ -78,15 +78,9 @@ public class CompanyPracticumSessionListService extends AbstractService<Company,
 
 	@Override
 	public void unbind(final Collection<PracticumSession> object) {
-		//		assert object != null;
-		//
-		//		Tuple tuple;
-		//
-		//		tuple = super.unbind(object, "title", "abstract$", "startPeriod", "finishPeriod", "draftMode", "exceptional");
-		//
-		//		super.getResponse().setData(tuple);
 
 		assert object != null;
+
 		boolean createButton = false;
 		final int masterId = super.getRequest().getData("masterId", int.class);
 		final Practicum practicum = this.psRepository.findPracticumById(masterId);
