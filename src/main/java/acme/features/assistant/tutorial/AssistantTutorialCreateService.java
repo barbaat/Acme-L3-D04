@@ -74,8 +74,6 @@ public class AssistantTutorialCreateService extends AbstractService<Assistant, T
 
 		if (!super.getBuffer().getErrors().hasErrors("course"))
 			super.state(!object.getCourse().isDraftMode(), "course", "assistant.tutorial.form.error.course-not-published");
-		if (!super.getBuffer().getErrors().hasErrors("estimatedTotalTime"))
-			super.state(object.getEstimatedTotalTime() > 0, "estimatedTotalTime", "assistant.tutorial.form.error.negative-estimatedTotalTime");
 		if (super.getBuffer().getErrors().hasErrors("course"))
 			super.state(courses.contains(object.getCourse()), "course", "assistant.tutorial.form.error.course-not-in-select");
 	}
