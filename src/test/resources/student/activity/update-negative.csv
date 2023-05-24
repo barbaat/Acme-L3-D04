@@ -2,3 +2,8 @@ enrolmentIndex,code,activityIndex,title,abstractt,activityType,link,startPeriod,
 0,ABM1236,2,,titulo en blanco activitytype sin seleccionar y fecha de inicio despues de fin,---,http://www.example.com,2023/07/16 19:00,2023/07/16 17:00
 1,ABM1237,1,abstract en blanco url mal y fecha no en formato correcto,,HANDS_ON,hola,02/02/2024 15:30,2023/07/19 18:00
 2,ABM1538,0,sin fechas,abstract,THEORY,http://www.exampleee.com,,
+2,ABM1538,0,fechas,actividad empieza despues que acaba,THEORY,http://www.exampleee.com,2023/04/18 12:20,2023/04/18 10:20
+2,ABM1538,0,fechas,fecha con formato invalido,THEORY,http://www.exampleee.com,2023/04/18,2023/04/18
+2,ABM1538,0,fechas,tipo de actividad nulo,---,http://www.exampleee.com,2023/04/18 12:20,2023/04/18 14:20
+2,ABM1538,0,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,title mas de 75,THEORY,http://www.exampleee.com,2023/04/18 12:20,2023/04/18 14:20
+2,ABM1538,0,abstract mas de 100,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,THEORY,http://www.exampleee.com,2023/04/18 12:20,2023/04/18 14:20

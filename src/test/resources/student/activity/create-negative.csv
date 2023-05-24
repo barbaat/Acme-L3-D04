@@ -6,4 +6,7 @@ enrolmentIndex,code,activityIndex,title,abstractt,activityType,link,startPeriod,
 2,ABM1538,1,vacio el abstract,,HANDS_ON,http://www.exampleee.com,2023/07/20 16:00,2023/07/20 17:30
 2,ABM1538,1,title,url mal,THEORY,lolala,2023/07/20 16:00,2023/07/20 17:30
 2,ABM1538,1,startperiod vacio,abstract,HANDS_ON,http://www.exampleee.com,,2023/07/20 17:30
-2,ABM1538,1,startperiod vacio,abstract,HANDS_ON,http://www.exampleee.com,2023/07/20 17:30,
+2,ABM1538,1,endperiod vacio,abstract,HANDS_ON,http://www.exampleee.com,2023/07/20 17:30,
+2,ABM1538,1,,,---,,,
+2,ABM1538,1,fecha de comienzo despues de fin,abstract,HANDS_ON,http://www.exampleee.com,2023/07/20 19:30,2023/07/20 17:30
+2,ABM1538,1,fecha con mal formato,abstract,HANDS_ON,http://www.exampleee.com,14:30,17:30
