@@ -24,17 +24,11 @@ public class CompanyPracticumSessionController extends AbstractController<Compan
 	@Autowired
 	protected CompanyPracticumSessionCreateService	createService;
 
-	//	@Autowired
-	//	protected CompanyPracticumSessionCreateExceptionalService	createExceptionalService;
-
 	@Autowired
 	protected CompanyPracticumSessionDeleteService	deleteService;
 
 	@Autowired
 	protected CompanyPracticumSessionUpdateService	updateService;
-
-	//	@Autowired
-	//	protected CompanyPracticumSessionPublishService				publishService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -44,10 +38,7 @@ public class CompanyPracticumSessionController extends AbstractController<Compan
 		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("create", this.createService);
-		//		super.addCustomCommand("create-exceptional", "create", this.createExceptionalService);
 		super.addBasicCommand("delete", this.deleteService);
 		super.addBasicCommand("update", this.updateService);
-		//		super.addCustomCommand("publish", "update", this.publishService);
-
 	}
 }

@@ -31,7 +31,7 @@ public class CompanyPracticumCreateTest extends TestHarness {
 		super.fillInputBoxIn("abstract$", abstract$);
 		super.fillInputBoxIn("goals", goals);
 		super.fillInputBoxIn("estimatedTotalTime", estimatedTotalTime);
-		super.clickOnSubmit("Create");
+		super.clickOnSubmit("Create practicum");
 
 		super.clickOnMenu("Company", "List of practicums");
 
@@ -63,7 +63,7 @@ public class CompanyPracticumCreateTest extends TestHarness {
 		super.fillInputBoxIn("abstract$", abstract$);
 		super.fillInputBoxIn("goals", goals);
 		super.fillInputBoxIn("estimatedTotalTime", estimatedTotalTime);
-		super.clickOnSubmit("Create");
+		super.clickOnSubmit("Create practicum");
 		super.checkErrorsExist();
 
 		super.signOut();

@@ -12,6 +12,7 @@
 company.practicum-session.list.label.title = Título
 company.practicum-session.list.label.startPeriod = Fecha de inicio
 company.practicum-session.list.label.finishPeriod = Fecha de fin
+company.practicum-session.list.label.exceptional = Sesión práctica excepcional
 
 company.practicum-session.list.button.create = Crear sesión práctica
 company.practicum-session.list.button.create-exceptional = Crear sesión excepcional
@@ -21,19 +22,15 @@ company.practicum-session.form.label.abstract$ = Resumen:
 company.practicum-session.form.label.startPeriod = Fecha de inicio:
 company.practicum-session.form.label.finishPeriod = Fecha de fin:
 company.practicum-session.form.label.optionalLink = Más informarción (opcional):
-company.practicum-session.form.label.practicum = Práctica
 
 company.practicum-session.form.button.create = Crear sesión práctica
 company.practicum-session.form.button.create-exceptional = Crear sesión excepcional
 company.practicum-session.form.button.update = Actualizar
 company.practicum-session.form.button.delete = Eliminar
-company.practicum-session.form.button.publish = Publicar
 
 company.practicum-session.form.label.confirmation = Confirmar sesión de práctica excepcional
-company.practicum-session.form.message.exceptional = ¡ESTO ES UNA SESIÓN PRACTICA EXCEPCIONAL!
-company.practicum-session.list.label.exceptional = Sesión práctica excepcional
+company.practicum-session.form.message.exceptional = ¡ESTO ES UNA SESIÓN DE PRACTICA EXCEPCIONAL!
 
 company.practicum-session.validation.startPeriod.error.WeekAhead = Error: La Fecha de Inicio debe comenzar al menos una semana después del momento actual
 company.practicum-session.validation.finishPeriod.error.WeekLong = Error: La Fecha de Fin debe establecerse al menos una semana después de la Fecha de Inicio
-company.practicum-session.validation.practicum.error.Published = Error: Esta práctica ya ha sido publicada
-company.practicum-session.validation.practicum.error.ExceptionalAlreadyExists = Error: Sólo una sesión de prácticas excepcional permitida por práctica publicada
+company.practicum-session.validation.practicum.error.ExceptionalAlreadyExists = Error: Sólo una sesión de práctica excepcional permitida por práctica publicada

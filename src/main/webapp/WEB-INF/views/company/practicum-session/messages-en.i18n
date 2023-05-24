@@ -12,6 +12,7 @@
 company.practicum-session.list.label.title = Title
 company.practicum-session.list.label.startPeriod = Start date
 company.practicum-session.list.label.finishPeriod = Finish date
+company.practicum-session.list.label.exceptional = Exceptional practicum session
 
 company.practicum-session.list.button.create = Create practicum session
 company.practicum-session.list.button.create-exceptional = Create exceptional session
@@ -21,20 +22,15 @@ company.practicum-session.form.label.abstract$ = Abstract:
 company.practicum-session.form.label.startPeriod = Start date:
 company.practicum-session.form.label.finishPeriod = Finish date:
 company.practicum-session.form.label.optionalLink = More information (optional):
-company.practicum-session.form.label.practicum = Practicum
 
 company.practicum-session.form.button.create = Create practicum session
 company.practicum-session.form.button.create-exceptional = Create exceptional session
 company.practicum-session.form.button.update = Update
 company.practicum-session.form.button.delete = Delete
-company.practicum-session.form.button.publish = Publish
 
 company.practicum-session.form.label.confirmation = Confirm exceptional practicum session
 company.practicum-session.form.message.exceptional = THIS IS AN EXCEPTIONAL SESSION!
-company.practicum-session.list.label.exceptional = Exceptional practicum session
 
 company.practicum-session.validation.startPeriod.error.WeekAhead = Error: The Start Date must be at least one week ahead
 company.practicum-session.validation.finishPeriod.error.WeekLong = Error: The Finish Date must be at least one week ahead from the Start Date
-company.practicum-session.validation.practicum.error.Published = Error: This Practicum has been already published
 company.practicum-session.validation.practicum.error.ExceptionalAlreadyExists = Error: Only one exceptional session allowed per published practicum 
-
