@@ -20,9 +20,6 @@ public class AuthenticatedNoteCreateService extends AbstractService<Authenticate
 	@Autowired
 	protected AuthenticatedNoteRepository noteRepository;
 
-	//	@Autowired
-	//	protected AuxiliarService				auxiliarService;
-
 
 	@Override
 	public void check() {
@@ -71,20 +68,6 @@ public class AuthenticatedNoteCreateService extends AbstractService<Authenticate
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "javax.validation.constraints.AssertTrue.message");
 
-		//		if (!super.getBuffer().getErrors().hasErrors("title"))
-		//			super.state(this.auxiliarService.validateTextImput(object.getTitle()), "title", "authenticated.note.form.error.spam");
-		//
-		//		if (!super.getBuffer().getErrors().hasErrors("author"))
-		//			super.state(this.auxiliarService.validateTextImput(object.getAuthor()), "author", "authenticated.note.form.error.spam");
-		//
-		//		if (!super.getBuffer().getErrors().hasErrors("message"))
-		//			super.state(this.auxiliarService.validateTextImput(object.getMessage()), "message", "authenticated.note.form.error.spam");
-		//
-		//		if (!super.getBuffer().getErrors().hasErrors("email"))
-		//			super.state(this.auxiliarService.validateTextImput(object.getEmail()), "email", "authenticated.note.form.error.spam");
-		//
-		//		if (!super.getBuffer().getErrors().hasErrors("furtherInformationLink"))
-		//			super.state(this.auxiliarService.validateTextImput(object.getFurtherInformationLink()), "furtherInformationLink", "authenticated.note.form.error.spam");
 	}
 
 	@Override

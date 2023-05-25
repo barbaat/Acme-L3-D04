@@ -4,7 +4,6 @@ package acme.features.company.practicumSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.components.SystemConfigurationService;
 import acme.entities.practicums.Practicum;
 import acme.entities.sessions.PracticumSession;
 import acme.framework.components.models.Tuple;
@@ -17,10 +16,7 @@ public class CompanyPracticumSessionShowService extends AbstractService<Company,
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected CompanyPracticumSessionRepository	psRepository;
-
-	@Autowired
-	protected SystemConfigurationService		scService;
+	protected CompanyPracticumSessionRepository psRepository;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -69,10 +65,8 @@ public class CompanyPracticumSessionShowService extends AbstractService<Company,
 
 		final int id = super.getRequest().getData("id", int.class);
 		final Practicum practicum = this.psRepository.findPracticumByPracticumSessionId(id);
-		final Tuple tuple = super.unbind(object, "title", "abstract$", "optionalLink", "exceptional");
+		final Tuple tuple = super.unbind(object, "title", "abstract$", "optionalLink", "startPeriod", "finishPeriod", "exceptional");
 		final String lang = super.getRequest().getLocale().getLanguage();
-		tuple.put("startPeriod", this.scService.translateDate(object.getStartPeriod(), lang));
-		tuple.put("finishPeriod", this.scService.translateDate(object.getFinishPeriod(), lang));
 		tuple.put("masterId", practicum.getId());
 		tuple.put("draftMode", practicum.isDraftMode());
 
