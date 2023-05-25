@@ -7,3 +7,4 @@ enrolmentIndex,code,activityIndex,title,abstractt,activityType,link,startPeriod,
 2,ABM1538,0,fechas,tipo de actividad nulo,---,http://www.exampleee.com,2023/04/18 12:20,2023/04/18 14:20
 2,ABM1538,0,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,title mas de 75,THEORY,http://www.exampleee.com,2023/04/18 12:20,2023/04/18 14:20
 2,ABM1538,0,abstract mas de 100,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,THEORY,http://www.exampleee.com,2023/04/18 12:20,2023/04/18 14:20
+2,ABM1538,0,,,---,,,
