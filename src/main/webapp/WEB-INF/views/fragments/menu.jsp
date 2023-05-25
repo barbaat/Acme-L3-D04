@@ -29,7 +29,7 @@
 			<acme:menu-separator/>	
 			<acme:menu-suboption code="master.menu.authenticated.offer.list" action="/authenticated/offer/list"/>
 			<acme:menu-separator/>	
-			<acme:menu-suboption code="master.menu.authenticated.assistant.list" action="/authenticated/assistant/list"/>
+			<acme:menu-suboption code="master.menu.authenticated.tutorial.list" action="/authenticated/tutorial/list"/>
 		</acme:menu-option>
 
 

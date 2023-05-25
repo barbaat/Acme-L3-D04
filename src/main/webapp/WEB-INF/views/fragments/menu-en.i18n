@@ -35,7 +35,7 @@ master.menu.authenticated = Authenticated
 master.menu.authenticated.note.create = Create note 
 master.menu.authenticated.note.list = List of notes
 master.menu.authenticated.offer.list = List of offers
-master.menu.authenticated.assistant.list = List of tutorials
+master.menu.authenticated.tutorial.list = List of tutorials
 
 # master.menu.administrator ###################################################
 
