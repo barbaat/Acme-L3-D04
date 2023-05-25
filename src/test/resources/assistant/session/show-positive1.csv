@@ -1,9 +1,4 @@
 tutorialRecordIndex,code,sessionRecordIndex,title,abstractSession,isTheorySession,initTimePeriod,finishTimePeriod,link
-0,ABC123,0,Session 123.1,Abstract 1,true,2030/12/11 22:00,2030/12/11 23:00,
-0,ABC123,1,Session 123.2,Abstract 2,true,2030/12/11 22:00,2030/12/11 23:00,
-1,ABC456,0,Session 456.1,Abstract 3,true,2030/01/30 20:00,2023/01/30 21:00,
-1,ABC456,1,Session 456.2,Abstract 4,false,2030/01/30 11:00,2030/01/30 13:00,
-1,ABC456,2,Session 456.3,Abstract 5,true,2030/12/11 22:00,2030/12/11 23:00,
 2,ZZC456,0,Session 456.1,Abstract 6,false,2030/12/11 13:00,2030/12/11 17:00,
 2,ZZC456,1,Session 456.2,Abstract 7,true,2030/12/30 05:00,2030/12/30 07:00,
 2,ZZC456,2,Session 456.3,Abstract 8,true,2030/12/11 20:00,2030/12/11 22:00,

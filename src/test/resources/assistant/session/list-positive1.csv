@@ -1,9 +1,4 @@
 tutorialRecordIndex,code,sessionRecordIndex,title,abstractSession,isTheorySession,initTimePeriod
-0,ABC123,0,Session 123.1,Abstract 1,Yes,2030/12/11 22:00
-0,ABC123,1,Session 123.2,Abstract 2,Yes,2030/12/11 22:00
-1,ABC456,0,Session 456.1,Abstract 3,Yes,2030/01/30 20:00
-1,ABC456,1,Session 456.2,Abstract 4,No,2030/01/30 11:00
-1,ABC456,2,Session 456.3,Abstract 5,Yes,2030/12/11 22:00
 2,ZZC456,0,Session 456.1,Abstract 6,No,2030/12/11 13:00
 2,ZZC456,1,Session 456.2,Abstract 7,Yes,2030/12/30 05:00
 2,ZZC456,2,Session 456.3,Abstract 8,Yes,2030/12/11 20:00
