@@ -1,6 +1,7 @@
 practicumIndex,course,code,title,abstract$,goals,estimatedTotalTime
 0,---,CDC123,Práctica de expertos,Esto es un resumen,Ganar todo,190.00
 0,ABC123,,Práctica de expertos,Esto es un resumen,Ganar todo,190.00
+0,ABC123,LOL123,Práctica de expertos,Esto es un resumen,Ganar todo,190.00
 0,ABC123,X1X1X1,Práctica de expertos,Esto es un resumen,Ganar todo,190.00
 0,ABC123,CDC123,,Esto es un resumen,Ganar todo,190.00
 0,ABC123,CDC123,TítuloTítuloTítuloTítuloTítuloTítuloTítuloTítuloTítuloTítuloTítuloTítuloTítuloTítulo,Esto es un resumen,Ganar todo,190.00
@@ -10,3 +11,8 @@ practicumIndex,course,code,title,abstract$,goals,estimatedTotalTime
 0,ABC123,CDC123,Práctica de expertos,Esto es un resumen,Ganar todotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodo,190.00
 0,ABC123,CDC123,Práctica de expertos,Esto es un resumen,Ganar todo,
 0,ABC123,CDC123,Práctica de expertos,Esto es un resumen,Ganar todo,250.00
+0,---,,,,,
+0,ABC123,,,,,
+0,ABC123,CDC123,,,,
+0,ABC123,CDC123,Práctica de expertos,,,
+0,ABC123,CDC123,Práctica de expertos,Esto es un resumen,,
