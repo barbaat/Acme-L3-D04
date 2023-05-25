@@ -18,7 +18,7 @@ authenticated.note.form.label.instantiationMoment = Creation date:
 authenticated.note.form.label.title = Title:
 authenticated.note.form.label.author = Author:
 authenticated.note.form.label.message = Message:
-authenticated.note.form.label.email = Email: (optional)
+authenticated.note.form.label.email = Email (optional):
 authenticated.note.form.label.link = More information (optional):
 authenticated.note.form.label.confirmation = Confirm note
 
