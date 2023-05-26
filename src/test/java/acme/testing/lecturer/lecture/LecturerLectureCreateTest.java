@@ -74,6 +74,11 @@ public class LecturerLectureCreateTest extends TestHarness {
 		super.checkPanicExists();
 		super.signOut();
 
+		super.signIn("auditor1", "auditor1");
+		super.request("/lecturer/lecture/create");
+		super.checkPanicExists();
+		super.signOut();
+
 	}
 
 }

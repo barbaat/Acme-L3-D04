@@ -50,7 +50,11 @@ public class LecturerCourseListTest extends TestHarness {
 		super.signIn("administrator", "administrator");
 		super.request("/lecturer/course/list");
 		super.checkPanicExists();
+		super.signOut();
 
+		super.signIn("auditor1", "auditor1");
+		super.request("/lecturer/course/list");
+		super.checkPanicExists();
 		super.signOut();
 	}
 

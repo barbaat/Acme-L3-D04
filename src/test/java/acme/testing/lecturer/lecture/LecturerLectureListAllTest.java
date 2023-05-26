@@ -55,8 +55,13 @@ public class LecturerLectureListAllTest extends TestHarness {
 		super.signIn("administrator", "administrator");
 		super.request("/lecturer/lecture/list-all");
 		super.checkPanicExists();
-
 		super.signOut();
+
+		super.signIn("auditor1", "auditor1");
+		super.request("/lecturer/lecture/list-all");
+		super.checkPanicExists();
+		super.signOut();
+
 	}
 
 }

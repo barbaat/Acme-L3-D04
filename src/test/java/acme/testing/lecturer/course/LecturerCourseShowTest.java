@@ -49,6 +49,34 @@ public class LecturerCourseShowTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
+		Collection<Course> courses;
+		String param;
+
+		courses = this.repository.findManyCoursesByLecturerUsername("lecturer2");
+		for (final Course course : courses) {
+
+			param = String.format("id=%d", course.getId());
+
+			super.checkLinkExists("Sign in");
+			super.request("/lecturer/course/show", param);
+			super.checkPanicExists();
+
+			super.signIn("administrator", "administrator");
+			super.request("/lecturer/course/show", param);
+			super.checkPanicExists();
+			super.signOut();
+
+			super.signIn("auditor1", "auditor1");
+			super.request("/lecturer/course/show", param);
+			super.checkPanicExists();
+			super.signOut();
+		}
+
+		super.signOut();
+	}
+
+	@Test
+	public void test301Hacking() {
 		// Un profesor solo puede ver sus cursos
 		Collection<Course> courses;
 		String param;

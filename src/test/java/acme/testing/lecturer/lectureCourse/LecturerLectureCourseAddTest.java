@@ -128,11 +128,16 @@ public class LecturerLectureCourseAddTest extends TestHarness {
 			param = String.format("lectureId=%d", lecture.getId());
 
 			super.checkLinkExists("Sign in");
-			super.request("/lecturer/lecture-course/delete", param);
+			super.request("/lecturer/lecture-course/create", param);
 			super.checkPanicExists();
 
 			super.signIn("administrator", "administrator");
-			super.request("/lecturer/lecture-course/delete", param);
+			super.request("/lecturer/lecture-course/create", param);
+			super.checkPanicExists();
+			super.signOut();
+
+			super.signIn("auditor1", "auditor1");
+			super.request("/lecturer/lecture-course/create", param);
 			super.checkPanicExists();
 			super.signOut();
 		}
@@ -151,7 +156,7 @@ public class LecturerLectureCourseAddTest extends TestHarness {
 
 		for (final Lecture lecture : lectures) {
 			param = String.format("lectureId=%d", lecture.getId());
-			super.request("/lecturer/lecture-course/delete", param);
+			super.request("/lecturer/lecture-course/create", param);
 			super.checkPanicExists();
 		}
 	}

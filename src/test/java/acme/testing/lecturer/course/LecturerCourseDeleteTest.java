@@ -94,6 +94,16 @@ public class LecturerCourseDeleteTest extends TestHarness {
 			super.request("/lecturer/course/delete", param);
 			super.checkPanicExists();
 			super.signOut();
+
+			super.signIn("auditor1", "auditor1");
+			super.request("/lecturer/course/delete", param);
+			super.checkPanicExists();
+			super.signOut();
+
+			super.signIn("lecturer1", "lecturer1");
+			super.request("/lecturer/course/delete", param);
+			super.checkPanicExists();
+			super.signOut();
 		}
 	}
 }

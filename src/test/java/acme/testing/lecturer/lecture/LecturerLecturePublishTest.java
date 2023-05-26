@@ -86,7 +86,7 @@ public class LecturerLecturePublishTest extends TestHarness {
 				super.checkPanicExists();
 				super.signOut();
 
-				super.signIn("lecturer1", "lecturer1");
+				super.signIn("auditor1", "auditor1");
 				super.request("/lecturer/lecture/publish", params);
 				super.checkPanicExists();
 				super.signOut();
@@ -95,7 +95,7 @@ public class LecturerLecturePublishTest extends TestHarness {
 
 	@Test
 	public void test301Hacking() {
-		// HINT: this test tries to publish a published lecture that was registered by the principal.
+		// Publicar una lección ya publicada
 
 		Collection<Lecture> lectures;
 		String params;
@@ -113,7 +113,7 @@ public class LecturerLecturePublishTest extends TestHarness {
 
 	@Test
 	public void test302Hacking() {
-
+		// Publicar una lección que no es tuya
 		Collection<Lecture> lectures;
 		String params;
 
