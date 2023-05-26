@@ -72,7 +72,6 @@ public class LecturerCourseShowTest extends TestHarness {
 			super.signOut();
 		}
 
-		super.signOut();
 	}
 
 	@Test
