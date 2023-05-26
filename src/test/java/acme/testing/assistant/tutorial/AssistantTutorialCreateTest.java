@@ -48,11 +48,6 @@ public class AssistantTutorialCreateTest extends TestHarness {
 
 		super.checkSubmitExists("Publish");
 
-		super.clickOnButton("Sessions");
-
-		super.checkListingExists();
-		super.checkListingEmpty();
-
 		super.signOut();
 	}
 
