@@ -2,7 +2,7 @@
 # lecturer.course ###################################################
 
 lecturer.course.form.label.title = Título
-lecturer.course.form.label.abstractCourse = Abstract
+lecturer.course.form.label.abstractCourse = Resumen
 lecturer.course.form.label.code = Código
 lecturer.course.form.label.retailPrice = Precio
 lecturer.course.form.label.link = Link (opcional)

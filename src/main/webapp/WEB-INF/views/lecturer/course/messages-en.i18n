@@ -21,4 +21,4 @@ lecturer.course.form.error.nolecture = No lectures!
 lecturer.course.form.error.nohandson = It's a theory course!
 lecturer.course.form.error.lecturenp = Some lectures does not published!
 
-lecturer.course.form.error.currency-retailPrice = Money should use EUR, GPP or USD
+lecturer.course.form.error.currency-retailPrice = Money should use EUR, GBP or USD

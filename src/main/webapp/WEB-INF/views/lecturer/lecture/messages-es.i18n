@@ -3,7 +3,7 @@
 # lecturer.lecture ###################################################
 
 lecturer.lecture.form.label.title = Título
-lecturer.lecture.form.label.abstractLecture = Abstract
+lecturer.lecture.form.label.abstractLecture = Resumen
 lecturer.lecture.form.label.body = Cuerpo
 lecturer.lecture.form.label.estimatedLearningTimeInHours = Tiempo estimado de aprender
 lecturer.lecture.form.label.link = Link (opcional)
