@@ -20,3 +20,5 @@ lecturer.course.form.error.negative-retailPrice = La cantidad debe ser positiva
 lecturer.course.form.error.nolecture = Este curso no tiene lecciones
 lecturer.course.form.error.nohandson = Este curso es solo teórico
 lecturer.course.form.error.lecturenp = Alguna lección no está publicada
+
+lecturer.course.form.error.currency-retailPrice = Debe usar EUR, GBP o USD 

@@ -1,6 +1,9 @@
 
 package acme.features.lecturer.course;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +58,10 @@ public class LecturerCourseCreateService extends AbstractService<Lecturer, Cours
 	@Override
 	public void validate(final Course object) {
 		assert object != null;
+		final List<String> monedas = new ArrayList<>();
+		monedas.add("EUR");
+		monedas.add("GBP");
+		monedas.add("USD");
 
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
 			Course existing;
@@ -62,6 +69,12 @@ public class LecturerCourseCreateService extends AbstractService<Lecturer, Cours
 			existing = this.repository.findOneCourseByCode(object.getCode());
 			super.state(existing == null, "code", "lecturer.course.form.error.duplicated");
 		}
+
+		if (!super.getBuffer().getErrors().hasErrors("retailPrice"))
+			super.state(object.getRetailPrice().getAmount() >= 0, "retailPrice", "lecturer.course.form.error.negative-retailPrice");
+
+		if (!super.getBuffer().getErrors().hasErrors("retailPrice"))
+			super.state(monedas.contains(object.getRetailPrice().getCurrency()), "retailPrice", "lecturer.course.form.error.currency-retailPrice");
 	}
 
 	@Override
