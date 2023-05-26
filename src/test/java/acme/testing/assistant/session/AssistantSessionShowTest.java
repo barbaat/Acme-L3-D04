@@ -85,8 +85,7 @@ public class AssistantSessionShowTest extends TestHarness {
 
 	@Test
 	public void test300Hacking() {
-		// HINT: this test tries to show a session of a tutorial that is in draft mode or
-		// HINT+ not available, but wasn't published by the principal;
+		// HINT: this test tries to show a session of a tutorial that is not created by the right assistant
 
 		Collection<Session> sessions;
 		String param;
@@ -94,19 +93,17 @@ public class AssistantSessionShowTest extends TestHarness {
 		super.signIn("assistant1", "assistant1");
 		sessions = this.repository.findManySessionsByAssistantUsername("assistant2");
 		for (final Session session : sessions)
-			if (session.getTutorial().isDraftMode()) {
+			if (!session.getTutorial().isDraftMode()) {
 				param = String.format("id=%d", session.getTutorial().getId());
+				super.request("/assistant/session/show", param);
+				super.checkPanicExists();
+				super.signOut();
 
 				super.checkLinkExists("Sign in");
 				super.request("/assistant/session/show", param);
 				super.checkPanicExists();
 
 				super.signIn("administrator", "administrator");
-				super.request("/assistant/session/show", param);
-				super.checkPanicExists();
-				super.signOut();
-
-				super.signIn("assistant2", "assistant2");
 				super.request("/assistant/session/show", param);
 				super.checkPanicExists();
 				super.signOut();
@@ -134,7 +131,7 @@ public class AssistantSessionShowTest extends TestHarness {
 				super.signIn("company1", "company1");
 				super.request("/assistant/session/show", param);
 				super.checkPanicExists();
-				super.signOut();
+
 			}
 	}
 

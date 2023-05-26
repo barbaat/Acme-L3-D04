@@ -124,4 +124,22 @@ public class AssistantSessionListTest extends TestHarness {
 			}
 	}
 
+	@Test
+	public void test301Hacking() {
+		// HINT: this test tries to list the sessions of a tutorial that is from another assistant
+
+		Collection<Tutorial> tutorials;
+		String param;
+
+		super.signIn("assistant1", "assistant1");
+		tutorials = this.repository.findManyTutorialsByAssistantUsername("assistant2");
+		for (final Tutorial tutorial : tutorials)
+			if (!tutorial.isDraftMode()) {
+				param = String.format("tutorial=%d", tutorial.getId());
+
+				super.request("/assistant/session/list", param);
+				super.checkPanicExists();
+			}
+	}
+
 }
